@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>QBank: Home</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet"
+	href="http://localhost:7777/qbank/static/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://localhost:7777/qbank/static/css/qbank.css">
+<script type="text/javascript"
+	src="http://localhost:7777/qbank/static/js/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://localhost:7777/qbank/static/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="http://localhost:7777/qbank/static/js/qbank.js"></script>
+<script type="text/javascript">
+	getTopNavigationLinks();
+</script>
+
+</head>
+
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span><span class="icon-bar"></span><span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">QBank</a>
+			</div>
+			<div class="navbar-collapse collapse"></div>
+			<!--/.navbar-collapse -->
+		</div>
+	</div>
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<form id="AddQuestion">
+				<div class="row">
+					<div class="col-md">
+						<label class="form-label">Question</label>
+						<textarea class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md">
+						<label class="form-label">Correct Answer</label>
+						<textarea class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md">
+						<a id="AddOptionButton" class="btn btn-primary"
+							onclick="addOptionalAnswer()">Add Option</a>
+
+					</div>
+				</div>
+				<div class="row">
+				<span class="container"><span class="col-md"><label class="form-label">Difficulty Rating</label><t/><input type="text" class="form-control-custom width60px" /></span></span>
+				<span id="tags"></span>
+				<span class="container"><span class="col-md"><label class="form-label">Tags</label><t/><input type="text" class="form-control" id="tagText" onKeydown="javascript: if (event.keyCode==13) addTag();"/></span></span>
+					<span class="col-md">
+						<a class="btn btn-primary" onclick="submitQuestion()">Submit
+							Question</a>
+
+					</span>
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<hr>
+	<footer>
+		<p>&copy; Company 2013</p>
+	</footer>
+	<!-- /container -->
+</body>
+
+</html>
