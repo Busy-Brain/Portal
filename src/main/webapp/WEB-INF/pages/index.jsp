@@ -6,6 +6,6 @@
 <portal:Meta pageId="${pageId}"/>
 </head>
 <body>
-Page Id: ${pageId}
+${pageContent}
 </body>
 </html> 

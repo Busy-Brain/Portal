@@ -15,6 +15,7 @@ public final class FrameworkConstants {
 	public class PageConstants{
 		public static final String DEFAULT_PAGE_NAME="index";
 		public static final String PAGE_ID = "pageId";
+		public static final String PAGE_CONTENT = "pageContent";
 		private PageConstants(){
 			throw new AssertionError();
 		}

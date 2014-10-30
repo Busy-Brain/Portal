@@ -19,9 +19,14 @@ public class DefaultController {
 	@RequestMapping(value = CONTROLLER_URL + "*")
 	public String index(Model model, HttpServletRequest request) {
 		String pageId = getPageId(request);
+		PortalPage page=new PageFactoryImpl().getPage(pageId);
+		String pageContent= page.getLayout().getContainers().get(0).getContents().getValue();
 		model.addAttribute(FrameworkConstants.PageConstants.PAGE_ID, pageId);
+		model.addAttribute(FrameworkConstants.PageConstants.PAGE_CONTENT, pageContent);
+		
 		return DEFAULT_PAGE_NAME;
 	}
+
 
 	private String getPageId(HttpServletRequest request) {
 		return request.getRequestURI().substring(
