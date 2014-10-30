@@ -5,20 +5,24 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-public abstract class PortalTag extends SimpleTagSupport{
-	protected String pageId;
-	
+/**
+ * This is base class for all portal tags.
+ * 
+ * @author mohit
+ *
+ */
+public abstract class PortalTag extends SimpleTagSupport {
+	/**
+	 * Overriding the doTag to return the tag HTML as String.
+	 */
 	@Override
-	 public void doTag() throws JspException, IOException {
-		    getJspContext().getOut().println(prepareTagStatement());
-		  }
-	protected abstract String prepareTagStatement() ;
-	
-	public String getPageId() {
-		return pageId;
+	public void doTag() throws JspException, IOException {
+		getJspContext().getOut().println(getTagHTML());
 	}
-	
-	public void setPageId(String pageId) {
-		this.pageId = pageId;
-	}
+	/**
+	 * This method returns the tag HTMl
+	 * @return
+	 */
+	protected abstract String getTagHTML();
+
 }

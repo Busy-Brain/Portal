@@ -1,10 +1,10 @@
 package com.mk.portal.framework.page.tags;
 
 
-public class MetaTag extends PortalTag {
+public class MetaTag extends PageSpecificPortalTag {
 
 	@Override
-	protected String prepareTagStatement() {
+	protected String getTagHTML() {
 		return getSiteMetaTags().append(getTopicMetaTags()).append(getPageSpecificMetaTags()).toString();
 	}
 
