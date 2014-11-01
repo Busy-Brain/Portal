@@ -24,15 +24,14 @@ public class PageFactoryImpl implements PageFactory {
 
 	private PortalPage getDefaultPage(String pageId) {
 		PortalPage page = new PortalPage();
-		PageLayout layout = new PageLayout();
-		layout.setLayoutId("default");
+		
 		Container container = new DefaultContainer(new HTMLContent(
 				"This is default page!"));
 
-		layout.addContainer(container);
-		page.setLayout(layout);
+		page.addContainer(container);
+		
 		page.setPageId(pageId);
-		page.setTitle("Error Page");
+		page.setTitle("Default Page");
 		List<MetaTagObject> metaTags = new ArrayList<MetaTagObject>();
 		metaTags.add(new MetaTagObject("description", "text"));
 		page.setMetaTags(metaTags);
@@ -45,8 +44,7 @@ public class PageFactoryImpl implements PageFactory {
 	}
 
 	private PortalPage getPageFromConfiguration(String pageId) {
-		// TODO Auto-generated method stub
-		return null;
+		return new JsonPageLoader().getPage(pageId);
 	}
 
 }

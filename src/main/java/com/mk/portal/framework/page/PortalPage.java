@@ -1,14 +1,16 @@
 package com.mk.portal.framework.page;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.tags.MetaTagObject;
 
 public class PortalPage {
 private String pageId;
 private String title;
 private List<MetaTagObject> metaTags;
-private PageLayout layout;
+private List<Container> containersList;
 public String getPageId() {
 	return pageId;
 }
@@ -27,11 +29,18 @@ public List<MetaTagObject> getMetaTags() {
 public void setMetaTags(List<MetaTagObject> metaTags2) {
 	this.metaTags = metaTags2;
 }
-public PageLayout getLayout() {
-	return layout;
+public List<Container> getContainersList() {
+	return containersList;
 }
-public void setLayout(PageLayout layout) {
-	this.layout = layout;
+public void setContainersList(List<Container> containersList) {
+	this.containersList = containersList;
 }
+public void addContainer(Container container) {
+	if(containersList==null){
+		containersList=new ArrayList<Container>();
+	}
+	containersList.add(container);
+}
+
 
 }

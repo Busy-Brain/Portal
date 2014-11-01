@@ -1,5 +1,7 @@
 package com.mk.portal.framework.page;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.page.container.Container;
 
 @Controller
 public class DefaultController {
@@ -20,9 +23,16 @@ public class DefaultController {
 	public String index(Model model, HttpServletRequest request) {
 		String pageId = getPageId(request);
 		PortalPage page=new PageFactoryImpl().getPage(pageId);
-		String pageContent= page.getLayout().getContainers().get(0).getContents().getValue();
+		List<Container> pageContainers= page.getContainersList();
+		StringBuilder sb=new StringBuilder();
+		if(pageContainers!=null){
+			for(Container c:pageContainers){
+				sb.append(c.getContentsAsString());
+			}
+		}
+		
 		model.addAttribute(FrameworkConstants.PageConstants.PAGE_ID, pageId);
-		model.addAttribute(FrameworkConstants.PageConstants.PAGE_CONTENT, pageContent);
+		model.addAttribute(FrameworkConstants.PageConstants.PAGE_CONTENT, sb.toString());
 		
 		return DEFAULT_PAGE_NAME;
 	}
