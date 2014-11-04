@@ -1,5 +1,5 @@
 package com.mk.portal.framework.page;
 
 public interface PageLoader {
- PortalPage getPage(String pageId);
+ PortalPage getPage(PageIdentifier pageIdentifier);
 }

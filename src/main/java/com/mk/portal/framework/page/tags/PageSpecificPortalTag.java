@@ -1,13 +1,15 @@
 package com.mk.portal.framework.page.tags;
 
-public abstract class PageSpecificPortalTag extends PortalTag {
-	protected String pageId;
+import com.mk.portal.framework.page.PageIdentifier;
 
-	public String getPageId() {
-		return pageId;
+public abstract class PageSpecificPortalTag extends PortalTag {
+	protected PageIdentifier pageIdentifier;
+
+	public PageIdentifier getPageIdentifier() {
+		return pageIdentifier;
 	}
 
-	public void setPageId(String pageId) {
-		this.pageId = pageId;
+	public void setPageIdentifier(PageIdentifier pageIdentifier) {
+		this.pageIdentifier = pageIdentifier;
 	}
 }

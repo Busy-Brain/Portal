@@ -5,7 +5,7 @@ public final class FrameworkConstants {
 		throw new AssertionError();
 	}
 	public class PortalConstants{
-		public static final String DEFAULT_PORTAL_URL="portal";
+		public static final String DEFAULT_SITE_URL="";
 		
 		private PortalConstants(){
 			throw new AssertionError();
@@ -13,9 +13,24 @@ public final class FrameworkConstants {
 	}
 	
 	public class PageConstants{
+		public static final String PAGES_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/pages.json";
+		public static final String CONTAINER_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/containers.json";
 		public static final String DEFAULT_PAGE_NAME="index";
 		public static final String PAGE_ID = "pageId";
 		public static final String PAGE_CONTENT = "pageContent";
+		public static final String TOPIC_ID = "topicId";
+		public static final String SITE_ID = "siteId";
+		public static final String SUB_TOPIC_ID = "subTopicId";
+		public static final String PAGE_IDENTIFIER = "pageIdentifier";
+		public static final String PAGE_TITLE = "pageTitle";
+		public static final String PAGES = "pages";
+		public static final String CONTAINERS = "containers";
+		public static final String CONTAINER_TYPE = "containerType";
+		public static final String CONTAINER_ID = "containerId";
+		public static final String CONTENTS = "contents";
+		public static final String CONTENT_ID = "contentId";
+		public static final String CONTENT_TYPE = "contentType";
+		public static final String CONTENT_PATH = "contentPath";
 		private PageConstants(){
 			throw new AssertionError();
 		}

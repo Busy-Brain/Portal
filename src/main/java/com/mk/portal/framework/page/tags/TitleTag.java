@@ -8,8 +8,8 @@ public class TitleTag extends PageSpecificPortalTag {
 
 	@Override
 	protected String getTagHTML() {
-		PageFactory factory = new PageFactoryImpl() ;
-		PortalPage page=factory.getPage(getPageId());
+		PageFactory factory = new PageFactoryImpl();
+		PortalPage page=factory.getPage(getPageIdentifier());
 		return "<title>"+page.getTitle()+"</title>";
 	}
 

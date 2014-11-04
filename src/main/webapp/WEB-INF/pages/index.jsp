@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<portal:Title pageId="${pageId}"/>
-<portal:Meta pageId="${pageId}"/>
+<portal:Title pageIdentifier="${pageIdentifier}"/>
+<portal:Meta pageIdentifier="${pageIdentifier}"/>
+<style type="text/css" src="../static/css/style.css"></style>
 </head>
 <body>
 ${pageContent}

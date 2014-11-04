@@ -7,7 +7,7 @@
     <tag-class>com.mk.portal.framework.page.tags.MetaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-       <name>pageId</name>
+       <name>pageIdentifier</name>
        <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
@@ -16,7 +16,7 @@
     <tag-class>com.mk.portal.framework.page.tags.TitleTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-       <name>pageId</name>
+       <name>pageIdentifier</name>
        <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>

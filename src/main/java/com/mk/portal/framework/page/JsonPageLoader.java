@@ -1,29 +1,32 @@
 package com.mk.portal.framework.page;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.page.container.Container;
+import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
-public class JsonPageLoader implements PageLoader{
+public class JsonPageLoader implements PageLoader {
 
 	@Override
-	public PortalPage getPage(String pageId) {
-
+	public PortalPage getPage(PageIdentifier pageIdentifier) {
 
 		try {
 			// read the json file
-			File t= new File("./resources/pages.json");
-			System.out.println(t.getAbsolutePath());
-			FileReader reader = new FileReader("/home/mohit/personal/github/Portal/portalconfig/pages/pages.json");
+			FileReader reader = new FileReader(
+					FrameworkConstants.PageConstants.PAGES_JSON);
 
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
-			return parsePageJson(jsonObject,pageId);
+			return parsePageJson(jsonObject, pageIdentifier);
 
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
@@ -31,27 +34,102 @@ public class JsonPageLoader implements PageLoader{
 			ex.printStackTrace();
 		}
 
-			return null;
+		return null;
 	}
-	private  PortalPage parsePageJson(JsonObject jsonObject,String pageId) {
+
+	private PortalPage parsePageJson(JsonObject jsonObject,
+			PageIdentifier expectedPageIdentifier) {
 		// get a String from the JSON object
-		JsonArray listOfPages = jsonObject.getAsJsonArray("pages");
+		JsonArray listOfPages = jsonObject
+				.getAsJsonArray(FrameworkConstants.PageConstants.PAGES);
 		int i = 0;
-		//TODO Bad practice of catching exception. change logic
+		// TODO Bad practice of catching exception. change logic
 		while (true) {
 			try {
 				JsonObject x = (JsonObject) listOfPages.get(i++);
-				if(pageId.equals(x.get("pageId").getAsString())){
-					PortalPage page = new PortalPage();
-					page.setPageId(pageId);
-					page.setTitle(x.get("pagetitle").getAsString());
+				String siteId = getSiteIdFromJson(x);
+				String topicId = getTopicIdFromJson(x);
+				String subTopicId = getSubTopicIdFromJson(x);
+				String pageId = getPageIdFromJson(x);
+				List<Container> containersList = getContainersFromJSON(x);
+				PageIdentifier pageIdentifierFromJson = new PageIdentifier(
+						siteId, topicId, subTopicId, pageId);
+				if (pageIdentifierFromJson.equals(expectedPageIdentifier)) {
+					PortalPage page = new PortalPage(pageIdentifierFromJson);
+					page.setTitle(x.get(
+							FrameworkConstants.PageConstants.PAGE_TITLE)
+							.getAsString());
+					page.setContainersList(containersList);
 					return page;
 				}
-				
+
 			} catch (IndexOutOfBoundsException e) {
 				break;
 			}
 		}
 		return null;
+	}
+
+	private List<Container> getContainersFromJSON(JsonObject x) {
+		List<Container> containersList = new ArrayList<Container>();
+		JsonArray containers = x.get(
+				FrameworkConstants.PageConstants.CONTAINERS).getAsJsonArray();
+		int i = 0;
+		while (true) {
+			try{
+			JsonObject container = (JsonObject) containers.get(i++);
+			containersList.add(new ContainerFactoryImpl()
+					.getContainer(container.get(
+							FrameworkConstants.PageConstants.CONTAINER_ID)
+							.getAsString()));
+			}
+			catch(IndexOutOfBoundsException e){
+				break;
+			}
+		}
+		return containersList;
+	}
+
+	private String getSubTopicIdFromJson(JsonObject x) {
+		/**
+		 * TODO : Add default implementation
+		 */
+		String subTopicId = x
+				.get(FrameworkConstants.PageConstants.SUB_TOPIC_ID)
+				.getAsString();
+		return subTopicId;
+	}
+
+	private String getTopicIdFromJson(JsonObject x) {
+		/**
+		 * TODO : Add default implementation
+		 */
+		String topicId = x.get(FrameworkConstants.PageConstants.TOPIC_ID)
+				.getAsString();
+		return topicId;
+	}
+
+	private String getPageIdFromJson(JsonObject x) {
+		/**
+		 * TODO : Add default implementation
+		 */
+		String pageId = x.get(FrameworkConstants.PageConstants.PAGE_ID)
+				.getAsString();
+		return pageId;
+	}
+
+	private String getSiteIdFromJson(JsonObject x) {
+		/**
+		 * TODO : Add default implementation
+		 */
+		JsonElement jsonElement = x
+				.get(FrameworkConstants.PageConstants.SITE_ID);
+		String siteId;
+		if (jsonElement == null) {
+			siteId = "defSite";
+		} else {
+			siteId = jsonElement.getAsString();
+		}
+		return siteId;
 	}
 }

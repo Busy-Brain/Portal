@@ -11,26 +11,23 @@ import com.mk.portal.framework.page.tags.MetaTagObject;
 public class PageFactoryImpl implements PageFactory {
 
 	@Override
-	public PortalPage getPage(String pageId) {
-		PortalPage page = getPageFromConfiguration(pageId);
+	public PortalPage getPage(PageIdentifier pageIdentifier) {
+		PortalPage page = getPageFromConfiguration(pageIdentifier);
 		if (page == null) {
-			page = getPageFromDB(pageId);
+			page = getPageFromDB(pageIdentifier);
 		}
 		if (page == null) {
-			page = getDefaultPage(pageId);
+			page = getDefaultPage(pageIdentifier);
 		}
 		return page;
 	}
 
-	private PortalPage getDefaultPage(String pageId) {
-		PortalPage page = new PortalPage();
+	private PortalPage getDefaultPage(PageIdentifier pageIdentifier) {
+		PortalPage page = new PortalPage(pageIdentifier);
 		
 		Container container = new DefaultContainer(new HTMLContent(
 				"This is default page!"));
-
 		page.addContainer(container);
-		
-		page.setPageId(pageId);
 		page.setTitle("Default Page");
 		List<MetaTagObject> metaTags = new ArrayList<MetaTagObject>();
 		metaTags.add(new MetaTagObject("description", "text"));
@@ -38,13 +35,13 @@ public class PageFactoryImpl implements PageFactory {
 		return page;
 	}
 
-	private PortalPage getPageFromDB(String pageId) {
+	private PortalPage getPageFromDB(PageIdentifier pageIdentifier) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private PortalPage getPageFromConfiguration(String pageId) {
-		return new JsonPageLoader().getPage(pageId);
+	private PortalPage getPageFromConfiguration(PageIdentifier pageIdentifier) {
+		return new JsonPageLoader().getPage(pageIdentifier);
 	}
 
 }
