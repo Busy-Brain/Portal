@@ -51,10 +51,13 @@ public class JsonPageLoader implements PageLoader {
 				String topicId = getTopicIdFromJson(x);
 				String subTopicId = getSubTopicIdFromJson(x);
 				String pageId = getPageIdFromJson(x);
-				List<Container> containersList = getContainersFromJSON(x);
+				
 				PageIdentifier pageIdentifierFromJson = new PageIdentifier(
 						siteId, topicId, subTopicId, pageId);
+				System.out.println("pageIdentifierFromJson"+pageIdentifierFromJson);
+				System.out.println("expectedPageIdentifier"+expectedPageIdentifier);
 				if (pageIdentifierFromJson.equals(expectedPageIdentifier)) {
+					List<Container> containersList = getContainersFromJSON(x);
 					PortalPage page = new PortalPage(pageIdentifierFromJson);
 					page.setTitle(x.get(
 							FrameworkConstants.PageConstants.PAGE_TITLE)

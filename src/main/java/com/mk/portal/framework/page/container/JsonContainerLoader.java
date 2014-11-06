@@ -42,6 +42,7 @@ public class JsonContainerLoader implements ContainerLoader {
 		// get a String from the JSON object
 		JsonArray listOfPages = jsonObject
 				.getAsJsonArray(FrameworkConstants.PageConstants.CONTAINERS);
+		System.out.println("USE THIS TO IMPROVE CODE"+listOfPages.size());
 		int i = 0;
 		// TODO Bad practice of catching exception. change logic
 		while (true) {

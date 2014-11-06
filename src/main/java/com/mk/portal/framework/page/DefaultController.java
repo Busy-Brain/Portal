@@ -1,8 +1,13 @@
 package com.mk.portal.framework.page;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.page.container.Container;
-import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
 @Controller
 public class DefaultController {
@@ -19,6 +23,50 @@ public class DefaultController {
 	private static final String DEFAULT_PAGE_NAME = "index";
 	private static final String DEFAULT_URL = "/"
 			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
+	private static final String STATIC_URL = "/static/";
+	
+	@RequestMapping(value = STATIC_URL + 
+			"/{"+ FrameworkConstants.StaticContentConstants.STATIC_CONTENT_TYPE + "}" +
+			"/{"+ FrameworkConstants.StaticContentConstants.FOLDER_ID + "}" +
+			"/{"+ FrameworkConstants.StaticContentConstants.FILE_NAME + "}")
+	public void requesForStaticContent(HttpServletResponse response,
+			Model model,
+			HttpServletRequest request,
+			@PathVariable(FrameworkConstants.StaticContentConstants.STATIC_CONTENT_TYPE) String staticContentType,
+			@PathVariable(FrameworkConstants.StaticContentConstants.FOLDER_ID) String folderId,
+			@PathVariable(FrameworkConstants.StaticContentConstants.FILE_NAME) String fileName) throws IOException  {
+		
+		File staticFile=new File(FrameworkConstants.PageConstants.STATIC_FOLDER_PATH+"/"+staticContentType+"/"+folderId+"/"+fileName+getExtension(staticContentType));
+		String myString = "Hello";
+	    response.setContentType("text/css");
+	    ServletOutputStream out;
+	    FileInputStream fis = new FileInputStream(staticFile);
+	    byte[] data = new byte[(int)staticFile.length()];
+	    fis.read(data);
+	    fis.close();
+	    //
+	    String s = new String(data, "UTF-8");
+			out = response.getOutputStream();
+			 out.println(new String(data));
+			    out.flush();
+			    out.close();
+		
+	}
+	
+	
+	
+	private String getExtension(String staticContentType) {
+		if(staticContentType.equals("css")){
+			return ".css";
+		}
+		if(staticContentType.equals("script")||staticContentType.equals("js")){
+			return ".js";
+		}
+		return null;
+	}
+
+
+
 	@RequestMapping(value = DEFAULT_URL + 
 			"/{"+ FrameworkConstants.PageConstants.SITE_ID + "}" +
 			"/{"+ FrameworkConstants.PageConstants.TOPIC_ID + "}" +

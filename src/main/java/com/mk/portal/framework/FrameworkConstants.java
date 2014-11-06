@@ -15,6 +15,7 @@ public final class FrameworkConstants {
 	public class PageConstants{
 		public static final String PAGES_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/pages.json";
 		public static final String CONTAINER_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/containers.json";
+		public static final String STATIC_FOLDER_PATH="/home/mohit/personal/github/Portal/target/Qbank/static";
 		public static final String DEFAULT_PAGE_NAME="index";
 		public static final String PAGE_ID = "pageId";
 		public static final String PAGE_CONTENT = "pageContent";
@@ -32,6 +33,16 @@ public final class FrameworkConstants {
 		public static final String CONTENT_TYPE = "contentType";
 		public static final String CONTENT_PATH = "contentPath";
 		private PageConstants(){
+			throw new AssertionError();
+		}
+	}
+	public class StaticContentConstants{
+
+		public static final String STATIC_CONTENT_TYPE = "staticContentType";
+		public static final String FOLDER_ID = "folderId";
+		public static final String FILE_NAME = "fileName";
+		
+		private StaticContentConstants(){
 			throw new AssertionError();
 		}
 	}

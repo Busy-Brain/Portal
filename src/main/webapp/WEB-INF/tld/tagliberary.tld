@@ -20,4 +20,14 @@
        <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
+  <tag>
+    <name>Style</name>
+    <tag-class>com.mk.portal.framework.page.tags.StyleTag</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
+  <tag>
+    <name>Script</name>
+    <tag-class>com.mk.portal.framework.page.tags.ScriptTag</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
 </taglib>
