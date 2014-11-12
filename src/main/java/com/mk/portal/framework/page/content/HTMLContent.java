@@ -9,7 +9,6 @@ public class HTMLContent implements Content {
 		HTMLContent = content;
 	}
 
-	@Override
 	public String getValue() {
 		return getHTMLContent();
 	}

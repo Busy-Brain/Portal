@@ -10,7 +10,6 @@ import com.mk.portal.framework.page.tags.MetaTagObject;
 
 public class PageFactoryImpl implements PageFactory {
 
-	@Override
 	public PortalPage getPage(PageIdentifier pageIdentifier) {
 		PortalPage page = getPageFromConfiguration(pageIdentifier);
 		if (page == null) {

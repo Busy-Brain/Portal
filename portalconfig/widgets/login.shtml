@@ -1,0 +1,6 @@
+<div class="centerSection">
+<h1>Login</h1>
+<div>Log me in as <input type="text" id="userId" placeholder="Type your user Id"/> </div>
+<div>My password is <input type="password" id="password" placeholder="Password"/></div>
+<div><input type="button" value="Authenticate Me"/></div>
+</div>

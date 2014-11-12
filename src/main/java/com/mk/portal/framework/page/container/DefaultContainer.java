@@ -21,7 +21,6 @@ public DefaultContainer(List<Content> pContents) {
 	}
 
 	
-	@Override
 	public String getContentsAsString() {
 		StringBuilder sb=new StringBuilder();
 		for(Content c:contents){
@@ -29,7 +28,6 @@ public DefaultContainer(List<Content> pContents) {
 		}
 		return sb.toString();
 	}
-	@Override
 	public String getId() {
 		return id;
 	}

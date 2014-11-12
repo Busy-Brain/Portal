@@ -15,7 +15,6 @@ import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
 public class JsonPageLoader implements PageLoader {
 
-	@Override
 	public PortalPage getPage(PageIdentifier pageIdentifier) {
 
 		try {

@@ -1,32 +1,26 @@
 {
     "pages": [
         {
-        	"siteId":"siteId1",
-        	"topicId":"topicId1",
-        	"subTopicId":"subTopicId1",
-            	"pageId": "page1",
-            	"pageTitle": "Title",
+        	"siteId":"me",
+        	"topicId":"login",
+        	"subTopicId":"",
+            	"pageId": "",
+            	"pageTitle": "Welcome",
             	"containers": [
                 {
-                    "containerId": "container1"
-                },
-                {
-                    "containerId": "container2"
+                    "containerId": "loginContainer"
                 }
             ]
         },
         {
-        	"siteId":"siteId2",
-        	"topicId":"topicId2",
-        	"subTopicId":"subTopicId2",
-           	"pageId": "page2",
-            	"pageTitle": "Title2",
+        	"siteId":"me",
+        	"topicId":"dashboard",
+        	"subTopicId":"",
+           	"pageId": "",
+            	"pageTitle": "All about me",
             	"containers": [
                 {
-                    "containerId": "container1"
-                },
-                {
-                    "containerId": "container2"
+                    "containerId": "myprofilecontainer"
                 }
             ]
         }

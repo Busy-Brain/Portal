@@ -4,6 +4,13 @@ public final class FrameworkConstants {
 	private FrameworkConstants() {
 		throw new AssertionError();
 	}
+	public class RestServiceConstants{
+		public static final String REST_SERVICE_NAME="restService";
+		
+		private RestServiceConstants(){
+			throw new AssertionError();
+		}
+	}
 	public class PortalConstants{
 		public static final String DEFAULT_SITE_URL="";
 		

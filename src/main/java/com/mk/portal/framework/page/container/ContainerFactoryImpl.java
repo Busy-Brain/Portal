@@ -4,7 +4,6 @@ import com.mk.portal.framework.page.content.HTMLContent;
 
 public class ContainerFactoryImpl implements ContainerFactory {
 
-	@Override
 	public Container getContainer(String containerId) {
 		Container container = getContainerFromConfiguration(containerId);
 		if (container == null) {

@@ -1,38 +1,13 @@
 {
     "containers": [
         {
-        	"containerId":"container1",
+        	"containerId":"myprofilecontainer",
         	"containerType":"default",
         	"contents":[
-        		{	"contentId":"header",
+        		
+        		{	"contentId":"myprofile",
         			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/header.shtml"
-        		},
-        		{	"contentId":"navigation",
-        			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/navigation.shtml"
-        		},
-        		{	"contentId":"section",
-        			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/section.shtml"
-        		},
-        		{	"contentId":"footer",
-        			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/footer.shtml"
-        		}
-        	]
-        },
-         {
-        	"containerId":"container2",
-        	"containerType":"default",
-        	"contents":[
-        		{	"contentId":"three",
-        			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/three.html"
-        		},
-        		{	"contentId":"four",
-        			"contentType":"html",
-        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/four.html"
+        			"contentPath":"/home/mohit/personal/github/Portal/portalconfig/widgets/myprofile.shtml"
         		}
         	]
         }

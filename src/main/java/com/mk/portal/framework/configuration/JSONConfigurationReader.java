@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 
 public class JSONConfigurationReader implements ConfigurationReader {
 
-	@Override
 	public String getValue(String key) {
 		List<File> listOfFiles = getListOfConfigurationFiles();
 		String value = null;
@@ -55,7 +54,6 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return null;
 	}
 
-	@Override
 	public String getValue(String namespace, String key) {
 		String value = null;
 		for (File file : getListOfConfigurationFiles()) {

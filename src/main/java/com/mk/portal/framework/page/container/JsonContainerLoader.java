@@ -15,7 +15,6 @@ import com.mk.portal.framework.page.content.HTMLContent;
 public class JsonContainerLoader implements ContainerLoader {
 
 
-	@Override
 	public Container getContainer(String containerId) {
 
 		try {
