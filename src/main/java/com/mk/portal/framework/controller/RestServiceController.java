@@ -20,7 +20,7 @@ public class RestServiceController {
 
 	@RequestMapping(value = REST_URL + "/{"
 			+ FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME + "}", method = RequestMethod.POST)
-	public void requesForStaticContent(
+	public void requesForRestService(
 			HttpServletResponse response,
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME) String serviceName) {

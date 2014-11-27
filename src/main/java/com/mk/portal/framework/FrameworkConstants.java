@@ -57,4 +57,10 @@ public final class FrameworkConstants {
 			throw new AssertionError();
 		}
 	}
+	
+	public class WidgetControllerConstants{
+
+		public static final String WIDGET_NAME = "WIDGET_NAME";
+		
+	}
 }

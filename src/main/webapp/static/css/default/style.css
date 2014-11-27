@@ -67,6 +67,10 @@ h1, h2, h3, h4, h5, h6 {
 	background-color: #fbfbfb;
 	border-radius: 16px;
 }
+.sidebar .nav a:hover {
+	
+	border-radius: 16px;
+}
 .profileImage{
 	 width: 100%;
 }
