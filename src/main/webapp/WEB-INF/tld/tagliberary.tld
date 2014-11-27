@@ -30,4 +30,9 @@
     <tag-class>com.mk.portal.framework.page.tags.ScriptTag</tag-class>
     <body-content>scriptless</body-content>
   </tag>
+  <tag>
+    <name>Page</name>
+    <tag-class>com.mk.portal.framework.page.tags.PortalPageTag</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
 </taglib>

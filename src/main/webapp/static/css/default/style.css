@@ -1,41 +1,69 @@
 .header {
-    background-color:#6B008F;
-    color:white;
-    text-align:center;
-    padding:5px;
-}
-#header h1{
-	color:white;
-}
-h1{
-	color:#6B008F;
-}
-#footer {
-   background-color:#6B008F;
-    color:white;
-    text-align:center;
-    padding:5px;
-}
-.centerSection {
-    
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    width: 500px;
+	background-color: #6B008F;
+	color: white;
+	text-align: center;
+	padding: 5px;
 }
 
-#nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
-    padding:5px;
+.header h1, .header h2, .header h3, .header h4, .header h5, .header h6 {
+	color: white;
 }
-.loginFormContainer{
-	width:400px;
+
+h1, h2, h3, h4, h5, h6 {
+	color: #6B008F;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background-color: #6B008F;
+	color: white;
+	text-align: center;
+	padding: 5px;
+}
+
+.btn-primary {
+	background-color: #6B008F;
+	border-color: #b217e6;
+	color: #fff;
+}
+
+.centerSection {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	width: 500px;
+}
+
+.loginFormContainer {
+	width: 400px;
 	margin-top: 8%;
 }
-.customSidebar{
-	margin-top: 25%;
+
+.page-header {
+	margin: 80px 0 20px;
+}
+
+.form-control:focus {
+	border-color: #b217e6;
+}
+
+.form-control {
+	margin-bottom: 10px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	font-weight: bolder;
+}
+
+.navbar-inverse .navbar-brand {
+	font-weight: bolder;
+}
+
+.sidebar .nav .active {
+	background-color: #fbfbfb;
+	border-radius: 16px;
 }

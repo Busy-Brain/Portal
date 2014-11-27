@@ -8,7 +8,7 @@
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
 	
-		<logout logout-success-url="/login?logout" logout-url="/logout" />
+	
 		 
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/login**" access="permitAll" />
@@ -19,7 +19,7 @@
 		<form-login login-page="/login" default-target-url="/me/dashboard"
 			authentication-failure-url="/login?error" username-parameter="username"
 			password-parameter="password" />
-		<logout logout-success-url="/login?logout" />
+		<logout logout-success-url="/login?logout" invalidate-session="true" logout-url="/login"/>
 		<!-- enable csrf protection -->
 		<csrf />
 	</http>
