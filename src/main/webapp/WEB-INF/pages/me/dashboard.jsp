@@ -1,4 +1,7 @@
 <%@ taglib prefix="portal" uri="/WEB-INF/tld/tagliberary.tld"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"   prefix="c" %>
+
+<c:set var="pageID" scope="request" value="dashboard"/>
 <jsp:include page="../pagesections/header.jsp" />
 <div class="container">
 	<div class="row">

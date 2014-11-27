@@ -25,6 +25,7 @@
     <![endif]-->
 </head>
 <body>
+	<input type="hidden" name="pageId" value="<c:out value='${pageID}'/>"/>
 	<nav class="navbar navbar-inverse navbar-fixed-top header" role="navigation">
 		<div class="container-fluid header">
 			<div class="navbar-header">

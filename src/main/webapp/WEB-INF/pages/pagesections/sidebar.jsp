@@ -1,7 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"   prefix="c" %>
 <div class="container-fluid sidebar visible-desktop">
 	<ul class="nav nav-sidebar">
-		<li class="active"><a href="#">Overview</a></li>
-		<li><a href="#">Reports</a></li>
+		<li class="active"><a href="#"><c:out value="${pageID}"/>Overview</a></li>
+		<li><a href="#"><c:out value="${pageID}"/></a></li>
 		<li><a href="#">Analytics</a></li>
 		<li><a href="#">Export</a></li>
 	</ul>
