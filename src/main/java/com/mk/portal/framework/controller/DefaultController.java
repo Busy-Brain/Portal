@@ -13,21 +13,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.page.PageFactoryImpl;
 import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.PortalPage;
 import com.mk.portal.framework.page.container.Container;
-
+/**
+ * This is the default controller of the portal. It handles default requests
+ * @author mohit
+ *
+ */
 @Controller
 public class DefaultController {
 
 	private static final String LOGIN_PAGE_NAME = "login";
-	private static final String LOGOUT_URL = "/logout";
+	
 	private static final String BLANK_URL = "/";
-	private static final String LOGIN_URL = "/login";
+	
 	private static final String DEFAULT_PAGE_NAME = "index";
 	private static final String DEFAULT_URL = "/"
 			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
@@ -46,7 +49,6 @@ public class DefaultController {
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId,
 			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_ID) String subTopic,
 			@PathVariable(FrameworkConstants.PageConstants.PAGE_ID) String pageId) {
-		System.out.println(0);
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				topicId, subTopic, pageId));
 	}
@@ -61,8 +63,6 @@ public class DefaultController {
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId,
 			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_ID) String subTopic) {
-		System.out.println(1);
-		checkUser(request);
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				topicId, subTopic, ""));
 	}
@@ -73,8 +73,6 @@ public class DefaultController {
 			Model model,
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId) {
-		System.out.println(2);
-		checkUser(request);
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				"", "", ""));
 	}
@@ -87,14 +85,12 @@ public class DefaultController {
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId) {
-		System.out.println(3);
-		checkUser(request);
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				topicId, "", ""));
 	}
 
-	@RequestMapping(value = { BLANK_URL, DEFAULT_URL, LOGIN_URL })
-	public String blankRequest(Model model, HttpServletRequest request) {
+	@RequestMapping(value = { BLANK_URL, DEFAULT_URL })
+	public String defaultRequest(Model model, HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String defaultPageName = "";
@@ -108,11 +104,11 @@ public class DefaultController {
 		return defaultPageName;
 	}
 
-	private String redirectToDefaultPage() {
+	String redirectToDefaultPage() {
 		return "redirect:" + getDefaultPageName();
 	}
 
-	private String getDefaultPageName() {
+	 String getDefaultPageName() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String defaultPageName = "";
@@ -164,7 +160,6 @@ public class DefaultController {
 
 		if (pageContainers != null) {
 			for (Container c : pageContainers) {
-				System.out.println("-->" + c.getContentsAsString());
 				sb.append(c.getContentsAsString());
 			}
 		}
@@ -182,17 +177,6 @@ public class DefaultController {
 		System.out.println(browserDetails);
 	}
 
-	@RequestMapping(value = { LOGOUT_URL })
-	public String logout(Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (auth != null) {
-			new SecurityContextLogoutHandler().logout(request, response, auth);
-		}
-		SecurityContextHolder.getContext().setAuthentication(null);
-		return redirectToDefaultPage();
-	}
+	
 
 }

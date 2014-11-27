@@ -8,10 +8,11 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mk.portal.framework.exceptions.PortalPropertyNotFoundException;
 
 public class JSONConfigurationReader implements ConfigurationReader {
 
-	public String getValue(String key) {
+	public String getValue(String key) throws PortalPropertyNotFoundException {
 		List<File> listOfFiles = getListOfConfigurationFiles();
 		String value = null;
 		for (File configFile : listOfFiles) {
@@ -28,22 +29,26 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
-	private String getValue(File configFile, String key) throws IOException {
+	private String getValue(File configFile, String key) throws IOException, PortalPropertyNotFoundException {
+		JsonObject jsonObject = null ;
+		String value="";
 		try {
 			// read the json file
 			FileReader reader = new FileReader(configFile);
-
 			JsonParser jsonParser = new JsonParser();
-			JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
-
-			return findValueInJson(jsonObject,key);
-
+			jsonObject = (JsonObject) jsonParser.parse(reader);
+			value=findValueInJson(jsonObject,key);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
+			throw ex;
 		} catch (NullPointerException ex) {
 			ex.printStackTrace();
+			throw ex;
 		}
-		return null;
+		if(value==null){
+			throw new PortalPropertyNotFoundException();
+		}
+		return value;
 	}
 
 	private String findValueInJson(JsonObject jsonObject,String key) {
@@ -54,7 +59,7 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return null;
 	}
 
-	public String getValue(String namespace, String key) {
+	public String getValue(String namespace, String key) throws PortalPropertyNotFoundException {
 		String value = null;
 		for (File file : getListOfConfigurationFiles()) {
 			if (file.getName().equals(namespace)) {

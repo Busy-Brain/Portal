@@ -1,5 +1,9 @@
 package com.mk.portal.framework;
-
+/**
+ * This class contains the constants used by portal framework
+ * Name spacing is achieved by inner classes
+ * @author mohit
+ */
 public final class FrameworkConstants {
 	private FrameworkConstants() {
 		throw new AssertionError();

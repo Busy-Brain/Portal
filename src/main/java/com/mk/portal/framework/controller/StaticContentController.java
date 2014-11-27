@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mk.portal.framework.FrameworkConstants;
-
+/**
+ * This controller controls the behaviour for handling static content
+ * @author mohit
+ *
+ */
 @Controller
 public class StaticContentController {
 	private static final String STATIC_URL = "/static/";
