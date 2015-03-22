@@ -61,5 +61,5 @@
 			expression="execution(* com.mk.portal.framework.service.impl.*Service.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />
 	</aop:config>
-
+ 
 </beans>

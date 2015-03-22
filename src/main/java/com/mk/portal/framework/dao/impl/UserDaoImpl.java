@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mk.portal.framework.model.User;
 import com.mk.portal.framework.dao.UserDao;
 
 public class UserDaoImpl implements UserDao {
-
+	@Autowired
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
