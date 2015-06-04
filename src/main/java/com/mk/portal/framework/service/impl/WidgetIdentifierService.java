@@ -2,13 +2,14 @@ package com.mk.portal.framework.service.impl;
 
 import com.mk.portal.framework.exceptions.PortalServiceException;
 import com.mk.portal.framework.service.PortalService;
+import com.mk.portal.framework.service.PortalVO;
 import com.mk.portal.framework.service.ServiceResponse;
 import com.mk.portal.framework.widget.WidgetServiceResponse;
 import com.mk.portal.framework.widget.WidgetServiceVO;
 
 
 
-public class WidgetIdentifierService implements PortalService<WidgetServiceVO, ServiceResponse> {
+public class WidgetIdentifierService implements PortalService {
 
 	public ServiceResponse execute(WidgetServiceVO vo) {
 		WidgetServiceResponse res= new WidgetServiceResponse();
@@ -26,6 +27,16 @@ public class WidgetIdentifierService implements PortalService<WidgetServiceVO, S
 	}
 
 	private WidgetServiceVO getWidgetByName(String widgetName) throws PortalServiceException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ServiceResponse execute(PortalVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PortalVO getEmptyInputVo() {
 		// TODO Auto-generated method stub
 		return null;
 	}

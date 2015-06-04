@@ -78,4 +78,9 @@ System.out.println("loading user :"+username);
 		return null;
 	}
 
+	public PortalVO getEmptyInputVo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

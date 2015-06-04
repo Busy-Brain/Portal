@@ -16,10 +16,20 @@ public class WidgetController {
 
 	@RequestMapping(value = WIDGET_URL + "/{"
 			+ FrameworkConstants.WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.POST)
-	public void requesForStaticContent(
+	public void postRequesForWidget(
 			HttpServletResponse response,
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.WidgetControllerConstants.WIDGET_NAME) String widgetName) {
+		System.out.println(widgetName);
+
+	}
+	@RequestMapping(value = WIDGET_URL + "/{"
+			+ FrameworkConstants.WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.GET)
+	public void getRequesForStaticContent(
+			HttpServletResponse response,
+			HttpServletRequest request,
+			@PathVariable(FrameworkConstants.WidgetControllerConstants.WIDGET_NAME) String widgetName) {
+		System.out.println(widgetName);
 
 	}
 }

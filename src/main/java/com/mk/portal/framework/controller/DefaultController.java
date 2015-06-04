@@ -2,6 +2,7 @@ package com.mk.portal.framework.controller;
 
 import java.util.List;
 
+import javax.management.ServiceNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -83,6 +84,14 @@ public class DefaultController {
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId) {
+		if(siteId.equals("rest")){
+			try {
+				return new RestServiceController().requesForRestService(null, request, topicId);
+			} catch (ServiceNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				topicId, "", ""));
 	}

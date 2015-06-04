@@ -10,8 +10,8 @@
  		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan
-		base-package="com.mk.portal.framework.controller,com.mohitkanwar.qbank.common.service.impl" />
-	
+		base-package="com.mk.portal.framework.controller,com.mk.portal.framework.service,com.mohitkanwar.qbank.common.service.impl" />
+	<context:property-placeholder location="classpath*:restservices.properties" />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 

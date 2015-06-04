@@ -10,6 +10,7 @@ public final class FrameworkConstants {
 	}
 	public class RestServiceConstants{
 		public static final String REST_SERVICE_NAME="restService";
+		public static final String REST_SERVICE_METHOD = "restServiceMethod";
 		
 		private RestServiceConstants(){
 			throw new AssertionError();

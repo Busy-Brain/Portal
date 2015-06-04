@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mk.portal.framework.FrameworkConstants;
+
 /**
  * This controller controls the behaviour for handling static content
+ * 
  * @author mohit
  *
  */
@@ -36,23 +38,28 @@ public class StaticContentController {
 			@PathVariable(FrameworkConstants.StaticContentConstants.FOLDER_ID) String folderId,
 			@PathVariable(FrameworkConstants.StaticContentConstants.FILE_NAME) String fileName)
 			throws IOException {
+		try {
 
-		File staticFile = new File(
-				FrameworkConstants.PageConstants.STATIC_FOLDER_PATH + "/"
-						+ staticContentType + "/" + folderId + "/" + fileName
-						+ getExtension(staticContentType));
-		response.setContentType("text/css");
-		ServletOutputStream out;
-		FileInputStream fis = new FileInputStream(staticFile);
-		byte[] data = new byte[(int) staticFile.length()];
-		fis.read(data);
-		fis.close();
-		//
-		out = response.getOutputStream();
-		out.println(new String(data));
-		out.flush();
-		out.close();
-
+			String pathname = FrameworkConstants.PageConstants.STATIC_FOLDER_PATH + "/"
+					+ staticContentType + "/" + folderId + "/"
+					+ fileName + getExtension(staticContentType);
+			System.out.println(pathname);
+			File staticFile = new File(
+					pathname);
+			response.setContentType("text/css");
+			ServletOutputStream out;
+			FileInputStream fis = new FileInputStream(staticFile);
+			byte[] data = new byte[(int) staticFile.length()];
+			fis.read(data);
+			fis.close();
+			//
+			out = response.getOutputStream();
+			out.println(new String(data));
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private String getExtension(String staticContentType) {

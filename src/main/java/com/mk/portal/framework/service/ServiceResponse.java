@@ -1,9 +1,7 @@
 package com.mk.portal.framework.service;
 
-public interface ServiceResponse {
-	public PortalVO getServiceInput();
-
-	public PortalVO getServiceResponseVO();
+public interface ServiceResponse extends PortalVO{
 
 	public boolean isExecutedSuccessfully();
+	public String toString();
 }
