@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class ErrorController {
+	//TODO handle multiple errors
 	// for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied() {

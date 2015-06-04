@@ -25,8 +25,11 @@ public final class FrameworkConstants {
 	}
 	
 	public class PageConstants{
+		//TODO remove absolute path
 		public static final String PAGES_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/pages.json";
+		//TODO remove absolute path
 		public static final String CONTAINER_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/containers.json";
+		//TODO remove absolute path, remove Relation to target folder
 		public static final String STATIC_FOLDER_PATH="/home/mohit/personal/github/Portal/target/Qbank/static";
 		public static final String DEFAULT_PAGE_NAME="index";
 		public static final String PAGE_ID = "pageId";

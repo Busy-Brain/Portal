@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminController {
-
+//TODO Implement
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 		ModelAndView model = new ModelAndView();

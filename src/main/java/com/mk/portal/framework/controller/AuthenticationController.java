@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class AuthenticationController {
+	//TODO this must be configurable
 	private static final String LOGIN_URL = "/login";
+	//TODO this must be configurable
 	private static final String LOGOUT_URL = "/logout";
 	@RequestMapping(value = { LOGIN_URL })
 	public String loginRequest(Model model, HttpServletRequest request) {

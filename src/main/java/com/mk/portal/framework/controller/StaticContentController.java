@@ -23,6 +23,7 @@ import com.mk.portal.framework.FrameworkConstants;
  */
 @Controller
 public class StaticContentController {
+	//TODO Configurable
 	private static final String STATIC_URL = "/static/";
 
 	@RequestMapping(value = STATIC_URL + "/{"
@@ -43,6 +44,8 @@ public class StaticContentController {
 			String pathname = FrameworkConstants.PageConstants.STATIC_FOLDER_PATH + "/"
 					+ staticContentType + "/" + folderId + "/"
 					+ fileName + getExtension(staticContentType);
+			//TODO Log it.
+			//TODO modify to pick files from resource folders instead
 			System.out.println(pathname);
 			File staticFile = new File(
 					pathname);

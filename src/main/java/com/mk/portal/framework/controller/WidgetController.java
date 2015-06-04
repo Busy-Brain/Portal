@@ -12,6 +12,8 @@ import com.mk.portal.framework.FrameworkConstants;
 
 @Controller
 public class WidgetController {
+	//This must be configurable
+	//Make an enum of All URL types
 	private static final String WIDGET_URL = "/widget/";
 
 	@RequestMapping(value = WIDGET_URL + "/{"

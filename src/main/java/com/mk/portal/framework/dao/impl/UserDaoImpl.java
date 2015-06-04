@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 
 		users = getSessionFactory().getCurrentSession().createQuery("from User where username=?")
 				.setParameter(0, username).list();
-
+		//TODO add a check if the user id matches instead of blindly returning the first data
 		if (users.size() > 0) {
 			return users.get(0);
 		} else {

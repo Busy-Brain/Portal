@@ -39,13 +39,16 @@ public class JSONConfigurationReader implements ConfigurationReader {
 			jsonObject = (JsonObject) jsonParser.parse(reader);
 			value=findValueInJson(jsonObject,key);
 		} catch (FileNotFoundException ex) {
+			// TODO log this
 			ex.printStackTrace();
 			throw ex;
 		} catch (NullPointerException ex) {
+			// TODO log this
 			ex.printStackTrace();
 			throw ex;
 		}
 		if(value==null){
+			// TODO log this
 			throw new PortalPropertyNotFoundException();
 		}
 		return value;
@@ -56,6 +59,7 @@ public class JSONConfigurationReader implements ConfigurationReader {
 	}
 
 	private List<File> getListOfConfigurationFiles() {
+		//TODO Implement
 		return null;
 	}
 

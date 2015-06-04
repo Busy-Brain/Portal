@@ -25,15 +25,15 @@ import com.mk.portal.framework.page.container.Container;
  */
 @Controller
 public class DefaultController {
-
+	//TODO this is used multiple times across project
 	private static final String LOGIN_PAGE_NAME = "login";
 	
 	private static final String BLANK_URL = "/";
-	
+	//TODO this must be configurable
 	private static final String DEFAULT_PAGE_NAME = "index";
 	private static final String DEFAULT_URL = "/"
 			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
-
+	//TODO This must be configurable
 	private static final String DEFAULT_SITE_URL = "me";
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
@@ -88,7 +88,7 @@ public class DefaultController {
 			try {
 				return new RestServiceController().requesForRestService(null, request, topicId);
 			} catch (ServiceNotFoundException e) {
-				// TODO Auto-generated catch block
+				// TODO log this 
 				e.printStackTrace();
 			}
 		}
@@ -120,7 +120,7 @@ public class DefaultController {
 				.getAuthentication();
 		String defaultPageName = "";
 		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
-
+			//TODO this must be configurable
 			/* The user is logged in :) */
 			defaultPageName = "/me/dashboard";
 		}

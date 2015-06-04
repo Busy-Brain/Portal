@@ -22,6 +22,7 @@ import com.mk.portal.framework.service.ServiceResponse;
  */
 @Controller
 public class RestServiceController {
+	//TODO configurable
 	private static final String REST_URL = "/rest/";
 @Autowired
 ServiceFactory factory;
