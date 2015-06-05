@@ -12,7 +12,7 @@ import com.mk.portal.framework.exceptions.PortalPropertyNotFoundException;
 
 public class JSONConfigurationReader implements ConfigurationReader {
 
-	public String getValue(String key) throws PortalPropertyNotFoundException {
+	public String getValueFromConfiguration(String key) throws PortalPropertyNotFoundException {
 		List<File> listOfFiles = getListOfConfigurationFiles();
 		String value = null;
 		for (File configFile : listOfFiles) {
@@ -63,7 +63,7 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return null;
 	}
 
-	public String getValue(String namespace, String key) throws PortalPropertyNotFoundException {
+	public String getValueFromConfiguration(String namespace, String key) throws PortalPropertyNotFoundException {
 		String value = null;
 		for (File file : getListOfConfigurationFiles()) {
 			if (file.getName().equals(namespace)) {
@@ -77,6 +77,21 @@ public class JSONConfigurationReader implements ConfigurationReader {
 			}
 		}
 		return value;
+	}
+
+	public String getValueFromConfigOrDefault(String key) {
+		String value;
+		try {
+			 value=getValueFromConfiguration(key);
+		} catch (PortalPropertyNotFoundException e) {
+			value=getDefaultValue(key);
+			// TODO create configuration file, so that It picks up from there next time onwards
+		}
+		return value;
+	}
+
+	private String getDefaultValue(String key) {
+		return DefaultConfigurations.getValue(key);
 	}
 
 }

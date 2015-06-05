@@ -16,7 +16,7 @@ public interface ConfigurationReader {
 	 * @return String, value of property
 	 * @throws PortalPropertyNotFoundException if property is not found
 	 */
-	String getValue(String key) throws PortalPropertyNotFoundException;
+	String getValueFromConfiguration(String key) throws PortalPropertyNotFoundException;
 	/**
 	 * This method searches in given configuration location.
 	 * This is faster, if location of property is known
@@ -25,5 +25,15 @@ public interface ConfigurationReader {
 	 * @return  String, value of property
 	 * @throws PortalPropertyNotFoundException if property is not found
 	 */
-	String getValue(String namespace,String key) throws PortalPropertyNotFoundException;
+	String getValueFromConfiguration(String namespace,String key) throws PortalPropertyNotFoundException;
+	
+	/**
+	 * This method searches in all available configurations.
+	 * This should be used if a property can be over-ridden by hierarchy. 
+	 * If value is not found, default value is returned
+	 * @param key
+	 * @return String, value of property
+	 * 
+	 */
+	String getValueFromConfigOrDefault(String key);
 }

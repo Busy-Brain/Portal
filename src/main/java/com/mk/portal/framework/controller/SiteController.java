@@ -24,7 +24,9 @@ import com.mk.portal.framework.page.container.Container;
  *
  */
 @Controller
-public class DefaultController {
+public class SiteController {
+	private static final String BLANK = "";
+
 	//TODO this is used multiple times across project
 	private static final String LOGIN_PAGE_NAME = "login";
 	
@@ -63,7 +65,7 @@ public class DefaultController {
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId,
 			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_ID) String subTopic) {
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				topicId, subTopic, ""));
+				topicId, subTopic, BLANK));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
@@ -73,7 +75,7 @@ public class DefaultController {
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId) {
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				"", "", ""));
+				BLANK, BLANK, BLANK));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
@@ -93,9 +95,9 @@ public class DefaultController {
 			}
 		}
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				topicId, "", ""));
+				topicId, BLANK, BLANK));
 	}
-
+/*
 	@RequestMapping(value = { BLANK_URL, DEFAULT_URL })
 	public String defaultRequest(Model model, HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext()
@@ -109,7 +111,7 @@ public class DefaultController {
 			defaultPageName = getDefaultPageName();
 		}
 		return defaultPageName;
-	}
+	}*/
 
 	String redirectToDefaultPage() {
 		return "redirect:" + getDefaultPageName();
@@ -118,7 +120,7 @@ public class DefaultController {
 	 String getDefaultPageName() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		String defaultPageName = "";
+		String defaultPageName = BLANK;
 		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
 			//TODO this must be configurable
 			/* The user is logged in :) */
@@ -144,15 +146,15 @@ public class DefaultController {
 		model.addAttribute(FrameworkConstants.PageConstants.PAGE_IDENTIFIER,
 				pageIdentifier);
 		String pagepath = pageIdentifier.getSiteId();
-		if (!pageIdentifier.getTopicId().equals("")) {
+		if (!pageIdentifier.getTopicId().equals(BLANK)) {
 			pagepath = pagepath + BLANK_URL + pageIdentifier.getTopicId();
-			if (!pageIdentifier.getSubTopicId().equals("")) {
+			if (!pageIdentifier.getSubTopicId().equals(BLANK)) {
 				pagepath = pagepath + BLANK_URL
 						+ pageIdentifier.getSubTopicId();
 
 			}
 		}
-		if (!pageIdentifier.getPageId().equals("")) {
+		if (!pageIdentifier.getPageId().equals(BLANK)) {
 			pagepath = pagepath + BLANK_URL + pageIdentifier.getPageId();
 		}
 

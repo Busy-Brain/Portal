@@ -14,7 +14,9 @@
 	<context:property-placeholder location="classpath*:restservices.properties" />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-
+	<mvc:resources mapping="/resources/**"
+           location="/, classpath:/WEB-INF/static/"
+           cache-period="10000" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

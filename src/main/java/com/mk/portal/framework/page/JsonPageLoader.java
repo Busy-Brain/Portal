@@ -25,7 +25,7 @@ public class JsonPageLoader implements PageLoader {
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
 
-			return parsePageJson(jsonObject, pageIdentifier);
+			return getPageFromJson(jsonObject, pageIdentifier);
 
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
@@ -36,7 +36,7 @@ public class JsonPageLoader implements PageLoader {
 		return null;
 	}
 
-	private PortalPage parsePageJson(JsonObject jsonObject,
+	private PortalPage getPageFromJson(JsonObject jsonObject,
 			PageIdentifier expectedPageIdentifier) {
 		// get a String from the JSON object
 		JsonArray listOfPages = jsonObject
