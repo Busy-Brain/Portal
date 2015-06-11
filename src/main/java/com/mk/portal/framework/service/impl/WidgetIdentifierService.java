@@ -1,6 +1,5 @@
 package com.mk.portal.framework.service.impl;
 
-import com.mk.portal.framework.exceptions.PortalServiceException;
 import com.mk.portal.framework.service.PortalService;
 import com.mk.portal.framework.service.PortalVO;
 import com.mk.portal.framework.service.ServiceResponse;
@@ -14,19 +13,16 @@ public class WidgetIdentifierService implements PortalService {
 	public ServiceResponse execute(WidgetServiceVO vo) {
 		WidgetServiceResponse res= new WidgetServiceResponse();
 		res.setServiceInput(vo);
-		try{
+		
 		WidgetServiceVO serviceResponse=getWidgetByName(vo.getWidgetName());
 		res.setServiceResponse(serviceResponse);
-		
+		//TODO res status can be false too
 		res.setStatus(true);
-		}
-		catch(PortalServiceException e){
-			res.setStatus(false);
-		}
+		
 		return res;
 	}
 
-	private WidgetServiceVO getWidgetByName(String widgetName) throws PortalServiceException{
+	private WidgetServiceVO getWidgetByName(String widgetName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

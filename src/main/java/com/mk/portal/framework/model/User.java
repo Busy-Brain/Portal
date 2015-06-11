@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User{
-
+	private Integer userId;
 	private String username;
 	private String password;
 	private boolean enabled;
-	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	private Set<UserRoles> userRole = new HashSet<UserRoles>(0);
 
 	public User() {
 	}
@@ -19,7 +19,7 @@ public class User{
 		this.enabled = enabled;
 	}
 
-	public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
+	public User(String username, String password, boolean enabled, Set<UserRoles> userRole) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -50,12 +50,20 @@ public class User{
 		this.enabled = enabled;
 	}
 
-	public Set<UserRole> getUserRole() {
+	public Set<UserRoles> getUserRole() {
 		return this.userRole;
 	}
 
-	public void setUserRole(Set<UserRole> userRole) {
+	public void setUserRole(Set<UserRoles> userRole) {
 		this.userRole = userRole;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

@@ -3,10 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.mk.portal.framework.model.User" table="users" catalog="portal">
-        <id name="username" type="string">
-            <column name="username" length="45" />
-            <generator class="assigned" />
+        <id name="userId" type="int">
+            <column name="user_id" length="45" />
+            <generator class="increment" />
         </id>
+        <property name="username" type="string">
+            <column name="username" length="45" />
+        </property>
         <property name="password" type="string">
             <column name="password" length="60" not-null="true" />
         </property>
@@ -15,9 +18,15 @@
         </property>
         <set name="userRole" table="user_roles" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="username" length="45" not-null="true" />
+                <column name="user_id" length="45" not-null="true" />
             </key>
-            <one-to-many class="com.mk.portal.framework.model.UserRole" />
+            <one-to-many class="com.mk.portal.framework.model.UserRoles" />
         </set>
     </class>
+    <class name="com.mk.portal.framework.model.UserRoles" table="user_roles" catalog="portal">
+    	<composite-id>
+            <key-many-to-one name="userId" class="com.mk.portal.framework.model.User" column="user_id"/>
+            <key-many-to-one name="roleId" class="com.mk.portal.framework.model.Roles" column="role_id"/>
+        </composite-id>             
+    </class>     
 </hibernate-mapping>

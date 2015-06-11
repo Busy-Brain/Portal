@@ -17,11 +17,14 @@ public class UserDaoImpl implements UserDao {
 	public User findByUserName(String username) {
 
 		List<User> users = new ArrayList<User>();
-
+		try{
 		users = getSessionFactory().getCurrentSession().createQuery("from User where username=?")
 				.setParameter(0, username).list();
-		//TODO add a check if the user id matches instead of blindly returning the first data
-		if (users.size() > 0) {
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		if ((users.size() ==1)&&(((User)users.get(0)).getUsername().equalsIgnoreCase(username))) {
 			return users.get(0);
 		} else {
 			return null;

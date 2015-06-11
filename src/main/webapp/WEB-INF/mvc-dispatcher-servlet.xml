@@ -13,10 +13,11 @@
 		base-package="com.mk.portal.framework.controller,com.mk.portal.framework.service,com.mohitkanwar.qbank.common.service.impl" />
 	<context:property-placeholder location="classpath*:restservices.properties" />
 	<mvc:default-servlet-handler />
-	<mvc:annotation-driven />
-	<mvc:resources mapping="/resources/**"
+	
+	<mvc:resources mapping="/static/**"
            location="/, classpath:/WEB-INF/static/"
            cache-period="10000" />
+    <mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -26,9 +27,4 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
-	
-	
-
-
 </beans>

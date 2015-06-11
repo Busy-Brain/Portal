@@ -58,11 +58,11 @@ public class AuthenticationController {
 		return redirectToDefaultPage();
 	}
 
-	String redirectToDefaultPage() {
+	private String redirectToDefaultPage() {
 		return "redirect:" + getDefaultPageName();
 	}
 
-	String getDefaultPageName() {
+	private String getDefaultPageName() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String defaultPageName = "";

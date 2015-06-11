@@ -1,18 +1,17 @@
 package com.mk.portal.framework.configuration;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mk.portal.framework.exceptions.PortalPropertyNotFoundException;
+import com.mk.portal.framework.exceptions.PotentialBugException;
 
 public class JSONConfigurationReader implements ConfigurationReader {
 
-	public String getValueFromConfiguration(String key) throws PortalPropertyNotFoundException {
+	public String getValueFromConfiguration(String key) {
 		List<File> listOfFiles = getListOfConfigurationFiles();
 		String value = null;
 		for (File configFile : listOfFiles) {
@@ -29,41 +28,32 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
-	private String getValue(File configFile, String key) throws IOException, PortalPropertyNotFoundException {
-		JsonObject jsonObject = null ;
-		String value="";
-		try {
-			// read the json file
-			FileReader reader = new FileReader(configFile);
-			JsonParser jsonParser = new JsonParser();
-			jsonObject = (JsonObject) jsonParser.parse(reader);
-			value=findValueInJson(jsonObject,key);
-		} catch (FileNotFoundException ex) {
+	private String getValue(File configFile, String key) throws IOException {
+		JsonObject jsonObject = null;
+		String value = "";
+		// read the json file
+		FileReader reader = new FileReader(configFile);
+		JsonParser jsonParser = new JsonParser();
+		jsonObject = (JsonObject) jsonParser.parse(reader);
+		value = findValueInJson(jsonObject, key);
+		if (value == null) {
 			// TODO log this
-			ex.printStackTrace();
-			throw ex;
-		} catch (NullPointerException ex) {
-			// TODO log this
-			ex.printStackTrace();
-			throw ex;
-		}
-		if(value==null){
-			// TODO log this
-			throw new PortalPropertyNotFoundException();
+			throw new PotentialBugException("0", "Property with name '" + key
+					+ "' is not found");
 		}
 		return value;
 	}
 
-	private String findValueInJson(JsonObject jsonObject,String key) {
+	private String findValueInJson(JsonObject jsonObject, String key) {
 		return jsonObject.get(key).getAsString();
 	}
 
 	private List<File> getListOfConfigurationFiles() {
-		//TODO Implement
+		// TODO Implement
 		return null;
 	}
 
-	public String getValueFromConfiguration(String namespace, String key) throws PortalPropertyNotFoundException {
+	public String getValueFromConfiguration(String namespace, String key) {
 		String value = null;
 		for (File file : getListOfConfigurationFiles()) {
 			if (file.getName().equals(namespace)) {
@@ -82,10 +72,9 @@ public class JSONConfigurationReader implements ConfigurationReader {
 	public String getValueFromConfigOrDefault(String key) {
 		String value;
 		try {
-			 value=getValueFromConfiguration(key);
-		} catch (PortalPropertyNotFoundException e) {
-			value=getDefaultValue(key);
-			// TODO create configuration file, so that It picks up from there next time onwards
+			value = getValueFromConfiguration(key);
+		} catch (PotentialBugException e) {
+			value = getDefaultValue(key);
 		}
 		return value;
 	}
