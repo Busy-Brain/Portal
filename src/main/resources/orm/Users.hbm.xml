@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.mk.portal.framework.model.User" table="users" catalog="portal">
+    <class name="com.mk.portal.framework.entity.UserEntity" table="users" catalog="portal">
         <id name="userId" type="int">
             <column name="user_id" length="45" />
             <generator class="increment" />
@@ -20,13 +20,13 @@
             <key>
                 <column name="user_id" length="45" not-null="true" />
             </key>
-            <one-to-many class="com.mk.portal.framework.model.UserRoles" />
+            <one-to-many class="com.mk.portal.framework.entity.UserRolesEntity" />
         </set>
     </class>
-    <class name="com.mk.portal.framework.model.UserRoles" table="user_roles" catalog="portal">
+    <class name="com.mk.portal.framework.entity.UserRolesEntity" table="user_roles" catalog="portal">
     	<composite-id>
-            <key-many-to-one name="userId" class="com.mk.portal.framework.model.User" column="user_id"/>
-            <key-many-to-one name="roleId" class="com.mk.portal.framework.model.Roles" column="role_id"/>
+            <key-many-to-one name="userId" class="com.mk.portal.framework.entity.UserEntity" column="user_id"/>
+            <key-many-to-one name="roleId" class="com.mk.portal.framework.entity.RolesEntity" column="role_id"/>
         </composite-id>             
     </class>     
 </hibernate-mapping>

@@ -1,8 +1,8 @@
-package com.mk.portal.framework.model;
+package com.mk.portal.framework.entity;
 
 import java.io.Serializable;
 
-public class UserRoles implements Serializable{
+public class UserRolesEntity implements Serializable{
 
 	/**
 	 * 
@@ -22,7 +22,4 @@ public class UserRoles implements Serializable{
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
-	
-
 }

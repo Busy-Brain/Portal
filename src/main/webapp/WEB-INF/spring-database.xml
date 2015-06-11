@@ -10,7 +10,6 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/portal" />
 		<property name="username" value="root" />
@@ -32,13 +31,15 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">true</prop>
-				<prop key="packagesToScan" >com.mk.portal.framework.model</prop>
-				
+				<prop key="packagesToScan" >com.mk.portal.framework.entity</prop>
 			</props>
 		</property>
 	</bean>
 
 	<bean id="userDao" class="com.mk.portal.framework.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="rolesDao" class="com.mk.portal.framework.dao.impl.RolesDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

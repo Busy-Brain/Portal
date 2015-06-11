@@ -1,25 +1,25 @@
-package com.mk.portal.framework.model;
+package com.mk.portal.framework.entity;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class User{
+public class UserEntity{
 	private Integer userId;
 	private String username;
 	private String password;
 	private boolean enabled;
-	private Set<UserRoles> userRole = new HashSet<UserRoles>(0);
+	private Set<UserRolesEntity> userRole = new HashSet<UserRolesEntity>(0);
 
-	public User() {
+	public UserEntity() {
 	}
 
-	public User(String username, String password, boolean enabled) {
+	public UserEntity(String username, String password, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public User(String username, String password, boolean enabled, Set<UserRoles> userRole) {
+	public UserEntity(String username, String password, boolean enabled, Set<UserRolesEntity> userRole) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -50,11 +50,11 @@ public class User{
 		this.enabled = enabled;
 	}
 
-	public Set<UserRoles> getUserRole() {
+	public Set<UserRolesEntity> getUserRole() {
 		return this.userRole;
 	}
 
-	public void setUserRole(Set<UserRoles> userRole) {
+	public void setUserRole(Set<UserRolesEntity> userRole) {
 		this.userRole = userRole;
 	}
 

@@ -3,14 +3,14 @@ package com.mk.portal.framework.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mk.portal.framework.model.User;
+import com.mk.portal.framework.model.PortalUser;
 
 public class NavigationServiceFetchLinksImpl implements RestService{
 
 	public ServiceResponse execute(PortalVO vo) {
 		NavigationServiceVO navigationVO=(NavigationServiceVO)vo;
 		String navId=navigationVO.getNavigationId();
-		User user=navigationVO.getUser();
+		PortalUser user=navigationVO.getUser();
 		
 		NavigationServiceResponse response = new NavigationServiceResponse();
 		
@@ -29,10 +29,6 @@ public class NavigationServiceFetchLinksImpl implements RestService{
 		return links;
 	
 	}
-
-	
-
-	
 
 }
 

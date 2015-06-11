@@ -1,13 +1,13 @@
 package com.mk.portal.framework.dao;
 
-import com.mk.portal.framework.model.PortalUser;
+import com.mk.portal.framework.model.UserRole;
 /**
  * UserDAO has database related operations for Portal User
  * @author mohit
  *
  */
-public interface UserDao {
+public interface RolesDao {
 
-	PortalUser findByUserName(String username);
+	UserRole findByRoleId(int roleId);
 
 }

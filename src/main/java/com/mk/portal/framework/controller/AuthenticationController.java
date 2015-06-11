@@ -68,6 +68,7 @@ public class AuthenticationController {
 		String defaultPageName = "";
 		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
 			/* The user is logged in :) */
+			//Get default page for user
 			defaultPageName = config
 					.getValueFromConfigOrDefault(ControllerConfigConstants.DEFAULT_PAGE_URL);
 		} else {
