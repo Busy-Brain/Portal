@@ -3,6 +3,7 @@ package com.mk.portal.framework.configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.controller.ControllerConfigConstants;
 
 public final class DefaultConfigurations {
@@ -11,6 +12,8 @@ public final class DefaultConfigurations {
 		configurations.put("page.name.login", "login");
 		configurations.put("page.name.logout", "logout");
 		configurations.put(ControllerConfigConstants.DEFAULT_PAGE_URL,"/me/dashboard");
+		configurations.put(FrameworkConstants.PageConstants.PAGES_JSON,"/home/mohit/personal/github/Portal/portalconfig/pages/pages.json");
+		configurations.put(FrameworkConstants.PageConstants.SITES_JSON,"/home/mohit/personal/github/Portal/portalconfig/pages/sites.json");
 	}
 
 	public static String getValue(String key){

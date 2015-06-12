@@ -1,0 +1,10 @@
+{
+    "sites": [
+        {
+            "siteId": "1",
+            "siteName": "Admin Portal",
+            "siteTitle": "Admin",
+            "siteTemplateId": "1"
+        }
+    ]
+}

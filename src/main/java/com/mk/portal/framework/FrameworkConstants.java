@@ -18,7 +18,7 @@ public final class FrameworkConstants {
 	}
 	public class PortalConstants{
 		public static final String DEFAULT_SITE_URL="";
-		
+		public static final String SITE_ID_PARAM_NAME = "s";
 		private PortalConstants(){
 			throw new AssertionError();
 		}
@@ -26,7 +26,8 @@ public final class FrameworkConstants {
 	
 	public class PageConstants{
 		//TODO remove absolute path
-		public static final String PAGES_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/pages.json";
+		public static final String PAGES_JSON = "PAGES_JSON";
+		public static final String SITES_JSON = "SITES_JSON";
 		//TODO remove absolute path
 		public static final String CONTAINER_JSON = "/home/mohit/personal/github/Portal/portalconfig/pages/containers.json";
 		//TODO remove absolute path, remove Relation to target folder
@@ -47,6 +48,8 @@ public final class FrameworkConstants {
 		public static final String CONTENT_ID = "contentId";
 		public static final String CONTENT_TYPE = "contentType";
 		public static final String CONTENT_PATH = "contentPath";
+		public static final String SITE_TAG = "sites";
+		public static final String SITE_NAME = "siteName";
 		private PageConstants(){
 			throw new AssertionError();
 		}

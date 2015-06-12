@@ -3,6 +3,7 @@ package com.mk.portal.framework.configuration;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonObject;
@@ -49,8 +50,10 @@ public class JSONConfigurationReader implements ConfigurationReader {
 	}
 
 	private List<File> getListOfConfigurationFiles() {
-		// TODO Implement
-		return null;
+
+		List<File> listOfFiles = new ArrayList<File>();
+		// TODO Add list of files
+		return listOfFiles;
 	}
 
 	public String getValueFromConfiguration(String namespace, String key) {
@@ -71,9 +74,8 @@ public class JSONConfigurationReader implements ConfigurationReader {
 
 	public String getValueFromConfigOrDefault(String key) {
 		String value;
-		try {
-			value = getValueFromConfiguration(key);
-		} catch (PotentialBugException e) {
+		value = getValueFromConfiguration(key);
+		if (value == null) {
 			value = getDefaultValue(key);
 		}
 		return value;

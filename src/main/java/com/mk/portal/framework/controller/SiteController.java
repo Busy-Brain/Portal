@@ -5,21 +5,23 @@ import java.util.List;
 import javax.management.ServiceNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageFactoryImpl;
 import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.PortalPage;
 import com.mk.portal.framework.page.container.Container;
+import com.mk.portal.framework.service.SiteDetailsService;
+
 /**
  * This is the default controller of the portal. It handles default requests
+ * 
  * @author mohit
  *
  */
@@ -27,16 +29,15 @@ import com.mk.portal.framework.page.container.Container;
 public class SiteController {
 	private static final String BLANK = "";
 
-	//TODO this is used multiple times across project
-	private static final String LOGIN_PAGE_NAME = "login";
-	
 	private static final String BLANK_URL = "/";
-	//TODO this must be configurable
+	// TODO this must be configurable
 	private static final String DEFAULT_PAGE_NAME = "index";
 	private static final String DEFAULT_URL = "/"
 			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
-	//TODO This must be configurable
+	// TODO This must be configurable
 	private static final String DEFAULT_SITE_URL = "me";
+	@Autowired
+	private SiteDetailsService detailsService;
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
 			+ FrameworkConstants.PageConstants.SITE_ID + "}" + "/{"
@@ -86,58 +87,37 @@ public class SiteController {
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId) {
-		if(siteId.equals("rest")){
+		if (siteId.equals("rest")) {
 			try {
-				return new RestServiceController().requesForRestService(null, request, topicId);
+				return new RestServiceController().requesForRestService(null,
+						request, topicId);
 			} catch (ServiceNotFoundException e) {
-				// TODO log this 
+				// TODO log this
 				e.printStackTrace();
 			}
 		}
 		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
 				topicId, BLANK, BLANK));
 	}
-/*
-	@RequestMapping(value = { BLANK_URL, DEFAULT_URL })
-	public String defaultRequest(Model model, HttpServletRequest request) {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String defaultPageName = "";
-		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
-			defaultPageName = redirectToDefaultPage();
-		}
 
-		else {
-			defaultPageName = getDefaultPageName();
-		}
-		return defaultPageName;
-	}*/
-
-	String redirectToDefaultPage() {
-		return "redirect:" + getDefaultPageName();
-	}
-
-	 String getDefaultPageName() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String defaultPageName = BLANK;
-		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
-			//TODO this must be configurable
-			/* The user is logged in :) */
-			defaultPageName = "/me/dashboard";
-		}
-
-		else {
-			defaultPageName = LOGIN_PAGE_NAME;
-		}
-		return defaultPageName;
-	}
+	/*
+	 * @RequestMapping(value = { BLANK_URL, DEFAULT_URL }) public String
+	 * defaultRequest(Model model, HttpServletRequest request) { Authentication
+	 * auth = SecurityContextHolder.getContext() .getAuthentication(); String
+	 * defaultPageName = ""; if (!((auth == null) || (auth instanceof
+	 * AnonymousAuthenticationToken))) { defaultPageName =
+	 * redirectToDefaultPage(); }
+	 * 
+	 * else { defaultPageName = getDefaultPageName(); } return defaultPageName;
+	 * }
+	 */
 
 	private String defaultControllorFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
-		if (pageIdentifier.getSiteId().equalsIgnoreCase(DEFAULT_SITE_URL)) {
-			return defaultSitePages(model, pageIdentifier);
-		}
+		/*
+		 * if (pageIdentifier.getSiteId().equalsIgnoreCase(DEFAULT_SITE_URL)) {
+		 * return defaultSitePages(model, pageIdentifier); }
+		 */
 
 		return customPageFunctionality(model, pageIdentifier);
 	}
@@ -163,6 +143,8 @@ public class SiteController {
 
 	private String customPageFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
+		PortalSite site = detailsService
+				.getSiteById(pageIdentifier.getSiteId());
 		PortalPage page = new PageFactoryImpl().getPage(pageIdentifier);
 		List<Container> pageContainers = page.getContainersList();
 		StringBuilder sb = new StringBuilder();
@@ -185,7 +167,5 @@ public class SiteController {
 		String browserDetails = request.getHeader("User-Agent");
 		System.out.println(browserDetails);
 	}
-
-	
 
 }

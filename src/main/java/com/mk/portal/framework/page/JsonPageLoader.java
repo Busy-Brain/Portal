@@ -10,6 +10,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.configuration.ConfigurationReader;
+import com.mk.portal.framework.configuration.JSONConfigurationReader;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
@@ -18,9 +20,12 @@ public class JsonPageLoader implements PageLoader {
 	public PortalPage getPage(PageIdentifier pageIdentifier) {
 
 		try {
+			ConfigurationReader config= new JSONConfigurationReader();
+			
+			
 			// read the json file
-			FileReader reader = new FileReader(
-					FrameworkConstants.PageConstants.PAGES_JSON);
+			FileReader reader = new FileReader(config.getValueFromConfigOrDefault(FrameworkConstants.PageConstants.PAGES_JSON)
+					);
 
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
