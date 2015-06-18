@@ -5,6 +5,7 @@ public class SiteEntity {
 	private String siteName;
 	private String siteTitle;
 	private String siteTemplateId;
+	private boolean enabled;
 	
 	public String getSiteTitle() {
 		return siteTitle;
@@ -29,5 +30,11 @@ public class SiteEntity {
 	}
 	public void setSiteTemplateId(String siteTemplateId) {
 		this.siteTemplateId = siteTemplateId;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

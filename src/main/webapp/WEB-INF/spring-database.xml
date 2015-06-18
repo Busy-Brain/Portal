@@ -23,6 +23,7 @@
 			<list>
 				<value>orm/Users.hbm.xml</value>
 				<value>orm/Roles.hbm.xml</value>
+				<value>orm/Sites.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -50,6 +51,9 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 	<bean id="siteDetailsService" class="com.mk.portal.framework.service.impl.SiteDetailsServiceImpl">
+	<property name="siteDao" ref="siteDao" />
+	</bean>
+	<bean id="pageDetailsService" class="com.mk.portal.framework.service.impl.PageDetailsServiceImpl">
 	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">

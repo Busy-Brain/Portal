@@ -10,10 +10,16 @@ import com.mk.portal.framework.service.SiteDetailsService;
 public class SiteDetailsServiceImpl extends SiteDetailsService {
 
 	@Autowired
-	private SiteDao dao;
+	private SiteDao siteDao;
+	public SiteDao getSiteDao() {
+		return siteDao;
+	}
+	public void setSiteDao(SiteDao siteDao) {
+		this.siteDao = siteDao;
+	}
 	@Override
 	public PortalSite getSiteById(String siteId) {
-		PortalSite site=dao.findBySiteId(siteId);
+		PortalSite site=siteDao.findBySiteId(siteId);
 		if(site==null){
 			site=findInConfiguration(siteId);
 		}

@@ -3,6 +3,7 @@ package com.mk.portal.framework.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,24 +34,30 @@ public class SiteDaoImpl implements SiteDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked"})
 	public PortalSite findBySiteId(String siteId) {
 
 		List<SiteEntity> sites = new ArrayList<SiteEntity>();
+		Session session = getSessionFactory().openSession();
+		PortalSite site = null;
 		try{
-			sites = getSessionFactory().getCurrentSession().createQuery("from SiteEntity where siteId=?")
+			sites = session.createQuery("from SiteEntity where siteId=?")
 				.setParameter(0, siteId).list();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
 		
 		if ((sites.size() ==1)&&(((SiteEntity)sites.get(0)).getSiteId().equalsIgnoreCase(siteId))) {
 			
-			return convertSiteEntityToSite(sites.get(0));
+			site= convertSiteEntityToSite(sites.get(0));
 		} else {
-			return null;
+			site= null;
 		}
-
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			session.close();
+		}
+return site;
 	}
 
 }

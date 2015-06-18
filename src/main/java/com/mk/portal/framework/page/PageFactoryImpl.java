@@ -11,9 +11,9 @@ import com.mk.portal.framework.page.tags.MetaTagObject;
 public class PageFactoryImpl implements PageFactory {
 
 	public PortalPage getPage(PageIdentifier pageIdentifier) {
-		PortalPage page = getPageFromConfiguration(pageIdentifier);
+		PortalPage page = getPageFromDB(pageIdentifier);
 		if (page == null) {
-			page = getPageFromDB(pageIdentifier);
+			page = getPageFromConfiguration(pageIdentifier);
 		}
 		if (page == null) {
 			page = getDefaultPage(pageIdentifier);
@@ -35,7 +35,7 @@ public class PageFactoryImpl implements PageFactory {
 	}
 
 	private PortalPage getPageFromDB(PageIdentifier pageIdentifier) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
