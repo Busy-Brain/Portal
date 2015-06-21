@@ -165,7 +165,7 @@ public class SiteController {
 	}
 
 	private boolean isDebugEnabled() {
-		return false;
+		return true;
 	}
 
 	private void checkUser(HttpServletRequest request) {
