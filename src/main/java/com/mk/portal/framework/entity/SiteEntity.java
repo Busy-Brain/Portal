@@ -6,6 +6,8 @@ public class SiteEntity {
 	private String siteTitle;
 	private String siteTemplateId;
 	private boolean enabled;
+	private String HTMLVersion;
+	private String siteUrl;
 	
 	public String getSiteTitle() {
 		return siteTitle;
@@ -36,5 +38,17 @@ public class SiteEntity {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public String getHTMLVersion() {
+		return HTMLVersion;
+	}
+	public void setHTMLVersion(String hTMLVersion) {
+		HTMLVersion = hTMLVersion;
+	}
+	public String getSiteUrl() {
+		return siteUrl;
+	}
+	public void setSiteUrl(String siteUrl) {
+		this.siteUrl = siteUrl;
 	}
 }

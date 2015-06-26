@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.html.objects.Page;
+import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageFactoryImpl;
 import com.mk.portal.framework.page.PageIdentifier;
-import com.mk.portal.framework.page.PortalPage;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
@@ -44,68 +44,68 @@ public class SiteController {
 	@Autowired
 	private PageDetailsService pageDetailsService;
 	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.SUB_TOPIC_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.PAGE_ID + "}")
+			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.TOPIC_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.SUB_TOPIC_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
 	@ResponseBody
 	public String requestWithSiteTopicSubTopicAndPage(
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId,
-			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_ID) String subTopic,
-			@PathVariable(FrameworkConstants.PageConstants.PAGE_ID) String pageId) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				topicId, subTopic, pageId));
+			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
+			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl,
+			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_URL) String subTopicUrl,
+			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
+		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
+				topicUrl, subTopicUrl, pageUrl));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.SUB_TOPIC_ID + "}")
+			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.TOPIC_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.SUB_TOPIC_URL + "}")
 	@ResponseBody
 	public String requestWithSiteTopicAndSubTopic(
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId,
-			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_ID) String subTopic) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				topicId, subTopic, BLANK));
+			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
+			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl,
+			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_URL) String subTopicUrl) {
+		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
+				topicUrl, subTopicUrl, BLANK));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_ID + "}")
+			+ FrameworkConstants.PageConstants.SITE_URL + "}")
 	@ResponseBody
 	public String requestWithSiteOnly(
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
+			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl) {
+		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
 				BLANK, BLANK, BLANK));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_ID + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_ID + "}")
+			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
+			+ FrameworkConstants.PageConstants.TOPIC_URL + "}")
 	@ResponseBody
 	public String requestWithSiteAndTopic(
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_ID) String siteId,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_ID) String topicId) {
-		if (siteId.equals("rest")) {
+			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
+			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl) {
+		if (siteUrl.equals("rest")) {
 			try {
 				return new RestServiceController().requesForRestService(null,
-						request, topicId);
+						request, topicUrl);
 			} catch (ServiceNotFoundException e) {
 				// TODO log this
 				e.printStackTrace();
 			}
 		}
-		return defaultControllorFunctionality(model, new PageIdentifier(siteId,
-				topicId, BLANK, BLANK));
+		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
+				topicUrl, BLANK, BLANK));
 	}
 
 	/*
@@ -123,14 +123,14 @@ public class SiteController {
 	private String defaultControllorFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
 		/*
-		 * if (pageIdentifier.getSiteId().equalsIgnoreCase(DEFAULT_SITE_URL)) {
+		 * if (pageIdentifier.getsiteUrl().equalsIgnoreCase(DEFAULT_SITE_URL)) {
 		 * return defaultSitePages(model, pageIdentifier); }
 		 */
 
 		return customPageFunctionality(model, pageIdentifier);
 	}
 
-	private String defaultSitePages(Model model, PageIdentifier pageIdentifier) {
+	/*private String defaultSitePages(Model model, PageIdentifier pageIdentifier) {
 		model.addAttribute(FrameworkConstants.PageConstants.PAGE_IDENTIFIER,
 				pageIdentifier);
 		String pagepath = pageIdentifier.getSiteId();
@@ -147,10 +147,11 @@ public class SiteController {
 		}
 
 		return pagepath;
-	}
+	}*/
 
 	private String customPageFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
+		pageIdentifier.setLanguage(getLanguage());
 		Page page=pageDetailsService.getpage(pageIdentifier);
 		
 		String pageContent;
@@ -162,6 +163,10 @@ public class SiteController {
 		}
 
 		return pageContent;
+	}
+
+	private String getLanguage() {
+		return "en";
 	}
 
 	private boolean isDebugEnabled() {

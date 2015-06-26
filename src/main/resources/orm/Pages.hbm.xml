@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mk.portal.framework.entity.PageEntity" table="pages" catalog="portal">
+        <id name="pageId" type="string">
+            <column name="page_id" length="45" />
+        </id>
+        <property name="siteId" type="string">
+            <column name="site_id" length="45" not-null="true" />
+        </property>
+        <property name="pageTitle" type="string">
+            <column name="title" length="60" />
+        </property>
+        <property name="enabled" type="boolean">
+            <column name="enabled" not-null="true" />
+        </property>
+        <property name="pageUrl" type="string">
+            <column name="page_url" not-null="true" />
+        </property>
+       <!--  <property name="siteUrl" type="string">
+            <column name="site_url" not-null="true" />
+        </property> -->
+    </class>
+</hibernate-mapping>

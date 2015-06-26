@@ -12,9 +12,9 @@ import com.google.gson.JsonParser;
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.configuration.ConfigurationReader;
 import com.mk.portal.framework.configuration.JSONConfigurationReader;
+import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageIdentifier;
-import com.mk.portal.framework.page.PortalPage;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
@@ -68,7 +68,7 @@ public class JsonSiteLoader  {
 	}
 	private String getSiteIdFromJson(JsonObject x) {
 		JsonElement jsonElement = x
-				.get(FrameworkConstants.PageConstants.SITE_ID);
+				.get(FrameworkConstants.PageConstants.SITE_URL);
 		return jsonElement.getAsString();
 	}
 }

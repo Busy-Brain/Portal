@@ -12,7 +12,7 @@ public enum HTMLVersion {
 	XHTML_1_0_Frameset(Constants.XHTML_1_0_FRAMESET,Constants.XHTML_1_0_FRAMESET_DECLARATION),
 	XHTML_1_1(Constants.XHTML_1_1,Constants.XHTML_1_1_DECLARATION);
 	
-	private String name;
+	private String vaersionName;
 	private String doctype;
 
 	
@@ -30,11 +30,11 @@ public enum HTMLVersion {
 		this.setDoctype(declaration);
 	}
 
-	public String getName() {
-		return name;
+	public String getVaersionName() {
+		return vaersionName;
 	}
 
 	private void setName(String name) {
-		this.name = name;
+		this.vaersionName = name;
 	}
 }

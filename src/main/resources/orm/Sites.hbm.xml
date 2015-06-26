@@ -18,7 +18,12 @@
         <property name="siteTemplateId" type="string">
             <column name="template_id" not-null="true" />
         </property>
-        
+         <property name="siteUrl" type="string">
+            <column name="site_url" not-null="true" />
+        </property>
+         <property name="HTMLVersion" type="string">
+            <column name="html_version" not-null="true" />
+        </property>
     </class>
     
 </hibernate-mapping>

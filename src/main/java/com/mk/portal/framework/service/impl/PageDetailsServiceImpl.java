@@ -3,12 +3,15 @@ package com.mk.portal.framework.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mk.portal.framework.html.objects.Attribute;
 import com.mk.portal.framework.html.objects.HTMLVersion;
 import com.mk.portal.framework.html.objects.Page;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.Tag;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.html.attributes.HREFAttribute;
 import com.mk.portal.framework.page.html.attributes.LangAttribute;
@@ -26,17 +29,39 @@ import com.mk.portal.framework.page.html.tags.ScriptTag;
 import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.TitleTag;
 import com.mk.portal.framework.service.PageDetailsService;
+import com.mk.portal.framework.service.SiteDetailsService;
 
 public class PageDetailsServiceImpl implements PageDetailsService {
+	@Autowired
+	private SiteDetailsService siteDetailsService;
 
-	public Page getpage(PageIdentifier pageId) {
+	public Page getpage(PageIdentifier pageIdentifier) {
+		PortalSite site=siteDetailsService.getSiteByUrl(pageIdentifier.getSiteUrl());
+		if(site!=null){
+			List<PageComponent> pageComponents = new ArrayList<PageComponent>();
+			pageComponents.add(getDoctype(site.getHTMLVersion()));
+			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
+			pageComponents.add(htmlTag);
+			htmlTag.addChild(getHeadTag());
+			htmlTag.addChild(getBodyTag());
+			return new Page(pageComponents);
+		}
+		return getErrorPage();
+	}
+
+	private Page getErrorPage() {
 		List<PageComponent> pageComponents = new ArrayList<PageComponent>();
-		pageComponents.add(getDoctype());
-		PageComponent htmlTag = getHTMLTag();
+		Page p = new Page(pageComponents );
+		pageComponents.add(getDoctype(HTMLVersion.HTML_5.name()));
+		PageComponent htmlTag = getHTMLTag("en");
 		pageComponents.add(htmlTag);
-		htmlTag.addChild(getHeadTag());
-		htmlTag.addChild(getBodyTag());
-		return new Page(pageComponents);
+		BodyTag body = new BodyTag();
+		LeftNavBarLayout layout = null;
+		layout = getLayout();
+		layout.setMainBody(new Text("Unfortunately the page does not exists!"));
+		body.addChild((PageComponent) layout);
+		htmlTag.addChild(body);
+		return p;
 	}
 
 	private PageComponent getBodyTag() {
@@ -63,15 +88,13 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return new LeftNavBarLayout();
 	}
 
-	private DocTypeDeclaration getDoctype() {
-		// TODO read from properties, defaulted to HTML5
-		return new DocTypeDeclaration(HTMLVersion.HTML_5);
+	private DocTypeDeclaration getDoctype(String htmlVersion) {
+		return new DocTypeDeclaration(HTMLVersion.valueOf(htmlVersion));
 	}
 
-	private Tag getHTMLTag() {
+	private Tag getHTMLTag(String language) {
 		Tag html = new HTMLTag();
-		// TODO make it dynamic
-		Attribute languageAttribute = new LangAttribute("en");
+		Attribute languageAttribute = new LangAttribute(language);
 		html.addAttribute(languageAttribute);
 		return html;
 	}
@@ -91,11 +114,11 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 				"/qbank/static/css/default/style.css"));
 		cust.addAttribute(new RelAttribute("stylesheet"));
 		head.addChild(boots);
-		List<LinkTag> cssList=getLayout().getCss();
-		for(LinkTag css:cssList){
+		List<LinkTag> cssList = getLayout().getCss();
+		for (LinkTag css : cssList) {
 			head.addChild(css);
 		}
-		
+
 		head.addChild(cust);
 		return head;
 	}

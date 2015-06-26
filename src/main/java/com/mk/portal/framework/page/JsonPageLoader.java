@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.configuration.ConfigurationReader;
 import com.mk.portal.framework.configuration.JSONConfigurationReader;
+import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
@@ -102,7 +103,7 @@ public class JsonPageLoader implements PageLoader {
 		 * TODO : Add default implementation
 		 */
 		String subTopicId = x
-				.get(FrameworkConstants.PageConstants.SUB_TOPIC_ID)
+				.get(FrameworkConstants.PageConstants.SUB_TOPIC_URL)
 				.getAsString();
 		return subTopicId;
 	}
@@ -111,7 +112,7 @@ public class JsonPageLoader implements PageLoader {
 		/**
 		 * TODO : Add default implementation
 		 */
-		String topicId = x.get(FrameworkConstants.PageConstants.TOPIC_ID)
+		String topicId = x.get(FrameworkConstants.PageConstants.TOPIC_URL)
 				.getAsString();
 		return topicId;
 	}
@@ -120,7 +121,7 @@ public class JsonPageLoader implements PageLoader {
 		/**
 		 * TODO : Add default implementation
 		 */
-		String pageId = x.get(FrameworkConstants.PageConstants.PAGE_ID)
+		String pageId = x.get(FrameworkConstants.PageConstants.PAGE_URL)
 				.getAsString();
 		return pageId;
 	}
@@ -130,7 +131,7 @@ public class JsonPageLoader implements PageLoader {
 		 * TODO : Add default implementation
 		 */
 		JsonElement jsonElement = x
-				.get(FrameworkConstants.PageConstants.SITE_ID);
+				.get(FrameworkConstants.PageConstants.SITE_URL);
 		String siteId;
 		if (jsonElement == null) {
 			siteId = "defSite";

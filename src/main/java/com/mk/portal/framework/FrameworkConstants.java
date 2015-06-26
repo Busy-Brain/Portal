@@ -33,11 +33,11 @@ public final class FrameworkConstants {
 		//TODO remove absolute path, remove Relation to target folder
 		public static final String STATIC_FOLDER_PATH="/home/mohit/personal/github/Portal/target/Qbank/static";
 		public static final String DEFAULT_PAGE_NAME="index";
-		public static final String PAGE_ID = "pageId";
+		public static final String PAGE_URL = "pageUrl";
 		public static final String PAGE_CONTENT = "pageContent";
-		public static final String TOPIC_ID = "topicId";
-		public static final String SITE_ID = "siteId";
-		public static final String SUB_TOPIC_ID = "subTopicId";
+		public static final String TOPIC_URL = "topicUrl";
+		public static final String SITE_URL = "siteUrl";
+		public static final String SUB_TOPIC_URL = "subTopicUrl";
 		public static final String PAGE_IDENTIFIER = "pageIdentifier";
 		public static final String PAGE_TITLE = "pageTitle";
 		public static final String PAGES = "pages";

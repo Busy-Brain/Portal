@@ -23,6 +23,7 @@ public class SiteDaoImpl implements SiteDao {
 		site.setSiteId(siteEntity.getSiteId());
 		site.setSiteName(siteEntity.getSiteName());
 		site.setSiteTitle(siteEntity.getSiteTitle());
+		site.setHTMLVersion(siteEntity.getHTMLVersion());
 		return site;
 	}
 
@@ -33,31 +34,52 @@ public class SiteDaoImpl implements SiteDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
-	@SuppressWarnings({ "unchecked"})
-	public PortalSite findBySiteId(String siteId) {
-
+	
+	@SuppressWarnings({ "unchecked" })
+	public PortalSite findBySiteUrl(String siteUrl) {
 		List<SiteEntity> sites = new ArrayList<SiteEntity>();
 		Session session = getSessionFactory().openSession();
 		PortalSite site = null;
-		try{
-			sites = session.createQuery("from SiteEntity where siteId=?")
-				.setParameter(0, siteId).list();
-		
-		
-		if ((sites.size() ==1)&&(((SiteEntity)sites.get(0)).getSiteId().equalsIgnoreCase(siteId))) {
-			
-			site= convertSiteEntityToSite(sites.get(0));
-		} else {
-			site= null;
-		}
-		}catch(Exception e){
+		try {
+			sites = session.createQuery("from SiteEntity where siteUrl=?").setParameter(0, siteUrl).list();
+
+			if ((sites.size() == 1)
+					&& (((SiteEntity) sites.get(0)).getSiteUrl()
+							.equalsIgnoreCase(siteUrl))) {
+
+				site = convertSiteEntityToSite(sites.get(0));
+			} else {
+				site = null;
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			session.close();
 		}
-return site;
+		return site;
+	}
+	@SuppressWarnings({ "unchecked" })
+	public PortalSite findBySiteId(String siteId) {
+		List<SiteEntity> sites = new ArrayList<SiteEntity>();
+		Session session = getSessionFactory().openSession();
+		PortalSite site = null;
+		try {
+			sites = session.createQuery("from SiteEntity where siteId=?").setParameter(0, siteId).list();
+
+			if ((sites.size() == 1)
+					&& (((SiteEntity) sites.get(0)).getSiteId()
+							.equalsIgnoreCase(siteId))) {
+
+				site = convertSiteEntityToSite(sites.get(0));
+			} else {
+				site = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return site;
 	}
 
 }

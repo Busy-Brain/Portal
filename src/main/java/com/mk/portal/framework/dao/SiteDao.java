@@ -9,5 +9,7 @@ import com.mk.portal.framework.model.PortalSite;
 public interface SiteDao {
 
 	PortalSite findBySiteId(String siteId);
+	
+	PortalSite findBySiteUrl(String siteUrl);
 
 }

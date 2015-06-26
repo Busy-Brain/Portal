@@ -3,6 +3,7 @@ package com.mk.portal.framework.page;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.container.DefaultContainer;
 import com.mk.portal.framework.page.content.HTMLContent;

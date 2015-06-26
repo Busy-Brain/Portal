@@ -1,6 +1,5 @@
 package com.mk.portal.framework.model;
 
-import com.mk.portal.framework.page.PortalPage;
 
 
 public class PortalSite {
@@ -10,6 +9,7 @@ public class PortalSite {
 	private String siteTitleId;
 	private String siteId;
 	private String siteName;
+	private String HTMLVersion;
 	public SiteSEO getSiteSEO() {
 		return siteSEO;
 	}
@@ -45,5 +45,11 @@ public class PortalSite {
 	}
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
+	}
+	public String getHTMLVersion() {
+		return HTMLVersion;
+	}
+	public void setHTMLVersion(String hTMLVersion) {
+		HTMLVersion = hTMLVersion;
 	}
 }

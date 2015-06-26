@@ -1,17 +1,35 @@
-package com.mk.portal.framework.page;
+package com.mk.portal.framework.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.tags.MetaTagObject;
 
 public class PortalPage {
-
+	private String pageId;
 	private PageIdentifier pageIdentifier;
 	private String title;
 	private List<MetaTagObject> metaTags;
 	private List<Container> containersList;
+	private boolean enabled;
+	private String url;
+	public PageIdentifier getPageIdentifier() {
+		return pageIdentifier;
+	}
+	
+	public void setPageIdentifier(PageIdentifier pageIdentifier) {
+		this.pageIdentifier = pageIdentifier;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public PortalPage(PageIdentifier pageIdentifier, String title,
 			List<MetaTagObject> metaTags, List<Container> containersList) {
@@ -21,16 +39,22 @@ public class PortalPage {
 		this.metaTags = metaTags;
 		this.containersList = containersList;
 	}
+
 	public PortalPage(PageIdentifier pageIdentifier) {
 		super();
 		this.pageIdentifier = pageIdentifier;
 	}
+
+	public PortalPage() {
+
+	}
+
 	public String getPageId() {
-		return pageIdentifier.getPageId();
+		return this.pageId;
 	}
 
 	public void setPageId(String pageId) {
-		this.pageIdentifier.setPageId(pageId);
+		this.pageId=pageId;
 	}
 
 	public String getTitle() {
@@ -64,4 +88,11 @@ public class PortalPage {
 		containersList.add(container);
 	}
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled() {
+		return this.enabled;
+	}
 }

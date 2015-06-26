@@ -2,7 +2,7 @@ package com.mk.portal.framework.site;
 
 import java.util.List;
 
-import com.mk.portal.framework.page.PortalPage;
+import com.mk.portal.framework.model.PortalPage;
 
 public class Topic {
 private String topicId;

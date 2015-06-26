@@ -24,6 +24,8 @@
 				<value>orm/Users.hbm.xml</value>
 				<value>orm/Roles.hbm.xml</value>
 				<value>orm/Sites.hbm.xml</value>
+				<value>orm/Pages.hbm.xml</value>
+				<value>orm/CSSMapping.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -32,7 +34,8 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">true</prop>
-				<prop key="packagesToScan" >com.mk.portal.framework.entity</prop>
+				<prop key="packagesToScan">com.mk.portal.framework.entity
+				</prop>
 			</props>
 		</property>
 	</bean>
@@ -46,14 +49,23 @@
 	<bean id="siteDao" class="com.mk.portal.framework.dao.impl.SiteDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
-	<bean id="myUserDetailsService" class="com.mk.portal.framework.service.impl.PortalUserDetailsService">
+	<bean id="pageDao" class="com.mk.portal.framework.dao.impl.PageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="cssMappingDao" class="com.mk.portal.framework.dao.impl.CSSMappingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="myUserDetailsService"
+		class="com.mk.portal.framework.service.impl.PortalUserDetailsService">
 		<property name="userDao" ref="userDao" />
 	</bean>
-	<bean id="siteDetailsService" class="com.mk.portal.framework.service.impl.SiteDetailsServiceImpl">
-	<property name="siteDao" ref="siteDao" />
+	<bean id="siteDetailsService"
+		class="com.mk.portal.framework.service.impl.SiteDetailsServiceImpl">
+		<property name="siteDao" ref="siteDao" />
 	</bean>
-	<bean id="pageDetailsService" class="com.mk.portal.framework.service.impl.PageDetailsServiceImpl">
+	<bean id="pageDetailsService"
+		class="com.mk.portal.framework.service.impl.PageDetailsServiceImpl">
 	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -73,5 +85,5 @@
 			expression="execution(* com.mk.portal.framework.service.impl.*Service.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />
 	</aop:config>
- 
+
 </beans>

@@ -7,7 +7,7 @@ import com.mk.portal.framework.dao.SiteDao;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.service.SiteDetailsService;
 
-public class SiteDetailsServiceImpl extends SiteDetailsService {
+public class SiteDetailsServiceImpl implements SiteDetailsService {
 
 	@Autowired
 	private SiteDao siteDao;
@@ -28,6 +28,14 @@ public class SiteDetailsServiceImpl extends SiteDetailsService {
 	private PortalSite findInConfiguration(String siteId) {
 		JSONConfigurationReader reader = new JSONConfigurationReader();
 		return null;
+	}
+	@Override
+	public PortalSite getSiteByUrl(String siteUrl) {
+		PortalSite site=siteDao.findBySiteUrl(siteUrl);
+		if(site==null){
+			site=findInConfiguration(siteUrl);
+		}
+		return site;
 	}
 
 }

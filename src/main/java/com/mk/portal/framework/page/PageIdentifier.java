@@ -5,11 +5,11 @@ public class PageIdentifier {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((pageId == null) ? 0 : pageId.hashCode());
-		result = prime * result + ((siteId == null) ? 0 : siteId.hashCode());
+		result = prime * result + ((pageUrl == null) ? 0 : pageUrl.hashCode());
+		result = prime * result + ((siteUrl == null) ? 0 : siteUrl.hashCode());
 		result = prime * result
-				+ ((subTopicId == null) ? 0 : subTopicId.hashCode());
-		result = prime * result + ((topicId == null) ? 0 : topicId.hashCode());
+				+ ((subTopicUrl == null) ? 0 : subTopicUrl.hashCode());
+		result = prime * result + ((topicUrl == null) ? 0 : topicUrl.hashCode());
 		return result;
 	}
 	@Override
@@ -21,72 +21,79 @@ public class PageIdentifier {
 		if (getClass() != obj.getClass())
 			return false;
 		PageIdentifier other = (PageIdentifier) obj;
-		if (pageId == null) {
-			if (other.pageId != null)
+		if (pageUrl == null) {
+			if (other.pageUrl != null)
 				
 				return false;
-		} else if (!pageId.equals(other.pageId)){
-			System.out.println("pageId "+pageId+" not eaual to "+other.pageId);
+		} else if (!pageUrl.equals(other.pageUrl)){
+			System.out.println("pageUrl "+pageUrl+" not eaual to "+other.pageUrl);
 			return false;
 		}
-		if (siteId == null) {
-			if (other.siteId != null)
+		if (siteUrl == null) {
+			if (other.siteUrl != null)
 				return false;
-		} else if (!siteId.equals(other.siteId)){
-			System.out.println("siteId "+siteId+" not eaual to "+other.siteId);
+		} else if (!siteUrl.equals(other.siteUrl)){
+			System.out.println("siteUrl "+siteUrl+" not eaual to "+other.siteUrl);
 			return false;
 		}
-		if (subTopicId == null) {
-			if (other.subTopicId != null)
+		if (subTopicUrl == null) {
+			if (other.subTopicUrl != null)
 				return false;
-		} else if (!subTopicId.equals(other.subTopicId)){
-			System.out.println("subTopicId "+subTopicId+" not eaual to "+other.subTopicId);
+		} else if (!subTopicUrl.equals(other.subTopicUrl)){
+			System.out.println("subtopicUrl "+subTopicUrl+" not eaual to "+other.subTopicUrl);
 			return false;
 		}
 			
-		if (topicId == null) {
-			if (other.topicId != null)
+		if (topicUrl == null) {
+			if (other.topicUrl != null)
 				return false;
-		} else if (!topicId.equals(other.topicId)){
-			System.out.println("topicId "+topicId+" not eaual to "+other.topicId);
+		} else if (!topicUrl.equals(other.topicUrl)){
+			System.out.println("topicUrl "+topicUrl+" not eaual to "+other.topicUrl);
 			return false;
 		}
 		return true;
 	}
-	private String siteId;
-	private String subTopicId;
-	private String topicId;
-	private String pageId;
-	public String getSiteId() {
-		return siteId;
+	private String siteUrl;
+	private String subTopicUrl;
+	private String topicUrl;
+	private String pageUrl;
+	private String language;
+	public String getSiteUrl() {
+		return siteUrl;
 	}
-	public void setSiteId(String siteId) {
-		this.siteId = siteId;
+	public void setSiteUrl(String pSiteUrl) {
+		this.siteUrl = pSiteUrl;
 	}
-	public void setSubTopicId(String subTopicId) {
-		this.subTopicId = subTopicId;
+	public void setSubtopicUrl(String pSubTopicUrl) {
+		this.subTopicUrl = pSubTopicUrl;
 	}
-	public void setTopicId(String topicId) {
-		this.topicId = topicId;
+	public void settopicUrl(String pTopicUrl) {
+		this.topicUrl = pTopicUrl;
 	}
-	public void setPageId(String pageId) {
-		this.pageId = pageId;
+	public void setpageUrl(String pPageUrl) {
+		this.pageUrl = pPageUrl;
 	}
-	public PageIdentifier(String siteId,String topicId, String subTopicId, 
-			String pageId) {
+	public PageIdentifier(String siteUrl,String topicUrl, String subtopicUrl, 
+			String pageUrl) {
 		super();
-		this.siteId = siteId;
-		this.subTopicId = subTopicId;
-		this.topicId = topicId;
-		this.pageId = pageId;
+		this.siteUrl = siteUrl;
+		this.subTopicUrl = subtopicUrl;
+		this.topicUrl = topicUrl;
+		this.pageUrl = pageUrl;
 	}
-	public String getSubTopicId() {
-		return subTopicId;
+	public String getSubtopicUrl() {
+		return subTopicUrl;
 	}
-	public String getTopicId() {
-		return topicId;
+	public String gettopicUrl() {
+		return topicUrl;
 	}
-	public String getPageId() {
-		return pageId;
+	public String getpageUrl() {
+		return pageUrl;
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }
