@@ -24,6 +24,9 @@
          <property name="HTMLVersion" type="string">
             <column name="html_version" not-null="true" />
         </property>
+         <property name="charSet" type="string">
+            <column name="charset" not-null="true" />
+        </property>
     </class>
     
 </hibernate-mapping>

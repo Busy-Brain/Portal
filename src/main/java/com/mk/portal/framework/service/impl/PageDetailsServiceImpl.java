@@ -46,7 +46,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 			pageComponents.add(getDoctype(site.getHTMLVersion()));
 			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
 			pageComponents.add(htmlTag);
-			htmlTag.addChild(getHeadTag(page));
+			htmlTag.addChild(getHeadTag(site,page));
 			htmlTag.addChild(getBodyTag());
 			return new Page(pageComponents);
 		}
@@ -103,9 +103,9 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return html;
 	}
 
-	private Tag getHeadTag(PortalPage page) {
+	private Tag getHeadTag(PortalSite site, PortalPage page) {
 		Tag head = new HeadTag();
-		populateMetaTags(page,head);
+		populateMetaTags(site,page,head);
 		head.addChild(getTitleTag(page));
 
 		LinkTag boots = new LinkTag();
@@ -127,8 +127,8 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return head;
 	}
 
-	private void populateMetaTags(PortalPage page, Tag head) {
-		head.addChild(new MetaTagListComponent());
+	private void populateMetaTags(PortalSite site, PortalPage page, Tag head) {
+		head.addChild(new MetaTagListComponent(site,page));
 	}
 
 	private TagComponent getTitleTag(PortalPage page) {

@@ -11,6 +11,7 @@ public class PortalSite {
 	private String siteName;
 	private String HTMLVersion;
 	private String siteUrl;
+	private String charSet;
 	public String getSiteTitleId() {
 		return siteTitleId;
 	}
@@ -64,5 +65,11 @@ public class PortalSite {
 	}
 	public void setHTMLVersion(String hTMLVersion) {
 		HTMLVersion = hTMLVersion;
+	}
+	public String getCharSet() {
+		return charSet;
+	}
+	public void setCharSet(String charSet) {
+		this.charSet = charSet;
 	}
 }
