@@ -6,13 +6,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mk.portal.framework.model.PortalUser;
-import com.mk.portal.framework.model.UserRole;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.dao.UserDao;
-import com.mk.portal.framework.entity.RolesEntity;
 import com.mk.portal.framework.entity.UserEntity;
 import com.mk.portal.framework.entity.UserRolesEntity;
+import com.mk.portal.framework.model.PortalUser;
+import com.mk.portal.framework.model.UserRole;
 
 public class UserDaoImpl implements UserDao {
 	@Autowired
@@ -47,7 +46,7 @@ public class UserDaoImpl implements UserDao {
 				.enabled(userEntity.isEnabled())
 				.build();
 		for(UserRolesEntity re:userEntity.getUserRole()){
-			user.addRole(rolesDao.findByRoleId(re.getRoleId()));
+			user.addRole(new UserRole(re.getRole().getRoleId(), re.getRole().getRoleName()));
 		}
 		return user;
 	}

@@ -34,8 +34,7 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">true</prop>
-				<prop key="packagesToScan">com.mk.portal.framework.entity
-				</prop>
+				<prop key="packagesToScan">com.mk.portal.framework.entity</prop>
 			</props>
 		</property>
 	</bean>

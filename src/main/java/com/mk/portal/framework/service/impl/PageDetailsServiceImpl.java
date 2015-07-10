@@ -42,7 +42,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 			pageComponents.add(getDoctype(site.getHTMLVersion()));
 			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
 			pageComponents.add(htmlTag);
-			htmlTag.addChild(getHeadTag());
+			htmlTag.addChild(getHeadTag(site.getSiteId()));
 			htmlTag.addChild(getBodyTag());
 			return new Page(pageComponents);
 		}
@@ -99,7 +99,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return html;
 	}
 
-	private Tag getHeadTag() {
+	private Tag getHeadTag(String siteId) {
 		Tag head = new HeadTag();
 		populateMetaTags(head);
 		head.addChild(getTitleTag());

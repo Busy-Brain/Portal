@@ -25,8 +25,8 @@
     </class>
     <class name="com.mk.portal.framework.entity.UserRolesEntity" table="user_roles" catalog="portal">
     	<composite-id>
-            <key-many-to-one name="userId" class="com.mk.portal.framework.entity.UserEntity" column="user_id"/>
-            <key-many-to-one name="roleId" class="com.mk.portal.framework.entity.RolesEntity" column="role_id"/>
+            <key-many-to-one name="user" class="com.mk.portal.framework.entity.UserEntity" column="user_id"/>
+            <key-many-to-one name="role" class="com.mk.portal.framework.entity.RolesEntity" column="role_id"/>
         </composite-id>             
     </class>     
 </hibernate-mapping>

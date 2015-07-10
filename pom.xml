@@ -171,6 +171,34 @@
 		<finalName>Qbank</finalName>
 		<plugins>
 			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/java/com/mk/portal/framework/entity</directory>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>2.2</version>
@@ -239,6 +267,33 @@
 						<scope>runtime</scope>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>hbm2java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<components>
+						<component>
+							<name>hbm2java</name>
+							<implementation>configuration</implementation>
+							<outputDirectory>src/main/java</outputDirectory>
+						</component>
+					</components>
+					<componentProperties>
+						<drop>true</drop>
+						<jdk5>true</jdk5>
+						<configurationfile>/src/main/webapp/WEB-INF/hibernate.cfg.xml</configurationfile>
+					</componentProperties>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
