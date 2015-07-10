@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.PageDao;
 import com.mk.portal.framework.html.objects.Attribute;
 import com.mk.portal.framework.html.objects.HTMLVersion;
 import com.mk.portal.framework.html.objects.Page;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.Tag;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.html.attributes.HREFAttribute;
@@ -34,22 +36,24 @@ import com.mk.portal.framework.service.SiteDetailsService;
 public class PageDetailsServiceImpl implements PageDetailsService {
 	@Autowired
 	private SiteDetailsService siteDetailsService;
-
+	@Autowired
+	PageDao pageDao;
 	public Page getpage(PageIdentifier pageIdentifier) {
 		PortalSite site=siteDetailsService.getSiteByUrl(pageIdentifier.getSiteUrl());
-		if(site!=null){
+		PortalPage page= pageDao.findBySiteId_PageUrl(site.getSiteId(), pageIdentifier.getpageUrl());
+		if(page!=null){
 			List<PageComponent> pageComponents = new ArrayList<PageComponent>();
 			pageComponents.add(getDoctype(site.getHTMLVersion()));
 			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
 			pageComponents.add(htmlTag);
-			htmlTag.addChild(getHeadTag(site.getSiteId()));
+			htmlTag.addChild(getHeadTag(page));
 			htmlTag.addChild(getBodyTag());
 			return new Page(pageComponents);
 		}
-		return getErrorPage();
+		return getErrorPage(site.getSiteId());
 	}
 
-	private Page getErrorPage() {
+	private Page getErrorPage(String siteId) {
 		List<PageComponent> pageComponents = new ArrayList<PageComponent>();
 		Page p = new Page(pageComponents );
 		pageComponents.add(getDoctype(HTMLVersion.HTML_5.name()));
@@ -99,10 +103,10 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return html;
 	}
 
-	private Tag getHeadTag(String siteId) {
+	private Tag getHeadTag(PortalPage page) {
 		Tag head = new HeadTag();
-		populateMetaTags(head);
-		head.addChild(getTitleTag());
+		populateMetaTags(page,head);
+		head.addChild(getTitleTag(page));
 
 		LinkTag boots = new LinkTag();
 		boots.addAttribute(new HREFAttribute(
@@ -123,13 +127,13 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return head;
 	}
 
-	private void populateMetaTags(Tag head) {
+	private void populateMetaTags(PortalPage page, Tag head) {
 		head.addChild(new MetaTagListComponent());
 	}
 
-	private TagComponent getTitleTag() {
+	private TagComponent getTitleTag(PortalPage page) {
 		Tag title = new TitleTag();
-		title.addChild(new Text("Mohit Kanwar - Keep Learning"));
+		title.addChild(new Text(page.getTitle()));
 		return title;
 	}
 

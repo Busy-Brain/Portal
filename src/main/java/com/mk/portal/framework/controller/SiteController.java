@@ -1,7 +1,5 @@
 package com.mk.portal.framework.controller;
 
-import java.util.List;
-
 import javax.management.ServiceNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,11 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.html.objects.Page;
-import com.mk.portal.framework.model.PortalPage;
-import com.mk.portal.framework.model.PortalSite;
-import com.mk.portal.framework.page.PageFactoryImpl;
 import com.mk.portal.framework.page.PageIdentifier;
-import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
 
@@ -63,16 +57,16 @@ public class SiteController {
 	@RequestMapping(value = DEFAULT_URL + "/{"
 			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
 			+ FrameworkConstants.PageConstants.TOPIC_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.SUB_TOPIC_URL + "}")
+			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
 	@ResponseBody
 	public String requestWithSiteTopicAndSubTopic(
 			Model model,
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
 			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl,
-			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_URL) String subTopicUrl) {
+			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
 		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				topicUrl, subTopicUrl, BLANK));
+				topicUrl, BLANK, pageUrl));
 	}
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
@@ -88,24 +82,24 @@ public class SiteController {
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
 			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_URL + "}")
+			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
 	@ResponseBody
 	public String requestWithSiteAndTopic(
 			Model model,
 			HttpServletRequest request,
 			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl) {
+			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
 		if (siteUrl.equals("rest")) {
 			try {
 				return new RestServiceController().requesForRestService(null,
-						request, topicUrl);
+						request, pageUrl);
 			} catch (ServiceNotFoundException e) {
 				// TODO log this
 				e.printStackTrace();
 			}
 		}
 		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				topicUrl, BLANK, BLANK));
+				BLANK, BLANK, pageUrl));
 	}
 
 	/*

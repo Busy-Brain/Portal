@@ -10,6 +10,19 @@ public class PortalSite {
 	private String siteId;
 	private String siteName;
 	private String HTMLVersion;
+	private String siteUrl;
+	public String getSiteTitleId() {
+		return siteTitleId;
+	}
+	public void setSiteTitleId(String siteTitleId) {
+		this.siteTitleId = siteTitleId;
+	}
+	public String getSiteUrl() {
+		return siteUrl;
+	}
+	public void setSiteUrl(String siteUrl) {
+		this.siteUrl = siteUrl;
+	}
 	public SiteSEO getSiteSEO() {
 		return siteSEO;
 	}

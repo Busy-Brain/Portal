@@ -24,6 +24,7 @@ public class SiteDaoImpl implements SiteDao {
 		site.setSiteName(siteEntity.getSiteName());
 		site.setSiteTitle(siteEntity.getSiteTitle());
 		site.setHTMLVersion(siteEntity.getHTMLVersion());
+		site.setSiteUrl(siteEntity.getSiteUrl());
 		return site;
 	}
 
