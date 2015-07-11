@@ -1,9 +1,11 @@
 package com.mk.portal.framework.page.html.layouts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.exceptions.PotentialBugException;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
@@ -22,18 +24,12 @@ import com.mk.portal.framework.page.html.tags.SpanTag;
 import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.UlTag;
 
-public class LeftNavBarLayout extends AbstractComponent {
+public class LeftNavBarLayout extends Layout {
 
-	private PageComponent leftBar;
-	private PageComponent mainBody;
+	
+	private Map<Integer, ArrayList<PageComponent>> areas=new HashMap<Integer, ArrayList<PageComponent>>();
 
-	// private List<PageComponent> children = new ArrayList<PageComponent>();
-	/*
-	 * private String layoutTemplate="<div class='container-fluid'>"+
-	 * "<div class='row-fluid'>"+ "<div class='span2'>"+ "{{widgetArea}}" +
-	 * "</div>"+ "<div class='span10'>"+ "{{widgetArea}}" + "</div>"+ "</div>"+
-	 * "</div>";
-	 */
+	
 
 	@Override
 	protected TagComponent getComponent() {
@@ -99,27 +95,19 @@ public class LeftNavBarLayout extends AbstractComponent {
 		mainBody.addAttribute(new ClassAttribute("col-md-12"));
 		row.addChild(navBar);
 		row.addChild(mainBody);
-		navBar.addChild(getLeftBar());
-		mainBody.addChild(getMainBody());
+		List<PageComponent> leftbarList=getComponentsFromArea(0);
+		for(PageComponent c:leftbarList){
+			navBar.addChild(c);
+		}
+		List<PageComponent> mainBodyList=getComponentsFromArea(1);
+		for(PageComponent c:mainBodyList){
+			mainBody.addChild(c);
+		}
+		
+		
 		layout.addChild(nav);
 		layout.addChild(containerfluid);
 		return layout;
-	}
-
-	public PageComponent getLeftBar() {
-		return leftBar;
-	}
-
-	public void setLeftBar(PageComponent leftBar) {
-		this.leftBar = leftBar;
-	}
-
-	public PageComponent getMainBody() {
-		return mainBody;
-	}
-
-	public void setMainBody(PageComponent mainBody) {
-		this.mainBody = mainBody;
 	}
 
 	public List<LinkTag> getCss() {
@@ -135,5 +123,32 @@ public class LeftNavBarLayout extends AbstractComponent {
 	public List<PageComponent> getScript() {
 		return new ArrayList<PageComponent>();
 
+	}
+
+	@Override
+	public int getAreaCount() {
+		return 2;
+	}
+
+	@Override
+	public boolean setComponentInArea(PageComponent component, int areaPosition) {
+		if(areaPosition<0 ||areaPosition>1){
+			throw new PotentialBugException("No area defined with id:"+areaPosition, "No area defined with id:"+areaPosition);
+		}
+		ArrayList<PageComponent> area;
+		if(areas.get(areaPosition) == null){
+			area=new ArrayList<PageComponent>();
+			areas.put(areaPosition, area);
+		}
+		else{
+			area=areas.get(areaPosition);
+		}
+		return area.add(component);
+		
+	}
+
+	@Override
+	public List<PageComponent> getComponentsFromArea(int area) {
+		return areas.get(area);
 	}
 }

@@ -68,7 +68,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		BodyTag body = new BodyTag();
 		LeftNavBarLayout layout = null;
 		layout = getLayout();
-		layout.setMainBody(new Text("Unfortunately the page does not exists!"));
+		layout.setComponentInArea(new Text("This is Main Bodty"), 1);
 		body.addChild((PageComponent) layout);
 		htmlTag.addChild(body);
 		return p;
@@ -78,8 +78,8 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		BodyTag body = new BodyTag();
 		LeftNavBarLayout layout = null;
 		layout = getLayout();
-		layout.setLeftBar(new SideBarComponent());
-		layout.setMainBody(new Text("This is Main Bodty"));
+		layout.setComponentInArea(new SideBarComponent(), 0);
+		layout.setComponentInArea(new Text("This is Main Bodty"), 1);
 		body.addChild((PageComponent) layout);
 
 		
