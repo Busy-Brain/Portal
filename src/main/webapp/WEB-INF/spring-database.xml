@@ -25,7 +25,8 @@
 				<value>orm/Roles.hbm.xml</value>
 				<value>orm/Sites.hbm.xml</value>
 				<value>orm/Pages.hbm.xml</value>
-				<value>orm/CSSMapping.hbm.xml</value>
+				<value>orm/PageFileMapping.hbm.xml</value>
+				<value>orm/ExternalFilePaths.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -51,10 +52,14 @@
 	<bean id="pageDao" class="com.mk.portal.framework.dao.impl.PageDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="cssMappingDao" class="com.mk.portal.framework.dao.impl.CSSMappingDaoImpl">
+	<bean id="pageFileMappingDao" class="com.mk.portal.framework.dao.impl.PageFileMappingDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="fileServiceImpl"
+		class="com.mk.portal.framework.service.impl.FileServiceImpl">
+		<property name="pageFileMappingDao" ref="pageFileMappingDao" />
+	</bean>
 	<bean id="myUserDetailsService"
 		class="com.mk.portal.framework.service.impl.PortalUserDetailsService">
 		<property name="userDao" ref="userDao" />

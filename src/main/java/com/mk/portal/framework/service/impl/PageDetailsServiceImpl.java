@@ -12,6 +12,7 @@ import com.mk.portal.framework.html.objects.Page;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.Tag;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PageFileMapping;
 import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageIdentifier;
@@ -30,6 +31,7 @@ import com.mk.portal.framework.page.html.tags.LinkTag;
 import com.mk.portal.framework.page.html.tags.ScriptTag;
 import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.TitleTag;
+import com.mk.portal.framework.service.FileService;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
 
@@ -38,6 +40,9 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 	private SiteDetailsService siteDetailsService;
 	@Autowired
 	PageDao pageDao;
+	@Autowired
+	private FileService fileService;
+	
 	public Page getpage(PageIdentifier pageIdentifier) {
 		PortalSite site=siteDetailsService.getSiteByUrl(pageIdentifier.getSiteUrl());
 		PortalPage page= pageDao.findBySiteId_PageUrl(site.getSiteId(), pageIdentifier.getpageUrl());
@@ -46,8 +51,9 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 			pageComponents.add(getDoctype(site.getHTMLVersion()));
 			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
 			pageComponents.add(htmlTag);
-			htmlTag.addChild(getHeadTag(site,page));
-			htmlTag.addChild(getBodyTag());
+			List<PageFileMapping> files=fileService.findFilesForSiteAndPage(site.getSiteId(), page.getPageId());
+			htmlTag.addChild(getHeadTag(site,page,files));
+			htmlTag.addChild(getBodyTag(files));
 			return new Page(pageComponents);
 		}
 		return getErrorPage(site.getSiteId());
@@ -68,7 +74,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return p;
 	}
 
-	private PageComponent getBodyTag() {
+	private PageComponent getBodyTag(List<PageFileMapping> files) {
 		BodyTag body = new BodyTag();
 		LeftNavBarLayout layout = null;
 		layout = getLayout();
@@ -76,15 +82,15 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		layout.setMainBody(new Text("This is Main Bodty"));
 		body.addChild((PageComponent) layout);
 
-		ScriptTag jq = new ScriptTag();
-		jq.addAttribute(new SrcAttribute(
-				"/qbank/static/js/default/jquery.min.js"));
-
-		ScriptTag bs = new ScriptTag();
-		bs.addAttribute(new SrcAttribute(
-				"/qbank/static/js/default/bootstrap.min.js"));
-		body.addChild(jq);
-		body.addChild(bs);
+		
+		for(PageFileMapping file:files){
+			if(file.getFileType().equals("JS")){
+				ScriptTag js = new ScriptTag();
+				js.addAttribute(new SrcAttribute(
+						file.getFilePath()));
+				body.addChild(js);
+			}
+		}
 		return body;
 	}
 
@@ -103,27 +109,25 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		return html;
 	}
 
-	private Tag getHeadTag(PortalSite site, PortalPage page) {
+	private Tag getHeadTag(PortalSite site, PortalPage page, List<PageFileMapping> files) {
 		Tag head = new HeadTag();
 		populateMetaTags(site,page,head);
 		head.addChild(getTitleTag(page));
-
-		LinkTag boots = new LinkTag();
-		boots.addAttribute(new HREFAttribute(
-				"/qbank/static/css/default/bootstrap.min.css"));
-		boots.addAttribute(new RelAttribute("stylesheet"));
-
-		LinkTag cust = new LinkTag();
-		cust.addAttribute(new HREFAttribute(
-				"/qbank/static/css/default/style.css"));
-		cust.addAttribute(new RelAttribute("stylesheet"));
-		head.addChild(boots);
+		for(PageFileMapping file:files){
+			if(file.getFileType().equals("CSS")){
+				LinkTag css = new LinkTag();
+				css.addAttribute(new HREFAttribute(
+						file.getFilePath()));
+				css.addAttribute(new RelAttribute("stylesheet"));
+				head.addChild(css);
+			}
+		}
+				
 		List<LinkTag> cssList = getLayout().getCss();
 		for (LinkTag css : cssList) {
 			head.addChild(css);
 		}
 
-		head.addChild(cust);
 		return head;
 	}
 

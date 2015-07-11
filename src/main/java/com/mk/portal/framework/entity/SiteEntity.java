@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 10 Jul, 2015 6:28:51 PM by Hibernate Tools 3.2.2.GA
+// Generated 11 Jul, 2015 10:57:56 PM by Hibernate Tools 3.2.2.GA
 
 
 
@@ -16,20 +16,22 @@ public class SiteEntity  implements java.io.Serializable {
      private String siteTemplateId;
      private String siteUrl;
      private String HTMLVersion;
+     private String charSet;
 
     public SiteEntity() {
     }
 
 	
-    public SiteEntity(String siteId, String siteName, boolean enabled, String siteTemplateId, String siteUrl, String HTMLVersion) {
+    public SiteEntity(String siteId, String siteName, boolean enabled, String siteTemplateId, String siteUrl, String HTMLVersion, String charSet) {
         this.siteId = siteId;
         this.siteName = siteName;
         this.enabled = enabled;
         this.siteTemplateId = siteTemplateId;
         this.siteUrl = siteUrl;
         this.HTMLVersion = HTMLVersion;
+        this.charSet = charSet;
     }
-    public SiteEntity(String siteId, String siteName, String siteTitle, boolean enabled, String siteTemplateId, String siteUrl, String HTMLVersion) {
+    public SiteEntity(String siteId, String siteName, String siteTitle, boolean enabled, String siteTemplateId, String siteUrl, String HTMLVersion, String charSet) {
        this.siteId = siteId;
        this.siteName = siteName;
        this.siteTitle = siteTitle;
@@ -37,6 +39,7 @@ public class SiteEntity  implements java.io.Serializable {
        this.siteTemplateId = siteTemplateId;
        this.siteUrl = siteUrl;
        this.HTMLVersion = HTMLVersion;
+       this.charSet = charSet;
     }
    
     public String getSiteId() {
@@ -87,6 +90,13 @@ public class SiteEntity  implements java.io.Serializable {
     
     public void setHTMLVersion(String HTMLVersion) {
         this.HTMLVersion = HTMLVersion;
+    }
+    public String getCharSet() {
+        return this.charSet;
+    }
+    
+    public void setCharSet(String charSet) {
+        this.charSet = charSet;
     }
 
 

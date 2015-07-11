@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.mk.portal.framework.entity.CSSMappingEntity" table="css_mapping" catalog="portal">
+    <class name="com.mk.portal.framework.entity.PageFileMappingEntity" table="page_file_mapping" catalog="portal">
         <id name="id" type="string">
             <column name="id" length="45" />
         </id>
@@ -10,10 +10,10 @@
             <column name="site_id" length="45" not-null="true" />
         </property>
         <property name="pageId" type="string">
-            <column name="page_id" length="60" />
+            <column name="page_id" length="45" />
         </property>
-        <property name="cssPath" type="string">
-            <column name="css_path" not-null="true" length="1000"/>
+        <property name="fileId" type="string">
+            <column name="file_id" not-null="true" length="45"/>
         </property>
     </class>
 </hibernate-mapping>

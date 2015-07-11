@@ -25,7 +25,8 @@
 		<mapping resource="orm/Roles.hbm.xml" />
 		<mapping resource="orm/Sites.hbm.xml" />
 		<mapping resource="orm/Pages.hbm.xml" />
-		<mapping resource="orm/CSSMapping.hbm.xml" />
+		<mapping resource="orm/PageFileMapping.hbm.xml" />
+		<mapping resource="orm/ExternalFilePaths.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>
