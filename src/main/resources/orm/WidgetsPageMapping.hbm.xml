@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mk.portal.framework.entity.WidgetPageMappingEntity" table="widget_pages_mapping" catalog="portal">
+       <composite-id>
+      	 		<key-property name="widgetId" type="string">
+       				<column name="widget_id" length="45"/>
+       			</key-property>
+       			<key-property name="pageId" type="string">
+       				<column name="page_id" length="45"/>
+       			</key-property>
+        </composite-id>    
+        <property name="area" type="string">
+            <column name="area" length="45"/>
+        </property>
+         <property name="order" type="int">
+            <column name="order"/>
+        </property>
+    </class>
+</hibernate-mapping>

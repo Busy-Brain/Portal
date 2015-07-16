@@ -27,6 +27,8 @@
 				<value>orm/Pages.hbm.xml</value>
 				<value>orm/PageFileMapping.hbm.xml</value>
 				<value>orm/ExternalFilePaths.hbm.xml</value>
+				<value>orm/WidgetsPageMapping.hbm.xml</value>
+				<value>orm/Widgets.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -53,6 +55,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="pageFileMappingDao" class="com.mk.portal.framework.dao.impl.PageFileMappingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="widgetsDao" class="com.mk.portal.framework.dao.impl.WidgetsDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	

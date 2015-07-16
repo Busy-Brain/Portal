@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mk.portal.framework.dao.PageDao;
+import com.mk.portal.framework.dao.WidgetsDao;
+import com.mk.portal.framework.entity.WidgetPageMappingEntity;
 import com.mk.portal.framework.html.objects.Attribute;
 import com.mk.portal.framework.html.objects.HTMLVersion;
 import com.mk.portal.framework.html.objects.Page;
@@ -13,6 +15,7 @@ import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.Tag;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.model.PageFileMapping;
+import com.mk.portal.framework.model.PageWidget;
 import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.PageIdentifier;
@@ -34,6 +37,7 @@ import com.mk.portal.framework.page.html.tags.TitleTag;
 import com.mk.portal.framework.service.FileService;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
+import com.mk.portal.framework.widget.WidgetFactory;
 
 public class PageDetailsServiceImpl implements PageDetailsService {
 	@Autowired
@@ -42,6 +46,9 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 	PageDao pageDao;
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private WidgetsDao widgetsDao;
 	
 	public Page getpage(PageIdentifier pageIdentifier) {
 		PortalSite site=siteDetailsService.getSiteByUrl(pageIdentifier.getSiteUrl());
@@ -53,7 +60,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 			pageComponents.add(htmlTag);
 			List<PageFileMapping> files=fileService.findFilesForSiteAndPage(site.getSiteId(), page.getPageId());
 			htmlTag.addChild(getHeadTag(site,page,files));
-			htmlTag.addChild(getBodyTag(files));
+			htmlTag.addChild(getBodyTag(files,site,page));
 			return new Page(pageComponents);
 		}
 		return getErrorPage(site.getSiteId());
@@ -68,18 +75,25 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		BodyTag body = new BodyTag();
 		LeftNavBarLayout layout = null;
 		layout = getLayout();
-		layout.setComponentInArea(new Text("This is Main Bodty"), 1);
+		layout.setComponentInArea(new Text("Unfortunately, the page doesn't exists!"), "1");
 		body.addChild((PageComponent) layout);
 		htmlTag.addChild(body);
 		return p;
 	}
 
-	private PageComponent getBodyTag(List<PageFileMapping> files) {
+	private PageComponent getBodyTag(List<PageFileMapping> files, PortalSite site, PortalPage page) {
 		BodyTag body = new BodyTag();
 		LeftNavBarLayout layout = null;
 		layout = getLayout();
-		layout.setComponentInArea(new SideBarComponent(), 0);
-		layout.setComponentInArea(new Text("This is Main Bodty"), 1);
+		
+		List<PageWidget> widgets=widgetsDao.findWidgetsForPage(page.getPageId());
+		for(PageWidget w:widgets){
+			PageComponent p=WidgetFactory.getWidgetByName(w.getName());
+			layout.setComponentInArea(p, w.getPageArea());
+		}
+		
+		//layout.setComponentInArea(new SideBarComponent(), 0);
+		layout.setComponentInArea(new Text("This is Main Bodty"), "1");
 		body.addChild((PageComponent) layout);
 
 		

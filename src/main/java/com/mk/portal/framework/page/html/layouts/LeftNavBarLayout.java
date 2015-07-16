@@ -27,7 +27,7 @@ import com.mk.portal.framework.page.html.tags.UlTag;
 public class LeftNavBarLayout extends Layout {
 
 	
-	private Map<Integer, ArrayList<PageComponent>> areas=new HashMap<Integer, ArrayList<PageComponent>>();
+	private Map<String, ArrayList<PageComponent>> areas=new HashMap<String, ArrayList<PageComponent>>();
 
 	
 
@@ -75,15 +75,13 @@ public class LeftNavBarLayout extends Layout {
 		div.addChild(navbar);
 		navbar.addAttribute(new IdAttribute("navbar"));
 		navbar.addAttribute(new ClassAttribute("navbar-collapse collapse "));
-		UlTag topLinks = new UlTag();
-		topLinks.addAttribute(new ClassAttribute("nav navbar-nav navbar-right"));
-		navbar.addChild(topLinks);
-		LiTag link1 = new LiTag();
-		ATag a1 = new ATag();
-		a1.addAttribute(new HREFAttribute("/qbank/logout"));
-		a1.addChild(new Text("Logout"));
-		link1.addChild(a1);
-		topLinks.addChild(link1);
+		
+		List<PageComponent> topBarList=getComponentsFromArea("0");
+		if(topBarList!=null){
+			for(PageComponent c:topBarList){
+				navbar.addChild(c);
+			}
+		}
 		DivTag containerfluid = new DivTag();
 		containerfluid.addAttribute(new ClassAttribute("container"));
 		DivTag row = new DivTag();
@@ -95,14 +93,19 @@ public class LeftNavBarLayout extends Layout {
 		mainBody.addAttribute(new ClassAttribute("col-md-12"));
 		row.addChild(navBar);
 		row.addChild(mainBody);
-		List<PageComponent> leftbarList=getComponentsFromArea(0);
-		for(PageComponent c:leftbarList){
-			navBar.addChild(c);
+		List<PageComponent> leftbarList=getComponentsFromArea("1");
+		if(leftbarList!=null){
+			for(PageComponent c:leftbarList){
+				navBar.addChild(c);
+			}
 		}
-		List<PageComponent> mainBodyList=getComponentsFromArea(1);
-		for(PageComponent c:mainBodyList){
-			mainBody.addChild(c);
+		List<PageComponent> mainBodyList=getComponentsFromArea("2");
+		if(mainBodyList!=null){
+			for(PageComponent c:mainBodyList){
+				mainBody.addChild(c);
+			}
 		}
+		
 		
 		
 		layout.addChild(nav);
@@ -127,14 +130,12 @@ public class LeftNavBarLayout extends Layout {
 
 	@Override
 	public int getAreaCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
-	public boolean setComponentInArea(PageComponent component, int areaPosition) {
-		if(areaPosition<0 ||areaPosition>1){
-			throw new PotentialBugException("No area defined with id:"+areaPosition, "No area defined with id:"+areaPosition);
-		}
+	public boolean setComponentInArea(PageComponent component, String areaPosition) {
+		
 		ArrayList<PageComponent> area;
 		if(areas.get(areaPosition) == null){
 			area=new ArrayList<PageComponent>();
@@ -148,7 +149,7 @@ public class LeftNavBarLayout extends Layout {
 	}
 
 	@Override
-	public List<PageComponent> getComponentsFromArea(int area) {
+	public List<PageComponent> getComponentsFromArea(String area) {
 		return areas.get(area);
 	}
 }

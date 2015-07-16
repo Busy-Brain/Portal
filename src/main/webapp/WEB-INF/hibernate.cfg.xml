@@ -27,6 +27,8 @@
 		<mapping resource="orm/Pages.hbm.xml" />
 		<mapping resource="orm/PageFileMapping.hbm.xml" />
 		<mapping resource="orm/ExternalFilePaths.hbm.xml" />
+		<mapping resource="orm/WidgetsPageMapping.hbm.xml" />
+		<mapping resource="orm/Widgets.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

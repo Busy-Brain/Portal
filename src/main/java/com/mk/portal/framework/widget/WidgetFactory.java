@@ -1,13 +1,14 @@
 package com.mk.portal.framework.widget;
 
 import com.mk.portal.framework.exceptions.PotentialBugException;
+import com.mk.portal.framework.html.objects.PageComponent;
 
 public class WidgetFactory {
 	@SuppressWarnings("unchecked")
-	public static Widget getWidgetByName(String widgetname) {
-		Class<? extends Widget> widgetclass = null;
+	public static PageComponent getWidgetByName(String widgetname) {
+		Class<? extends PageComponent> widgetclass = null;
 		try {
-			widgetclass = (Class<? extends Widget>) Class.forName("com.mk.portal.module."+widgetname);
+			widgetclass = (Class<? extends PageComponent>) Class.forName(widgetname);
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 			throw new PotentialBugException(e1, "1", "The widgetclass  with name '"+widgetclass+"' was not found");

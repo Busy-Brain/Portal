@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mk.portal.framework.entity.WidgetEntity" table="widgets" catalog="portal">
+        <id name="id" type="string">
+            <column name="id" length="45" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" />
+        </property>
+        <property name="uiPath" type="string">
+            <column name="ui_path" length="60" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" not-null="true" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>

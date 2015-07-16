@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mk.portal.framework.entity.LinkEntity" table="links" catalog="portal">
+        <id name="id" type="string">
+            <column name="id" length="45" />
+        </id>
+        <property name="text" type="string">
+            <column name="text" length="80" not-null="true" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="200" />
+        </property>
+        <property name="alt" type="string">
+            <column name="alt" not-null="true" length="100"/>
+        </property>
+        <property name="siteId" type="string">
+            <column name="site_id" not-null="true" length="45"/>
+        </property>
+        <property name="isVisible" type="boolean">
+            <column name="visible" not-null="true" />
+        </property>
+        <property name="parentId" type="boolean">
+            <column name="parent_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
