@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-configuration SYSTEM 
-"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+"classpath://org/hibernate/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
 	<session-factory>
@@ -27,8 +27,9 @@
 		<mapping resource="orm/Pages.hbm.xml" />
 		<mapping resource="orm/PageFileMapping.hbm.xml" />
 		<mapping resource="orm/ExternalFilePaths.hbm.xml" />
-		<mapping resource="orm/WidgetsPageMapping.hbm.xml" />
+		<mapping resource="orm/WidgetInstances.hbm.xml" />
 		<mapping resource="orm/Widgets.hbm.xml" />
+		<mapping resource="orm/Links.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>
