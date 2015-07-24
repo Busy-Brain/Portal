@@ -7,14 +7,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.dao.SiteDao;
 import com.mk.portal.framework.entity.SiteEntity;
 import com.mk.portal.framework.model.PortalSite;
 
 public class SiteDaoImpl implements SiteDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	
 	@Autowired
 	private RolesDao rolesDao;
 
@@ -30,12 +30,14 @@ public class SiteDaoImpl implements SiteDao {
 	}
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	
 	
 	@SuppressWarnings({ "unchecked" })
 	public PortalSite findBySiteUrl(String siteUrl) {

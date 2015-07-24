@@ -6,19 +6,23 @@ import org.springframework.stereotype.Component;
 
 import com.mk.portal.framework.exceptions.PotentialBugException;
 import com.mk.portal.framework.html.objects.PageComponent;
+import com.mk.portal.framework.model.PageWidget;
+import com.mk.portal.framework.model.PortalPage;
 
 @Component
 public class ComponentFactory {
 	@Autowired
 	private ApplicationContext appContext;
 
-	public PageComponent getComponentByName(String widgetname) {
+	public PageComponent getComponentInstance(PageWidget w, PortalPage page) {
 		try {
-			return (PageComponent) appContext.getBean(widgetname);
+			PageComponent component = (PageComponent) appContext.getBean(w.getName());
+			component.setPage(page);
+			return component;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new PotentialBugException(e, "1", "The widget  with name '"
-					+ widgetname + "' is not accessible");
+					+ w + "' is not accessible");
 		}
 
 	}

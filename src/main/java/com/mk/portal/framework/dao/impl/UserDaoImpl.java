@@ -3,9 +3,11 @@ package com.mk.portal.framework.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.dao.UserDao;
 import com.mk.portal.framework.entity.UserEntity;
@@ -14,27 +16,25 @@ import com.mk.portal.framework.model.PortalUser;
 import com.mk.portal.framework.model.UserRole;
 
 public class UserDaoImpl implements UserDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+
 	@Autowired
 	private RolesDao rolesDao;
 	@SuppressWarnings("unchecked")
 	public PortalUser findByUserName(String username) {
 
 		List<UserEntity> users = new ArrayList<UserEntity>();
-		try{
-		users = getSessionFactory().getCurrentSession().createQuery("from UserEntity where username=?")
+		PortalUser user=null;
+		Session session = getSessionFactory().openSession();
+		users = session.createQuery("from UserEntity where username=?")
 				.setParameter(0, username).list();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
 		
 		if ((users.size() ==1)&&(((UserEntity)users.get(0)).getUsername().equalsIgnoreCase(username))) {
 			
-			return convertUserEntityToUser(users.get(0));
-		} else {
-			return null;
-		}
+			user= convertUserEntityToUser(users.get(0));
+		} 
+		session.close();
+		return user;
 
 	}
 
@@ -52,11 +52,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
 
 }

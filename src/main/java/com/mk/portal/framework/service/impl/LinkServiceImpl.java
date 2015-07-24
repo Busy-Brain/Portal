@@ -30,4 +30,10 @@ public class LinkServiceImpl implements LinksService {
 		return linksDao.findTopLevelLinksForSite(siteId);
 	}
 
+	@Override
+	public List<PortalLink> getChildLinksForParent(String parentLinkId) {
+		return linksDao.getChildLinksForParentLink( parentLinkId);	
+		
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalPage;
 
 /**
  * The comment tag is used to insert comments in the source code. Comments are
@@ -18,7 +19,7 @@ import com.mk.portal.framework.html.objects.TagComponent;
  */
 public class Comment implements PageComponent {
 	private String value;
-
+	private PortalPage page;
 	public Comment(String string) {
 		this.value = string;
 	}
@@ -74,6 +75,19 @@ public class Comment implements PageComponent {
 
 	@Override
 	public void addChild(PageComponent child) {
+		
+	}
+
+
+	@Override
+	public PortalPage getPage() {
+		return page;
+	}
+
+
+	@Override
+	public void setPage(PortalPage page) {
+		this.page=page;
 		
 	}
 

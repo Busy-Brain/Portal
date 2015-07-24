@@ -53,4 +53,20 @@ public class LinksDaoImpl implements LinksDao {
 		return widgets;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PortalLink> getChildLinksForParentLink(String parentLinkId) {
+
+		List<LinkEntity> links = new ArrayList<LinkEntity>();
+		Session session = getSessionFactory().openSession();
+	
+		links = session.createQuery("from LinkEntity where  parentId=?").setParameter(0, parentLinkId).list();
+		
+		session.close();
+		
+		return convertToPortalLinks(links);
+	}
+
+	
+
 }

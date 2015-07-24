@@ -5,36 +5,32 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.WidgetsDao;
 import com.mk.portal.framework.entity.WidgetEntity;
-import com.mk.portal.framework.entity.WidgetPageMappingEntity;
+import com.mk.portal.framework.entity.WidgetInstanceEntity;
 import com.mk.portal.framework.exceptions.PotentialBugException;
 import com.mk.portal.framework.model.PageWidget;
 
 public class WidgetsDaoImpl implements WidgetsDao {
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	
-
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PageWidget> findWidgetsForPage(String pageId) {
 
-		List<WidgetPageMappingEntity> widgetPageMapping = new ArrayList<WidgetPageMappingEntity>();
+		List<WidgetInstanceEntity> widgetPageMapping = new ArrayList<WidgetInstanceEntity>();
 		Session session = getSessionFactory().openSession();
 	
-		widgetPageMapping = session.createQuery("from WidgetPageMappingEntity m where pageId=? ").setParameter(0, pageId).list();
+		widgetPageMapping = session.createQuery("from WidgetInstanceEntity where pageId=? ").setParameter(0, pageId).list();
 		
 		session.close();
 		
@@ -43,9 +39,9 @@ public class WidgetsDaoImpl implements WidgetsDao {
 
 	@SuppressWarnings("unchecked")
 	private List<PageWidget> convertToPageWidgetList(
-			List<WidgetPageMappingEntity> widgetPageMapping) {
+			List<WidgetInstanceEntity> widgetPageMapping) {
 		List<PageWidget> widgets = new ArrayList<PageWidget>();
-		for(WidgetPageMappingEntity w:widgetPageMapping){
+		for(WidgetInstanceEntity w:widgetPageMapping){
 			PageWidget pw= new PageWidget();
 			pw.setWidgetId(w.getWidgetId());
 			pw.setPageId(w.getPageId());

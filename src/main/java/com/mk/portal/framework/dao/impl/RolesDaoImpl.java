@@ -6,21 +6,23 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.entity.RolesEntity;
 import com.mk.portal.framework.model.UserRole;
 
 public class RolesDaoImpl implements RolesDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	
 	
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	
 
 	public UserRole findByRoleId(int roleId) {
 

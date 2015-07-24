@@ -2,8 +2,19 @@ package com.mk.portal.framework.html.objects;
 
 import java.util.List;
 
+import com.mk.portal.framework.model.PortalPage;
+
 public abstract class AbstractComponent implements PageComponent{
 	
+	private PortalPage page;
+	@Override
+	public PortalPage getPage() {
+		return page;
+	}
+	@Override
+	public void setPage(PortalPage pageId) {
+		this.page = pageId;
+	}
 	protected abstract TagComponent getComponent();
 	@Override
 	public PageComponent clone() {

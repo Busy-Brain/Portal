@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 20 Jul, 2015 12:08:11 PM by Hibernate Tools 3.2.2.GA
+// Generated 24 Jul, 2015 2:29:11 PM by Hibernate Tools 3.2.2.GA
 
 
 

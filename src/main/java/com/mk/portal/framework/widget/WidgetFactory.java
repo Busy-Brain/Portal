@@ -1,8 +1,10 @@
 package com.mk.portal.framework.widget;
 
+import org.springframework.stereotype.Component;
+
 import com.mk.portal.framework.exceptions.PotentialBugException;
 import com.mk.portal.framework.html.objects.PageComponent;
-
+@Component
 public class WidgetFactory {
 	@SuppressWarnings("unchecked")
 	public static PageComponent getWidgetByName(String widgetname) {

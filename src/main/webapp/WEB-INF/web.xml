@@ -22,8 +22,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/mvc-dispatcher-servlet.xml,   
-			/WEB-INF/spring-database.xml,
-			/WEB-INF/spring-security.xml
+			/WEB-INF/hibernate.cfg.xml,
+			/WEB-INF/spring-security.xml,
+			/WEB-INF/portal-daos.xml,
+			/WEB-INF/portal-services.xml,
+			/WEB-INF/portal-components.xml
 		</param-value>
 	</context-param>
 	<!-- Spring Security -->

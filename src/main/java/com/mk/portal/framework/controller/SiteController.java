@@ -26,59 +26,13 @@ import com.mk.portal.framework.service.SiteDetailsService;
 public class SiteController {
 	private static final String BLANK = "";
 
-	private static final String BLANK_URL = "/";
-	// TODO this must be configurable
-	private static final String DEFAULT_PAGE_NAME = "index";
 	private static final String DEFAULT_URL = "/"
 			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
-	// TODO This must be configurable
-	private static final String DEFAULT_SITE_URL = "me";
 	@Autowired
 	private SiteDetailsService siteDetailsService;
 	@Autowired
 	private PageDetailsService pageDetailsService;
-	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.SUB_TOPIC_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
-	@ResponseBody
-	public String requestWithSiteTopicSubTopicAndPage(
-			Model model,
-			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl,
-			@PathVariable(FrameworkConstants.PageConstants.SUB_TOPIC_URL) String subTopicUrl,
-			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				topicUrl, subTopicUrl, pageUrl));
-	}
-
-	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.TOPIC_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
-	@ResponseBody
-	public String requestWithSiteTopicAndSubTopic(
-			Model model,
-			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
-			@PathVariable(FrameworkConstants.PageConstants.TOPIC_URL) String topicUrl,
-			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				topicUrl, BLANK, pageUrl));
-	}
-
-	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_URL + "}")
-	@ResponseBody
-	public String requestWithSiteOnly(
-			Model model,
-			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl) {
-		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				BLANK, BLANK, BLANK));
-	}
+	
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
 			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
@@ -102,46 +56,14 @@ public class SiteController {
 				BLANK, BLANK, pageUrl));
 	}
 
-	/*
-	 * @RequestMapping(value = { BLANK_URL, DEFAULT_URL }) public String
-	 * defaultRequest(Model model, HttpServletRequest request) { Authentication
-	 * auth = SecurityContextHolder.getContext() .getAuthentication(); String
-	 * defaultPageName = ""; if (!((auth == null) || (auth instanceof
-	 * AnonymousAuthenticationToken))) { defaultPageName =
-	 * redirectToDefaultPage(); }
-	 * 
-	 * else { defaultPageName = getDefaultPageName(); } return defaultPageName;
-	 * }
-	 */
+	
 
 	private String defaultControllorFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
-		/*
-		 * if (pageIdentifier.getsiteUrl().equalsIgnoreCase(DEFAULT_SITE_URL)) {
-		 * return defaultSitePages(model, pageIdentifier); }
-		 */
-
+	
 		return customPageFunctionality(model, pageIdentifier);
 	}
 
-	/*private String defaultSitePages(Model model, PageIdentifier pageIdentifier) {
-		model.addAttribute(FrameworkConstants.PageConstants.PAGE_IDENTIFIER,
-				pageIdentifier);
-		String pagepath = pageIdentifier.getSiteId();
-		if (!pageIdentifier.getTopicId().equals(BLANK)) {
-			pagepath = pagepath + BLANK_URL + pageIdentifier.getTopicId();
-			if (!pageIdentifier.getSubTopicId().equals(BLANK)) {
-				pagepath = pagepath + BLANK_URL
-						+ pageIdentifier.getSubTopicId();
-
-			}
-		}
-		if (!pageIdentifier.getPageId().equals(BLANK)) {
-			pagepath = pagepath + BLANK_URL + pageIdentifier.getPageId();
-		}
-
-		return pagepath;
-	}*/
 
 	private String customPageFunctionality(Model model,
 			PageIdentifier pageIdentifier) {
@@ -165,11 +87,6 @@ public class SiteController {
 
 	private boolean isDebugEnabled() {
 		return true;
-	}
-
-	private void checkUser(HttpServletRequest request) {
-		String browserDetails = request.getHeader("User-Agent");
-		System.out.println(browserDetails);
 	}
 
 }

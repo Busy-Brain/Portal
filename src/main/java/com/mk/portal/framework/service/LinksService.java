@@ -8,4 +8,6 @@ public interface LinksService {
 
 	List<PortalLink> findTopLevelLinksForSite(String siteId);
 
+	List<PortalLink> getChildLinksForParent(String parentLinkId);
+
 }

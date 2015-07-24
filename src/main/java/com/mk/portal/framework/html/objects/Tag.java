@@ -3,9 +3,27 @@ package com.mk.portal.framework.html.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mk.portal.framework.model.PortalPage;
+
 public abstract class Tag implements TagComponent {
 	private List<Attribute> attributes;
+	@Override
+	public PortalPage getPage() {
+		return page;
+	}
+	public void setPage(PortalPage page) {
+		this.page = page;
+	}
+	public void setAttributes(List<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+	public void setChildren(List<PageComponent> children) {
+		this.children = children;
+	}
+
+
 	private List<PageComponent> children;
+	private PortalPage page;
 
 	public List<PageComponent> getChildren() {
 		return children;

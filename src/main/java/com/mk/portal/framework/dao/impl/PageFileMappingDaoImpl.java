@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.PageFileMappingDao;
 import com.mk.portal.framework.entity.ExternalFilePathEntity;
 import com.mk.portal.framework.entity.PageFileMappingEntity;
@@ -14,8 +14,6 @@ import com.mk.portal.framework.model.PageFileMapping;
 
 public class PageFileMappingDaoImpl implements PageFileMappingDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	private List<PageFileMapping> convertCSSMappingEntityToCSSMapping(
 			List<PageFileMappingEntity> files) {
@@ -35,12 +33,14 @@ public class PageFileMappingDaoImpl implements PageFileMappingDao {
 	}
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	
 
 	private ExternalFilePathEntity getFileById(String fileId) {
 		List<ExternalFilePathEntity> list = findFileById(

@@ -9,4 +9,6 @@ public interface LinksDao {
 
 	List<PortalLink> findTopLevelLinksForSite(String siteId);
 
+	List<PortalLink>  getChildLinksForParentLink(String parentLinkId);
+
 }

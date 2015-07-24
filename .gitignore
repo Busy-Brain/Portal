@@ -1,2 +1,7 @@
 /target/
 /target/
+.metadata
+.externalToolBuilders/
+.gitignore
+.metadata/
+.metadata/.log

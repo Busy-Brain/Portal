@@ -5,9 +5,18 @@ import java.util.List;
 import com.mk.portal.framework.html.objects.FormattingUtil;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalPage;
 
 public abstract class AbstractComponentList implements PageComponent{
-	
+	private PortalPage page;
+	@Override
+	public PortalPage getPage() {
+		return page;
+	}
+	@Override
+	public void setPage(PortalPage page) {
+		this.page = page;
+	}
 	protected abstract List<PageComponent> getComponentList();
 	@Override
 	public PageComponent clone() {

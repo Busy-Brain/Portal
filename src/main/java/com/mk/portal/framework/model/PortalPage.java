@@ -15,6 +15,7 @@ public class PortalPage {
 	private List<Container> containersList;
 	private boolean enabled;
 	private String url;
+	private String pageLinkId;
 	public PageIdentifier getPageIdentifier() {
 		return pageIdentifier;
 	}
@@ -94,5 +95,13 @@ public class PortalPage {
 
 	public boolean isEnabled() {
 		return this.enabled;
+	}
+
+	public String getPageLinkId() {
+		return pageLinkId;
+	}
+
+	public void setPageLinkId(String pageLinkId) {
+		this.pageLinkId = pageLinkId;
 	}
 }

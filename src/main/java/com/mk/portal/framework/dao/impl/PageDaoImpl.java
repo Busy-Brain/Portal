@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.PageDao;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.entity.PageEntity;
@@ -17,8 +18,6 @@ import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.service.SiteDetailsService;
 
 public class PageDaoImpl implements PageDao {
-	@Autowired
-	private SessionFactory sessionFactory;
 	@Autowired
 	private RolesDao rolesDao;
 	@Autowired
@@ -33,15 +32,16 @@ public class PageDaoImpl implements PageDao {
 		page.setPageIdentifier(pageIdentifier );
 		page.getPageIdentifier().setSiteUrl(pageEntity.getSiteId());
 		page.setPageId(pageEntity.getPageId());
+		page.setPageLinkId(pageEntity.getPageLinkId());
 		return page;
 	}
 
 	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+		SessionFactory sf=HibernateUtil.getSessionFactory();
+		if(sf==null){
+			sf=HibernateUtil.createSessionFactory();
+		}
+		return sf;
 	}
 
 	@Override

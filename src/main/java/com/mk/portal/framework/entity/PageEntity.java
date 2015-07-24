@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 16 Jul, 2015 3:51:50 PM by Hibernate Tools 3.2.2.GA
+// Generated 24 Jul, 2015 2:29:11 PM by Hibernate Tools 3.2.2.GA
 
 
 
@@ -14,23 +14,26 @@ public class PageEntity  implements java.io.Serializable {
      private String pageTitle;
      private boolean enabled;
      private String pageUrl;
+     private String pageLinkId;
 
     public PageEntity() {
     }
 
 	
-    public PageEntity(String pageId, String siteId, boolean enabled, String pageUrl) {
+    public PageEntity(String pageId, String siteId, boolean enabled, String pageUrl, String pageLinkId) {
         this.pageId = pageId;
         this.siteId = siteId;
         this.enabled = enabled;
         this.pageUrl = pageUrl;
+        this.pageLinkId = pageLinkId;
     }
-    public PageEntity(String pageId, String siteId, String pageTitle, boolean enabled, String pageUrl) {
+    public PageEntity(String pageId, String siteId, String pageTitle, boolean enabled, String pageUrl, String pageLinkId) {
        this.pageId = pageId;
        this.siteId = siteId;
        this.pageTitle = pageTitle;
        this.enabled = enabled;
        this.pageUrl = pageUrl;
+       this.pageLinkId = pageLinkId;
     }
    
     public String getPageId() {
@@ -67,6 +70,13 @@ public class PageEntity  implements java.io.Serializable {
     
     public void setPageUrl(String pageUrl) {
         this.pageUrl = pageUrl;
+    }
+    public String getPageLinkId() {
+        return this.pageLinkId;
+    }
+    
+    public void setPageLinkId(String pageLinkId) {
+        this.pageLinkId = pageLinkId;
     }
 
 

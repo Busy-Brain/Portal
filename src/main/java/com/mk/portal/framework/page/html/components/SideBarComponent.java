@@ -1,7 +1,12 @@
 package com.mk.portal.framework.page.html.components;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mk.portal.framework.html.objects.AbstractComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalLink;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
 import com.mk.portal.framework.page.html.attributes.HREFAttribute;
 import com.mk.portal.framework.page.html.tags.ATag;
@@ -9,9 +14,18 @@ import com.mk.portal.framework.page.html.tags.DivTag;
 import com.mk.portal.framework.page.html.tags.LiTag;
 import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.UlTag;
+import com.mk.portal.framework.service.impl.LinkServiceImpl;
+import com.mk.portal.framework.service.impl.PageDetailsServiceImpl;
 
 public class SideBarComponent extends AbstractComponent{
-	
+	@Autowired
+	private LinkServiceImpl linksServiceImpl ;
+	public LinkServiceImpl getLinksServiceImpl() {
+		return linksServiceImpl;
+	}
+	public void setLinksServiceImpl(LinkServiceImpl linksServiceImpl) {
+		this.linksServiceImpl = linksServiceImpl;
+	}
 	@Override
 	protected TagComponent getComponent() {
 		DivTag sidebar= new DivTag();
@@ -19,39 +33,18 @@ public class SideBarComponent extends AbstractComponent{
 		UlTag ul = new UlTag();
 		ul.addAttribute(new ClassAttribute("nav nav-sidebar"));
 		
-		LiTag li = new LiTag();
-		ATag link= new ATag();
-		link.addAttribute(new HREFAttribute(""));
-		link.addChild(new Text("Nav item"));
-		li.addChild(link);
+		String pageLinkId=getPage().getPageLinkId();
+		List<PortalLink> links=linksServiceImpl.getChildLinksForParent(pageLinkId);
 		
-		ul.addChild(li);
-		
-		LiTag li2 = new LiTag();
-		ATag link2= new ATag();
-		link2.addAttribute(new HREFAttribute(""));
-		link2.addChild(new Text("Nav item"));
-		li2.addChild(link2);
-		
-		ul.addChild(li2);
-		
-		LiTag li3 = new LiTag();
-		ATag link3= new ATag();
-		link3.addAttribute(new HREFAttribute(""));
-		link3.addChild(new Text("Nav item"));
-		li3.addChild(link3);
-		
-		ul.addChild(li3);
-		
-		LiTag li21 = new LiTag();
-		ATag link21= new ATag();
-		link21.addAttribute(new HREFAttribute(""));
-		link21.addChild(new Text("Nav item"));
-		li21.addChild(link21);
-		
-		ul.addChild(li21);
+		for(PortalLink link:links){
+			LiTag li = new LiTag();
+			ATag a= new ATag();
+			a.addAttribute(new HREFAttribute(link.getUrl()));
+			a.addChild(new Text(link.getText()));
+			li.addChild(a);
+			ul.addChild(li);
+		}
 		sidebar.addChild(ul);
-		
 		return sidebar;
 	}
 

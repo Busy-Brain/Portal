@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.mk.portal.framework.entity.LinkEntity" table="links" catalog="portal">
         <id name="id" type="string">
@@ -21,8 +21,8 @@
         <property name="isVisible" type="boolean">
             <column name="visible" not-null="true" />
         </property>
-        <property name="parentId" type="boolean">
-            <column name="parent_id" not-null="true" />
+        <property name="parentId" type="string">
+            <column name="parent_id" not-null="true" length="45"/>
         </property>
     </class>
 </hibernate-mapping>

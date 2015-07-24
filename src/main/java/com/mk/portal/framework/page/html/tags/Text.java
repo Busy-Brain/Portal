@@ -5,6 +5,7 @@ import java.util.List;
 import com.mk.portal.framework.html.objects.FormattingUtil;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
+import com.mk.portal.framework.model.PortalPage;
 
 public class Text implements PageComponent {
     private String value;
@@ -12,6 +13,16 @@ public class Text implements PageComponent {
     private boolean italics;
     private boolean underLined;
     private FontTag font;
+    private PortalPage page;
+    @Override
+	public PortalPage getPage() {
+		return page;
+	}
+    @Override
+	public void setPage(PortalPage page) {
+		this.page = page;
+	}
+
 	public Text(String string) {
 		this.value=string;
 	}

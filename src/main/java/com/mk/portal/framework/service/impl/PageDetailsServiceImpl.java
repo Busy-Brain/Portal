@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mk.portal.framework.dao.PageDao;
 import com.mk.portal.framework.dao.WidgetsDao;
-import com.mk.portal.framework.entity.WidgetPageMappingEntity;
 import com.mk.portal.framework.html.objects.Attribute;
 import com.mk.portal.framework.html.objects.HTMLVersion;
 import com.mk.portal.framework.html.objects.Page;
@@ -23,8 +22,8 @@ import com.mk.portal.framework.page.html.attributes.HREFAttribute;
 import com.mk.portal.framework.page.html.attributes.LangAttribute;
 import com.mk.portal.framework.page.html.attributes.RelAttribute;
 import com.mk.portal.framework.page.html.attributes.SrcAttribute;
+import com.mk.portal.framework.page.html.components.ComponentFactory;
 import com.mk.portal.framework.page.html.components.MetaTagListComponent;
-import com.mk.portal.framework.page.html.components.SideBarComponent;
 import com.mk.portal.framework.page.html.layouts.LeftNavBarLayout;
 import com.mk.portal.framework.page.html.tags.BodyTag;
 import com.mk.portal.framework.page.html.tags.DocTypeDeclaration;
@@ -37,7 +36,6 @@ import com.mk.portal.framework.page.html.tags.TitleTag;
 import com.mk.portal.framework.service.FileService;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
-import com.mk.portal.framework.widget.WidgetFactory;
 
 public class PageDetailsServiceImpl implements PageDetailsService {
 	@Autowired
@@ -46,7 +44,8 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 	PageDao pageDao;
 	@Autowired
 	private FileService fileService;
-	
+	@Autowired
+	private ComponentFactory componentFactory;
 	@Autowired
 	private WidgetsDao widgetsDao;
 	
@@ -88,12 +87,12 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		
 		List<PageWidget> widgets=widgetsDao.findWidgetsForPage(page.getPageId());
 		for(PageWidget w:widgets){
-			PageComponent p=WidgetFactory.getWidgetByName(w.getName());
+			PageComponent p=componentFactory.getComponentInstance(w,page);
 			layout.setComponentInArea(p, w.getPageArea());
 		}
 		
 		//layout.setComponentInArea(new SideBarComponent(), 0);
-		layout.setComponentInArea(new Text("This is Main Bodty"), "1");
+		//layout.setComponentInArea(new Text("This is Main Bodty"), "1");
 		body.addChild((PageComponent) layout);
 
 		
