@@ -86,4 +86,23 @@ public class SiteDaoImpl implements SiteDao {
 		return site;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PortalSite> fetchAllSites() {
+		List<SiteEntity> sites = new ArrayList<SiteEntity>();
+		Session session = getSessionFactory().openSession();
+		try {
+			sites = session.createQuery("from SiteEntity ").list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		List<PortalSite> filSites=new ArrayList<PortalSite>();
+		for(SiteEntity se :sites){
+			filSites.add(convertSiteEntityToSite(se));
+		}
+		return filSites;
+	}
+
 }

@@ -14,7 +14,6 @@ import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.entity.PageEntity;
 import com.mk.portal.framework.exceptions.PotentialBugException;
 import com.mk.portal.framework.model.PortalPage;
-import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.service.SiteDetailsService;
 
 public class PageDaoImpl implements PageDao {
@@ -27,12 +26,9 @@ public class PageDaoImpl implements PageDao {
 		page.setEnabled(pageEntity.isEnabled());
 		page.setPageId(pageEntity.getPageId());
 		page.setTitle(pageEntity.getPageTitle());
-		page.setUrl(pageEntity.getPageUrl());
-		PageIdentifier pageIdentifier = new PageIdentifier(siteDetailsService.getSiteById(pageEntity.getSiteId()).getSiteUrl(), null, null, pageEntity.getPageUrl());
-		page.setPageIdentifier(pageIdentifier );
-		page.getPageIdentifier().setSiteUrl(pageEntity.getSiteId());
 		page.setPageId(pageEntity.getPageId());
 		page.setPageLinkId(pageEntity.getPageLinkId());
+		page.setSiteId(pageEntity.getSiteId());
 		return page;
 	}
 
@@ -60,11 +56,13 @@ public class PageDaoImpl implements PageDao {
 	}
 
 	@Override
-	public PortalPage findBySiteId_PageUrl(String siteId,String pageUrl) {
+	public PortalPage findByPageUrl(String pageUrl) {
 		List<String> listOfParams=new ArrayList<String>();
-		listOfParams.add(siteId);
+		if(pageUrl.charAt(pageUrl.length()-1)=='/'){
+			pageUrl=pageUrl.substring(0, pageUrl.length()-2);
+		}
 		listOfParams.add(pageUrl);
-		List<PageEntity> pages = findByQuery("from PageEntity where siteId = ? and pageUrl = ?", listOfParams);
+		List<PageEntity> pages = findByQuery("from PageEntity where pageLinkId = (select id from LinkEntity where url = ?)", listOfParams);
 		PortalPage page =null;
 		if(pages.size()>1){
 			throw new PotentialBugException("INVALID_DATA", "Data setup issue");

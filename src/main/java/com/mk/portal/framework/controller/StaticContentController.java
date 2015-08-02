@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.constants.PageConstants;
+import com.mk.portal.framework.constants.StaticContentConstants;
+
 
 /**
  * This controller controls the behaviour for handling static content
@@ -27,21 +29,21 @@ public class StaticContentController {
 	private static final String STATIC_URL = "/static/";
 
 	@RequestMapping(value = STATIC_URL + "/{"
-			+ FrameworkConstants.StaticContentConstants.STATIC_CONTENT_TYPE
-			+ "}" + "/{" + FrameworkConstants.StaticContentConstants.FOLDER_ID
-			+ "}" + "/{" + FrameworkConstants.StaticContentConstants.FILE_NAME
+			+ StaticContentConstants.STATIC_CONTENT_TYPE
+			+ "}" + "/{" + StaticContentConstants.FOLDER_ID
+			+ "}" + "/{" + StaticContentConstants.FILE_NAME
 			+ "}")
 	public void requesForStaticContent(
 			HttpServletResponse response,
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.StaticContentConstants.STATIC_CONTENT_TYPE) String staticContentType,
-			@PathVariable(FrameworkConstants.StaticContentConstants.FOLDER_ID) String folderId,
-			@PathVariable(FrameworkConstants.StaticContentConstants.FILE_NAME) String fileName)
+			@PathVariable(StaticContentConstants.STATIC_CONTENT_TYPE) String staticContentType,
+			@PathVariable(StaticContentConstants.FOLDER_ID) String folderId,
+			@PathVariable(StaticContentConstants.FILE_NAME) String fileName)
 			throws IOException {
 		try {
 
-			String pathname = FrameworkConstants.PageConstants.STATIC_FOLDER_PATH + "/"
+			String pathname = PageConstants.STATIC_FOLDER_PATH + "/"
 					+ staticContentType + "/" + folderId + "/"
 					+ fileName + getExtension(staticContentType);
 			//TODO Log it.

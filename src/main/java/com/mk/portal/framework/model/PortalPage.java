@@ -3,47 +3,34 @@ package com.mk.portal.framework.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.container.Container;
 import com.mk.portal.framework.page.tags.MetaTagObject;
 
 public class PortalPage {
 	private String pageId;
-	private PageIdentifier pageIdentifier;
+	private String siteId;
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
 	private String title;
 	private List<MetaTagObject> metaTags;
 	private List<Container> containersList;
 	private boolean enabled;
-	private String url;
 	private String pageLinkId;
-	public PageIdentifier getPageIdentifier() {
-		return pageIdentifier;
-	}
 	
-	public void setPageIdentifier(PageIdentifier pageIdentifier) {
-		this.pageIdentifier = pageIdentifier;
-	}
 
-	public String getUrl() {
-		return url;
-	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public PortalPage(PageIdentifier pageIdentifier, String title,
+	public PortalPage( String title,
 			List<MetaTagObject> metaTags, List<Container> containersList) {
 		super();
-		this.pageIdentifier = pageIdentifier;
 		this.title = title;
 		this.metaTags = metaTags;
 		this.containersList = containersList;
-	}
-
-	public PortalPage(PageIdentifier pageIdentifier) {
-		super();
-		this.pageIdentifier = pageIdentifier;
 	}
 
 	public PortalPage() {

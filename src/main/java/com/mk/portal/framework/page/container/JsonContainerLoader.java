@@ -9,7 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.constants.PageConstants;
 import com.mk.portal.framework.page.content.HTMLContent;
 
 public class JsonContainerLoader implements ContainerLoader {
@@ -20,7 +20,7 @@ public class JsonContainerLoader implements ContainerLoader {
 		try {
 			// read the json file
 			FileReader reader = new FileReader(
-					FrameworkConstants.PageConstants.CONTAINER_JSON);
+					PageConstants.CONTAINER_JSON);
 
 			JsonParser jsonParser = new JsonParser();
 			JsonObject jsonObject = (JsonObject) jsonParser.parse(reader);
@@ -40,7 +40,7 @@ public class JsonContainerLoader implements ContainerLoader {
 			String expectedContainerId) {
 		// get a String from the JSON object
 		JsonArray listOfPages = jsonObject
-				.getAsJsonArray(FrameworkConstants.PageConstants.CONTAINERS);
+				.getAsJsonArray(PageConstants.CONTAINERS);
 		System.out.println("USE THIS TO IMPROVE CODE"+listOfPages.size());
 		int i = 0;
 		// TODO Bad practice of catching exception. change logic
@@ -69,7 +69,7 @@ public class JsonContainerLoader implements ContainerLoader {
 		 * TODO : Add default implementation
 		 */
 		JsonArray contents = x
-				.getAsJsonArray(FrameworkConstants.PageConstants.CONTENTS);
+				.getAsJsonArray(PageConstants.CONTENTS);
 		StringBuffer completeContent = new StringBuffer("<p border=\"2\">");
 		int i=0;
 		while(true){
@@ -106,24 +106,24 @@ public class JsonContainerLoader implements ContainerLoader {
 
 	private String getContentPathFromJson(JsonObject content) {
 		// TODO Auto-generated method stub
-		return content.get(FrameworkConstants.PageConstants.CONTENT_PATH).getAsString();
+		return content.get(PageConstants.CONTENT_PATH).getAsString();
 	}
 
 	private String getContentTypeFromJson(JsonObject content) {
 		// TODO Auto-generated method stub
 		System.out.println(content);
-		return content.get(FrameworkConstants.PageConstants.CONTENT_TYPE).getAsString();
+		return content.get(PageConstants.CONTENT_TYPE).getAsString();
 	}
 
 	private String getContentIdFromJson(JsonObject content) {
-		return content.get(FrameworkConstants.PageConstants.CONTENT_ID).getAsString();
+		return content.get(PageConstants.CONTENT_ID).getAsString();
 	}
 
 	private String getcontainerTypeFromJson(JsonObject x) {
 		/**
 		 * TODO : Add default implementation
 		 */
-		String containerType = x.get(FrameworkConstants.PageConstants.CONTAINER_TYPE)
+		String containerType = x.get(PageConstants.CONTAINER_TYPE)
 				.getAsString();
 		return containerType;
 	}
@@ -134,7 +134,7 @@ public class JsonContainerLoader implements ContainerLoader {
 		 * TODO : Add default implementation
 		 */
 		JsonElement jsonElement = x
-				.get(FrameworkConstants.PageConstants.CONTAINER_ID);
+				.get(PageConstants.CONTAINER_ID);
 		String containerId= jsonElement.getAsString();
 		return containerId;
 	}

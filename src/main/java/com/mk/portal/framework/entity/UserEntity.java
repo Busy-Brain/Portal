@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 24 Jul, 2015 2:29:11 PM by Hibernate Tools 3.2.2.GA
+// Generated 2 Aug, 2015 6:35:28 AM by Hibernate Tools 3.2.2.GA
 
 
 import java.util.HashSet;

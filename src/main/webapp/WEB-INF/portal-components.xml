@@ -19,5 +19,11 @@
 		class="com.mk.portal.framework.page.html.components.SideBarComponent">
 		<property name="linksServiceImpl" ref="linksServiceImpl" />
 	</bean>
+	<bean id="availableSitesComponent"
+		class="com.mk.portal.module.sites.AvailableSitesComponent">
+		<property name="siteDetailsService" ref="siteDetailsService" />
+	</bean>
+	
+	
 </beans>
     

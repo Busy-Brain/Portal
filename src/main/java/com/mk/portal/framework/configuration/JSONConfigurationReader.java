@@ -10,8 +10,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mk.portal.framework.exceptions.PotentialBugException;
 
+/**
+ * JSONConfigurationReader reads the configuration properties from JSON Format
+ * property files.
+ * 
+ * @author mohit
+ *
+ */
 public class JSONConfigurationReader implements ConfigurationReader {
-
+	@Override
 	public String getValueFromConfiguration(String key) {
 		List<File> listOfFiles = getListOfConfigurationFiles();
 		String value = null;
@@ -29,6 +36,14 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
+	/**
+	 * This method gets the value from a configuration file
+	 * 
+	 * @param configFile
+	 * @param key
+	 * @return
+	 * @throws IOException
+	 */
 	private String getValue(File configFile, String key) throws IOException {
 		JsonObject jsonObject = null;
 		String value = "";
@@ -45,10 +60,23 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
+	/**
+	 * This method finds the value in JSONObject
+	 * 
+	 * @param jsonObject
+	 * @param key
+	 * @return
+	 */
 	private String findValueInJson(JsonObject jsonObject, String key) {
 		return jsonObject.get(key).getAsString();
 	}
 
+	/**
+	 * This method returns the list of configuration files available for the
+	 * application
+	 * 
+	 * @return
+	 */
 	private List<File> getListOfConfigurationFiles() {
 
 		List<File> listOfFiles = new ArrayList<File>();
@@ -56,6 +84,10 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return listOfFiles;
 	}
 
+	/**
+	 * This method searches the configuration setting in configuration files.
+	 */
+	@Override
 	public String getValueFromConfiguration(String namespace, String key) {
 		String value = null;
 		for (File file : getListOfConfigurationFiles()) {
@@ -72,6 +104,12 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
+	/**
+	 * This method tries to fetch value of a given configuration setting from
+	 * configuration files. If such a configuration is not found, it returns the
+	 * default value.
+	 */
+	@Override
 	public String getValueFromConfigOrDefault(String key) {
 		String value;
 		value = getValueFromConfiguration(key);
@@ -81,6 +119,12 @@ public class JSONConfigurationReader implements ConfigurationReader {
 		return value;
 	}
 
+	/**
+	 * Get value from default configuration
+	 * 
+	 * @param key
+	 * @return
+	 */
 	private String getDefaultValue(String key) {
 		return DefaultConfigurations.getValue(key);
 	}

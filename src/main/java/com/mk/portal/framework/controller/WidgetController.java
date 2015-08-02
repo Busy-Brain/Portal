@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.constants.WidgetControllerConstants;
 
 @Controller
 public class WidgetController {
@@ -17,20 +17,20 @@ public class WidgetController {
 	private static final String WIDGET_URL = "/widget/";
 
 	@RequestMapping(value = WIDGET_URL + "/{"
-			+ FrameworkConstants.WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.POST)
+			+ WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.POST)
 	public void postRequesForWidget(
 			HttpServletResponse response,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.WidgetControllerConstants.WIDGET_NAME) String widgetName) {
+			@PathVariable(WidgetControllerConstants.WIDGET_NAME) String widgetName) {
 		System.out.println(widgetName);
 
 	}
 	@RequestMapping(value = WIDGET_URL + "/{"
-			+ FrameworkConstants.WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.GET)
+			+ WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.GET)
 	public void getRequesForStaticContent(
 			HttpServletResponse response,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.WidgetControllerConstants.WIDGET_NAME) String widgetName) {
+			@PathVariable(WidgetControllerConstants.WIDGET_NAME) String widgetName) {
 		System.out.println(widgetName);
 
 	}

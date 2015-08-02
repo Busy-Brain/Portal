@@ -1,15 +1,17 @@
 package com.mk.portal.framework.page.tags;
 
-import com.mk.portal.framework.page.PageIdentifier;
+import com.mk.portal.framework.model.PortalPage;
 
 public abstract class PageSpecificPortalTag extends PortalTag {
-	protected PageIdentifier pageIdentifier;
+	
+	protected PortalPage page;
 
-	public PageIdentifier getPageIdentifier() {
-		return pageIdentifier;
+	public PortalPage getPage() {
+		return page;
 	}
 
-	public void setPageIdentifier(PageIdentifier pageIdentifier) {
-		this.pageIdentifier = pageIdentifier;
+	public void setPage(PortalPage page) {
+		this.page = page;
 	}
+
 }

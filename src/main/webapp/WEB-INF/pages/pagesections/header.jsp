@@ -7,8 +7,8 @@
 <head>
 <portal:Style />
 <portal:Script />
-<portal:Title pageIdentifier="${pageIdentifier}" />
-<portal:Meta pageIdentifier="${pageIdentifier}" />
+<title>Welcome</title>
+
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,20 +38,6 @@
 				</button>
 				<a class="navbar-brand" href="#">Me!</a>
 			</div>
-			<sec:authorize access="isAuthenticated()">
-				<div id="navbar" class="navbar-collapse collapse ">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="/qbank/me/dashboard">Dashboard</a></li>
-						<li><a href="/qbank/me/profile">Profile</a></li>
-						<li><a href="/qbank/me/attendance">Attendance & Vacations</a></li>
-						<li><a href="/qbank/me/network">Network</a></li>
-						<li><a href="/qbank/logout">Logout</a></li>
-					</ul>
-				<%--	<form class="navbar-form navbar-right">
-						<input type="text" class="form-control" placeholder="Search...">
-					</form>
-					 --%>
-				</div>
-			</sec:authorize>
+			
 		</div>
 	</nav>

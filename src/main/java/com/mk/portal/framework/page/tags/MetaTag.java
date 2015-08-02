@@ -13,7 +13,6 @@ public class MetaTag extends PageSpecificPortalTag {
 		StringBuilder sb = new StringBuilder();
 		sb.append(new MetaTagObject("description", "text"));
 		sb.append(new MetaTagObject("keywords", "word1,word2"));
-		System.out.println(getPageIdentifier());
 		return sb;
 	}
 

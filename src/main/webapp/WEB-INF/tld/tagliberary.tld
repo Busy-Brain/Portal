@@ -4,7 +4,7 @@
   <short-name>Example TLD</short-name>
   <tag>
     <name>Meta</name>
-    <tag-class>com.mk.portal.framework.page.tags.MetaTag</tag-class>
+    <tag-class>com.mk.portal.framework.page.html.tags.MetaTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
        <name>pageIdentifier</name>
@@ -13,7 +13,7 @@
   </tag>
    <tag>
     <name>Title</name>
-    <tag-class>com.mk.portal.framework.page.tags.TitleTag</tag-class>
+    <tag-class>com.mk.portal.framework.page.html.tags.TitleTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
        <name>pageIdentifier</name>

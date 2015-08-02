@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 24 Jul, 2015 2:29:11 PM by Hibernate Tools 3.2.2.GA
+// Generated 2 Aug, 2015 6:35:28 AM by Hibernate Tools 3.2.2.GA
 
 
 
@@ -13,26 +13,23 @@ public class PageEntity  implements java.io.Serializable {
      private String siteId;
      private String pageTitle;
      private boolean enabled;
-     private String pageUrl;
      private String pageLinkId;
 
     public PageEntity() {
     }
 
 	
-    public PageEntity(String pageId, String siteId, boolean enabled, String pageUrl, String pageLinkId) {
+    public PageEntity(String pageId, String siteId, boolean enabled, String pageLinkId) {
         this.pageId = pageId;
         this.siteId = siteId;
         this.enabled = enabled;
-        this.pageUrl = pageUrl;
         this.pageLinkId = pageLinkId;
     }
-    public PageEntity(String pageId, String siteId, String pageTitle, boolean enabled, String pageUrl, String pageLinkId) {
+    public PageEntity(String pageId, String siteId, String pageTitle, boolean enabled, String pageLinkId) {
        this.pageId = pageId;
        this.siteId = siteId;
        this.pageTitle = pageTitle;
        this.enabled = enabled;
-       this.pageUrl = pageUrl;
        this.pageLinkId = pageLinkId;
     }
    
@@ -63,13 +60,6 @@ public class PageEntity  implements java.io.Serializable {
     
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-    public String getPageUrl() {
-        return this.pageUrl;
-    }
-    
-    public void setPageUrl(String pageUrl) {
-        this.pageUrl = pageUrl;
     }
     public String getPageLinkId() {
         return this.pageLinkId;

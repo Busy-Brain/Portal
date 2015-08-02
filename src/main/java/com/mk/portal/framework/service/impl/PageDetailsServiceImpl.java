@@ -17,7 +17,6 @@ import com.mk.portal.framework.model.PageFileMapping;
 import com.mk.portal.framework.model.PageWidget;
 import com.mk.portal.framework.model.PortalPage;
 import com.mk.portal.framework.model.PortalSite;
-import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.page.html.attributes.HREFAttribute;
 import com.mk.portal.framework.page.html.attributes.LangAttribute;
 import com.mk.portal.framework.page.html.attributes.RelAttribute;
@@ -48,24 +47,27 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 	private ComponentFactory componentFactory;
 	@Autowired
 	private WidgetsDao widgetsDao;
-	
-	public Page getpage(PageIdentifier pageIdentifier) {
-		PortalSite site=siteDetailsService.getSiteByUrl(pageIdentifier.getSiteUrl());
-		PortalPage page= pageDao.findBySiteId_PageUrl(site.getSiteId(), pageIdentifier.getpageUrl());
+	@Override
+	public Page getpage(String url, String queryparam) {
+		PortalPage page= pageDao.findByPageUrl(url);
 		if(page!=null){
+			PortalSite site=siteDetailsService.getSiteById(page.getSiteId());
 			List<PageComponent> pageComponents = new ArrayList<PageComponent>();
 			pageComponents.add(getDoctype(site.getHTMLVersion()));
-			PageComponent htmlTag = getHTMLTag(pageIdentifier.getLanguage());
+			PageComponent htmlTag = getHTMLTag("en");
 			pageComponents.add(htmlTag);
 			List<PageFileMapping> files=fileService.findFilesForSiteAndPage(site.getSiteId(), page.getPageId());
 			htmlTag.addChild(getHeadTag(site,page,files));
 			htmlTag.addChild(getBodyTag(files,site,page));
 			return new Page(pageComponents);
 		}
-		return getErrorPage(site.getSiteId());
+		else{
+			return getDefaultErrorPage();
+		}
+		
 	}
 
-	private Page getErrorPage(String siteId) {
+	private Page getDefaultErrorPage() {
 		List<PageComponent> pageComponents = new ArrayList<PageComponent>();
 		Page p = new Page(pageComponents );
 		pageComponents.add(getDoctype(HTMLVersion.HTML_5.name()));
@@ -90,9 +92,6 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 			PageComponent p=componentFactory.getComponentInstance(w,page);
 			layout.setComponentInArea(p, w.getPageArea());
 		}
-		
-		//layout.setComponentInArea(new SideBarComponent(), 0);
-		//layout.setComponentInArea(new Text("This is Main Bodty"), "1");
 		body.addChild((PageComponent) layout);
 
 		
@@ -153,5 +152,7 @@ public class PageDetailsServiceImpl implements PageDetailsService {
 		title.addChild(new Text(page.getTitle()));
 		return title;
 	}
+
+	
 
 }

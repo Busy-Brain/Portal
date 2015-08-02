@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.constants.PageConstants;
+import com.mk.portal.framework.constants.PortalConstants;
 import com.mk.portal.framework.html.objects.Page;
-import com.mk.portal.framework.page.PageIdentifier;
 import com.mk.portal.framework.service.PageDetailsService;
 import com.mk.portal.framework.service.SiteDetailsService;
 
@@ -24,10 +24,8 @@ import com.mk.portal.framework.service.SiteDetailsService;
  */
 @Controller
 public class SiteController {
-	private static final String BLANK = "";
-
 	private static final String DEFAULT_URL = "/"
-			+ FrameworkConstants.PortalConstants.DEFAULT_SITE_URL;
+			+ PortalConstants.DEFAULT_SITE_URL;
 	@Autowired
 	private SiteDetailsService siteDetailsService;
 	@Autowired
@@ -35,14 +33,14 @@ public class SiteController {
 	
 
 	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ FrameworkConstants.PageConstants.SITE_URL + "}" + "/{"
-			+ FrameworkConstants.PageConstants.PAGE_URL + "}")
+			+ PageConstants.SITE_URL + "}" + "/{"
+			+ PageConstants.PAGE_URL + "}/**")
 	@ResponseBody
 	public String requestWithSiteAndTopic(
 			Model model,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.PageConstants.SITE_URL) String siteUrl,
-			@PathVariable(FrameworkConstants.PageConstants.PAGE_URL) String pageUrl) {
+			@PathVariable(PageConstants.SITE_URL) String siteUrl,
+			@PathVariable(PageConstants.PAGE_URL) String pageUrl) {
 		if (siteUrl.equals("rest")) {
 			try {
 				return new RestServiceController().requesForRestService(null,
@@ -52,23 +50,24 @@ public class SiteController {
 				e.printStackTrace();
 			}
 		}
-		return defaultControllorFunctionality(model, new PageIdentifier(siteUrl,
-				BLANK, BLANK, pageUrl));
+		        
+        
+		return defaultControllorFunctionality(model,request.getRequestURI(),request.getQueryString());
 	}
 
 	
 
 	private String defaultControllorFunctionality(Model model,
-			PageIdentifier pageIdentifier) {
+			String url, String queryparam) {
 	
-		return customPageFunctionality(model, pageIdentifier);
+		return customPageFunctionality(model, url,queryparam);
 	}
 
 
 	private String customPageFunctionality(Model model,
-			PageIdentifier pageIdentifier) {
-		pageIdentifier.setLanguage(getLanguage());
-		Page page=pageDetailsService.getpage(pageIdentifier);
+			String url, String queryparam) {
+		System.out.println(url);
+		Page page=pageDetailsService.getpage(url,queryparam);
 		
 		String pageContent;
 		if(isDebugEnabled()){
@@ -79,10 +78,6 @@ public class SiteController {
 		}
 
 		return pageContent;
-	}
-
-	private String getLanguage() {
-		return "en";
 	}
 
 	private boolean isDebugEnabled() {

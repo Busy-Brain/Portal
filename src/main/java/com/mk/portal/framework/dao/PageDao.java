@@ -6,6 +6,8 @@ public interface PageDao {
 
 	PortalPage findByPageId(String pageId);
 
-	PortalPage findBySiteId_PageUrl(String siteId, String pageUrl);
+	//PortalPage findBySiteId_PageUrl(String siteId, String pageUrl);
+
+	PortalPage findByPageUrl(String url);
 
 }

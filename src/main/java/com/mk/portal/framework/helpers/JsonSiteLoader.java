@@ -2,21 +2,15 @@ package com.mk.portal.framework.helpers;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mk.portal.framework.FrameworkConstants;
 import com.mk.portal.framework.configuration.ConfigurationReader;
 import com.mk.portal.framework.configuration.JSONConfigurationReader;
-import com.mk.portal.framework.model.PortalPage;
+import com.mk.portal.framework.constants.PageConstants;
 import com.mk.portal.framework.model.PortalSite;
-import com.mk.portal.framework.page.PageIdentifier;
-import com.mk.portal.framework.page.container.Container;
-import com.mk.portal.framework.page.container.ContainerFactoryImpl;
 
 public class JsonSiteLoader  {
 
@@ -27,7 +21,7 @@ public class JsonSiteLoader  {
 			
 			
 			// read the json file
-			FileReader reader = new FileReader(config.getValueFromConfigOrDefault(FrameworkConstants.PageConstants.SITES_JSON)
+			FileReader reader = new FileReader(config.getValueFromConfigOrDefault(PageConstants.SITES_JSON)
 					);
 
 			JsonParser jsonParser = new JsonParser();
@@ -48,7 +42,7 @@ public class JsonSiteLoader  {
 			String siteId) {
 		// get a String from the JSON object
 		JsonArray listOfSites = jsonObject
-				.getAsJsonArray(FrameworkConstants.PageConstants.SITE_TAG);
+				.getAsJsonArray(PageConstants.SITE_TAG);
 		PortalSite site = new PortalSite();
 		for(int i=0;i<listOfSites.size();i++){
 
@@ -63,12 +57,12 @@ public class JsonSiteLoader  {
 	}
 	private String getSiteNameFromJson(JsonObject x) {
 		JsonElement jsonElement = x
-				.get(FrameworkConstants.PageConstants.SITE_NAME);
+				.get(PageConstants.SITE_NAME);
 		return jsonElement.getAsString();
 	}
 	private String getSiteIdFromJson(JsonObject x) {
 		JsonElement jsonElement = x
-				.get(FrameworkConstants.PageConstants.SITE_URL);
+				.get(PageConstants.SITE_URL);
 		return jsonElement.getAsString();
 	}
 }

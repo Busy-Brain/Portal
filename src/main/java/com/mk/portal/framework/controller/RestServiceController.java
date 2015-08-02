@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mk.portal.framework.FrameworkConstants;
+import com.mk.portal.framework.constants.RestServiceConstants;
 import com.mk.portal.framework.service.PortalService;
 import com.mk.portal.framework.service.PortalVO;
 import com.mk.portal.framework.service.ServiceFactory;
@@ -28,14 +28,14 @@ public class RestServiceController {
 ServiceFactory factory;
 
 	@RequestMapping(value = REST_URL + "/{"
-			+ FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME + "}/{"+
-			FrameworkConstants.RestServiceConstants.REST_SERVICE_METHOD +"}"
+			+ RestServiceConstants.REST_SERVICE_NAME + "}/{"+
+			RestServiceConstants.REST_SERVICE_METHOD +"}"
 			, method = RequestMethod.POST)
 	public String requesForRestService(
 			HttpServletResponse response,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME) String serviceName,
-			@PathVariable(FrameworkConstants.RestServiceConstants.REST_SERVICE_METHOD) String serviceMethod) throws ServiceNotFoundException {
+			@PathVariable(RestServiceConstants.REST_SERVICE_NAME) String serviceName,
+			@PathVariable(RestServiceConstants.REST_SERVICE_METHOD) String serviceMethod) throws ServiceNotFoundException {
 		PortalService service;
 		try {
 			service =  factory.getService(serviceName,serviceMethod);
@@ -51,12 +51,12 @@ ServiceFactory factory;
 
 	}
 	@RequestMapping(value = REST_URL + "/{"
-			+ FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME + "}/"
+			+ RestServiceConstants.REST_SERVICE_NAME + "}/"
 			, method = RequestMethod.POST)
 	public String requesForRestService(
 			HttpServletResponse response,
 			HttpServletRequest request,
-			@PathVariable(FrameworkConstants.RestServiceConstants.REST_SERVICE_NAME) String serviceName) throws ServiceNotFoundException {
+			@PathVariable(RestServiceConstants.REST_SERVICE_NAME) String serviceName) throws ServiceNotFoundException {
 		PortalService service;
 		try {
 			service =  factory.getService(serviceName,"");

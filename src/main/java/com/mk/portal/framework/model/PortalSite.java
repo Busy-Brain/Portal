@@ -1,8 +1,11 @@
 package com.mk.portal.framework.model;
 
+import java.math.BigInteger;
+
 
 
 public class PortalSite {
+	public static final PortalSite DEFAULT_SITE = getDefaultSite();
 	private SiteSEO siteSEO;
 	private SiteUI siteUI;
 	private PortalPage defaultPage;
@@ -14,6 +17,11 @@ public class PortalSite {
 	private String charSet;
 	public String getSiteTitleId() {
 		return siteTitleId;
+	}
+	private static PortalSite getDefaultSite() {
+		PortalSite ps = new PortalSite();
+		ps.setSiteId(BigInteger.ZERO.toString());
+		return ps;
 	}
 	public void setSiteTitleId(String siteTitleId) {
 		this.siteTitleId = siteTitleId;

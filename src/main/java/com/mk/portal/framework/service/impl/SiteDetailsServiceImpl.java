@@ -1,5 +1,7 @@
 package com.mk.portal.framework.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mk.portal.framework.configuration.JSONConfigurationReader;
@@ -36,6 +38,12 @@ public class SiteDetailsServiceImpl implements SiteDetailsService {
 			site=findInConfiguration(siteUrl);
 		}
 		return site;
+	}
+	@Override
+	public List<PortalSite> getAccessibleSites() {
+		 List<PortalSite>  sites=siteDao.fetchAllSites();
+		
+		return sites;
 	}
 
 }
