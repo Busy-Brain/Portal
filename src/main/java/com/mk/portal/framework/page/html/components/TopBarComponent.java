@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.model.PortalLink;
 import com.mk.portal.framework.page.html.attributes.AltAttribute;
@@ -17,7 +17,7 @@ import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.UlTag;
 import com.mk.portal.framework.service.impl.LinkServiceImpl;
 @Component
-public class TopBarComponent extends AbstractComponent {
+public class TopBarComponent extends AbstractTagComponent {
 	@Autowired
 	private LinkServiceImpl linksServiceImpl ;
 	public LinkServiceImpl getLinksServiceImpl() {

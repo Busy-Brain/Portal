@@ -1,13 +1,13 @@
 package com.mk.portal.framework.page.html.components;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
 import com.mk.portal.framework.page.html.tags.DivTag;
 import com.mk.portal.framework.page.html.tags.H1Tag;
 import com.mk.portal.framework.page.html.tags.Text;
 
-public class PageHeaderComponent extends AbstractComponent{
+public class PageHeaderComponent extends AbstractTagComponent{
 	public PageHeaderComponent() {
 		this("Default Page Header Text");
 	}

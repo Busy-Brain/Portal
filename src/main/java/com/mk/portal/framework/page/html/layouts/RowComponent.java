@@ -3,13 +3,13 @@ package com.mk.portal.framework.page.html.layouts;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.PageComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
 import com.mk.portal.framework.page.html.tags.DivTag;
 
-public class RowComponent extends AbstractComponent{
+public class RowComponent extends AbstractTagComponent{
 	private List<PageComponent> children= new ArrayList<PageComponent>();
 
 	@Override

@@ -30,6 +30,7 @@
 		<mapping resource="orm/WidgetInstances.hbm.xml" />
 		<mapping resource="orm/Widgets.hbm.xml" />
 		<mapping resource="orm/Links.hbm.xml" />
-
+		<mapping resource="orm/WidgetInstanceProperties.hbm.xml" />
+		<mapping resource="orm/WidgetProperties.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

@@ -3,10 +3,6 @@ package com.mk.portal.framework.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.PageFileMappingDao;
 import com.mk.portal.framework.entity.ExternalFilePathEntity;
 import com.mk.portal.framework.entity.PageFileMappingEntity;
@@ -14,6 +10,8 @@ import com.mk.portal.framework.model.PageFileMapping;
 
 public class PageFileMappingDaoImpl implements PageFileMappingDao {
 
+	
+	private QueryDao<PageFileMappingEntity> queryDao = new QueryDao<PageFileMappingEntity>();
 
 	private List<PageFileMapping> convertCSSMappingEntityToCSSMapping(
 			List<PageFileMappingEntity> files) {
@@ -32,19 +30,15 @@ public class PageFileMappingDaoImpl implements PageFileMappingDao {
 		return filesList;
 	}
 
-	public SessionFactory getSessionFactory() {
-		SessionFactory sf=HibernateUtil.getSessionFactory();
-		if(sf==null){
-			sf=HibernateUtil.createSessionFactory();
-		}
-		return sf;
-	}
-
+	
 	
 
 	private ExternalFilePathEntity getFileById(String fileId) {
-		List<ExternalFilePathEntity> list = findFileById(
-				"from ExternalFilePathEntity where id=? ", fileId);
+		
+		List<String> listOfParams=new ArrayList<String>();
+		listOfParams.add(fileId);
+		 QueryDao<ExternalFilePathEntity> efpqueryDao = new QueryDao<ExternalFilePathEntity>();
+		List<ExternalFilePathEntity>list=efpqueryDao.findListByQuery("from ExternalFilePathEntity where id=? ", listOfParams);
 		if (list.size() == 1) {
 			return list.get(0);
 		} else {
@@ -55,41 +49,15 @@ public class PageFileMappingDaoImpl implements PageFileMappingDao {
 	@Override
 	public List<PageFileMapping> findFilesForSiteAndPage(String siteId,
 			String pageId) {
-		List<PageFileMappingEntity> fileList = findByQuery(
+		List<String> listOfParams=new ArrayList<String>();
+		listOfParams.add(siteId);
+		listOfParams.add(pageId);
+		List<PageFileMappingEntity> fileList = queryDao.findListByQuery(
 				"from PageFileMappingEntity where siteId=? and (pageId=? OR pageId='ALL')",
-				siteId, pageId);
+				listOfParams);
 		return convertCSSMappingEntityToCSSMapping(fileList);
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	private List<PageFileMappingEntity> findByQuery(String query,
-			String siteId, String pageId) {
-		List<PageFileMappingEntity> css = new ArrayList<PageFileMappingEntity>();
-		Session session = getSessionFactory().openSession();
-		try {
-			css = session.createQuery(query).setParameter(0, siteId)
-					.setParameter(1, pageId).list();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return css;
-	}
-
-	@SuppressWarnings({ "unchecked" })
-	private List<ExternalFilePathEntity> findFileById(String query,
-			String fileId) {
-		List<ExternalFilePathEntity> css = new ArrayList<ExternalFilePathEntity>();
-		Session session = getSessionFactory().openSession();
-		try {
-			css = session.createQuery(query).setParameter(0, fileId).list();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return css;
-	}
+	
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mk.portal.framework.model.PortalPage;
 
-public abstract class AbstractComponent implements PageComponent{
+public abstract class AbstractTagComponent implements PageComponent{
 	
 	private PortalPage page;
 	@Override
@@ -48,18 +48,19 @@ public abstract class AbstractComponent implements PageComponent{
 	public String toFormattedString(int tabCount) {
 		// begin start tag
 		StringBuffer tag = new StringBuffer();
-		tag.append(FormattingUtil.getFormattingTabs(tabCount) + getComponent().getStartTag());
+		TagComponent component = getComponent();
+		tag.append(FormattingUtil.getFormattingTabs(tabCount) + component.getStartTag());
 
 		if (hasChildren()) {
 			for (PageComponent child : getChildren()) {
 				tag.append("\n" + child.toFormattedString(tabCount + 1));
 			}
 		}
-		if (getComponent().hasEndTag()) {
+		if (component.hasEndTag()) {
 			if (hasChildren()) {
 				tag.append("\n" + FormattingUtil.getFormattingTabs(tabCount));
 			}
-			tag.append(getComponent().getEndTag());
+			tag.append(component.getEndTag());
 
 		}
 		return tag.toString();

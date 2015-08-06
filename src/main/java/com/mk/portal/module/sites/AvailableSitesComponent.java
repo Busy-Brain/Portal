@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.model.PortalSite;
 import com.mk.portal.framework.page.html.attributes.HrefAttribute;
@@ -17,7 +17,7 @@ import com.mk.portal.framework.page.html.tags.Text;
 import com.mk.portal.framework.page.html.tags.TrTag;
 import com.mk.portal.framework.service.SiteDetailsService;
 
-public class AvailableSitesComponent extends AbstractComponent{
+public class AvailableSitesComponent extends AbstractTagComponent{
 	@Autowired
 	private SiteDetailsService siteDetailsService ;
 	

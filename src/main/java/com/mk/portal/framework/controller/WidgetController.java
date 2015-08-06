@@ -10,10 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mk.portal.framework.constants.WidgetControllerConstants;
 
+/**
+ * This is the default widget controller
+ * 
+ * @author mohit
+ *
+ */
+
 @Controller
 public class WidgetController {
-	//This must be configurable
-	//Make an enum of All URL types
+	// This must be configurable
+	// Make an enum of All URL types
 	private static final String WIDGET_URL = "/widget/";
 
 	@RequestMapping(value = WIDGET_URL + "/{"
@@ -25,6 +32,7 @@ public class WidgetController {
 		System.out.println(widgetName);
 
 	}
+
 	@RequestMapping(value = WIDGET_URL + "/{"
 			+ WidgetControllerConstants.WIDGET_NAME + "}", method = RequestMethod.GET)
 	public void getRequesForStaticContent(

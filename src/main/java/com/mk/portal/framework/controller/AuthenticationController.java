@@ -27,19 +27,28 @@ import com.mk.portal.framework.service.SiteDetailsService;
  */
 @Controller
 public class AuthenticationController {
-	
+
 	// TODO How to override in extension
 	private static final String LOGIN_PAGE_NAME = "login";
 	private static final String LOGOUT_PAGE_NAME = "logout";
 	private static final String LOGIN_URL = "/" + LOGIN_PAGE_NAME;
 	private static final String LOGOUT_URL = "/" + LOGOUT_PAGE_NAME;
 	private static final ConfigurationReader config = new JSONConfigurationReader();
-	
+
 	@Autowired
 	private SiteDetailsService siteDetailsService;
 
+	/**
+	 * This function is the login function of the application
+	 * 
+	 * @param model
+	 * @param request
+	 * @param siteId
+	 * @return
+	 */
 	@RequestMapping(value = { LOGIN_URL })
-	public String loginRequest(Model model, HttpServletRequest request,@RequestParam(required = false)String siteId) {
+	public String loginRequest(Model model, HttpServletRequest request,
+			@RequestParam(required = false) String siteId) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String defaultPageName = "";
@@ -53,6 +62,14 @@ public class AuthenticationController {
 		return defaultPageName;
 	}
 
+	/**
+	 * This is logout function
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = { LOGOUT_URL })
 	public String logout(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -66,18 +83,30 @@ public class AuthenticationController {
 		return redirectToDefaultPage(null);
 	}
 
+	/**
+	 * Redirect to default page configured in site
+	 * 
+	 * @param siteId
+	 * @return
+	 */
 	private String redirectToDefaultPage(String siteId) {
 		return "redirect:" + getDefaultPageName(siteId);
 	}
 
+	/**
+	 * Get the default page configured for the website
+	 * 
+	 * @param siteId
+	 * @return
+	 */
 	private String getDefaultPageName(String siteId) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String defaultPageName = "";
 		if (!((auth == null) || (auth instanceof AnonymousAuthenticationToken))) {
 			/* The user is logged in :) */
-			//Get default page for user
-			PortalSite site= siteDetailsService.getSiteById(siteId);
+			// Get default page for user
+			PortalSite site = siteDetailsService.getSiteById(siteId);
 			site.getDefaultPage();
 			defaultPageName = config
 					.getValueFromConfigOrDefault(ControllerConfigConstants.DEFAULT_PAGE_URL);

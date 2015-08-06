@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mk.portal.framework.page.container.Container;
-import com.mk.portal.framework.page.tags.MetaTagObject;
 
 public class PortalPage {
 	private String pageId;
@@ -18,18 +17,15 @@ public class PortalPage {
 	}
 
 	private String title;
-	private List<MetaTagObject> metaTags;
 	private List<Container> containersList;
 	private boolean enabled;
 	private String pageLinkId;
 	
 
 
-	public PortalPage( String title,
-			List<MetaTagObject> metaTags, List<Container> containersList) {
+	public PortalPage( String title, List<Container> containersList) {
 		super();
 		this.title = title;
-		this.metaTags = metaTags;
 		this.containersList = containersList;
 	}
 
@@ -53,13 +49,6 @@ public class PortalPage {
 		this.title = title;
 	}
 
-	public List<MetaTagObject> getMetaTags() {
-		return metaTags;
-	}
-
-	public void setMetaTags(List<MetaTagObject> metaTags2) {
-		this.metaTags = metaTags2;
-	}
 
 	public List<Container> getContainersList() {
 		return containersList;

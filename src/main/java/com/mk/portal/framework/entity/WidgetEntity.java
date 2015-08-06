@@ -1,5 +1,5 @@
 package com.mk.portal.framework.entity;
-// Generated 2 Aug, 2015 6:35:28 AM by Hibernate Tools 3.2.2.GA
+// Generated 6 Aug, 2015 5:39:58 PM by Hibernate Tools 3.2.2.GA
 
 
 
@@ -11,22 +11,14 @@ public class WidgetEntity  implements java.io.Serializable {
 
      private String id;
      private String name;
-     private String uiPath;
      private String title;
 
     public WidgetEntity() {
     }
 
-	
     public WidgetEntity(String id, String name, String title) {
-        this.id = id;
-        this.name = name;
-        this.title = title;
-    }
-    public WidgetEntity(String id, String name, String uiPath, String title) {
        this.id = id;
        this.name = name;
-       this.uiPath = uiPath;
        this.title = title;
     }
    
@@ -43,13 +35,6 @@ public class WidgetEntity  implements java.io.Serializable {
     
     public void setName(String name) {
         this.name = name;
-    }
-    public String getUiPath() {
-        return this.uiPath;
-    }
-    
-    public void setUiPath(String uiPath) {
-        this.uiPath = uiPath;
     }
     public String getTitle() {
         return this.title;

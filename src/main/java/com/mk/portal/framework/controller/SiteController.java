@@ -30,14 +30,11 @@ public class SiteController {
 	private SiteDetailsService siteDetailsService;
 	@Autowired
 	private PageDetailsService pageDetailsService;
-	
 
-	@RequestMapping(value = DEFAULT_URL + "/{"
-			+ PageConstants.SITE_URL + "}" + "/{"
-			+ PageConstants.PAGE_URL + "}/**")
+	@RequestMapping(value = DEFAULT_URL + "/{" + PageConstants.SITE_URL + "}"
+			+ "/{" + PageConstants.PAGE_URL + "}/**")
 	@ResponseBody
-	public String requestWithSiteAndTopic(
-			Model model,
+	public String requestWithSiteAndTopic(Model model,
 			HttpServletRequest request,
 			@PathVariable(PageConstants.SITE_URL) String siteUrl,
 			@PathVariable(PageConstants.PAGE_URL) String pageUrl) {
@@ -50,34 +47,32 @@ public class SiteController {
 				e.printStackTrace();
 			}
 		}
-		        
-        
-		return defaultControllorFunctionality(model,request.getRequestURI(),request.getQueryString());
+
+		return defaultControllorFunctionality(model, request.getRequestURI(),
+				request.getQueryString());
 	}
 
-	
+	/**
+	 * Loads the page
+	 * 
+	 * @param model
+	 * @param url
+	 * @param queryparam
+	 * @return
+	 */
+	private String defaultControllorFunctionality(Model model, String url,
+			String queryparam) {
+		Page page = pageDetailsService.getpage(url, queryparam);
 
-	private String defaultControllorFunctionality(Model model,
-			String url, String queryparam) {
-	
-		return customPageFunctionality(model, url,queryparam);
-	}
-
-
-	private String customPageFunctionality(Model model,
-			String url, String queryparam) {
-		System.out.println(url);
-		Page page=pageDetailsService.getpage(url,queryparam);
-		
 		String pageContent;
-		if(isDebugEnabled()){
-			pageContent=page.getFormattedHTMLString();
-		}
-		else{
-			pageContent=page.getHTMLString();
+		if (isDebugEnabled()) {
+			pageContent = page.getFormattedHTMLString();
+		} else {
+			pageContent = page.getHTMLString();
 		}
 
 		return pageContent;
+
 	}
 
 	private boolean isDebugEnabled() {

@@ -3,7 +3,7 @@ package com.mk.portal.framework.page.html.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
 import com.mk.portal.framework.page.html.tags.TableTag;
@@ -13,7 +13,7 @@ import com.mk.portal.framework.page.html.tags.ThTag;
 import com.mk.portal.framework.page.html.tags.TheadTag;
 import com.mk.portal.framework.page.html.tags.TrTag;
 
-public class TableComponent extends AbstractComponent {
+public class TableComponent extends AbstractTagComponent {
 	
 	private List<String> tableHeaders = new ArrayList<String>();
 	public void addHeaders(String ...arg){

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mk.portal.framework.entity.WidgetPropertyEntity" table="widget_properties" catalog="portal">
+        <id name="id" type="string">
+            <column name="id" length="45" />
+        </id>
+        <property name="widgetId" type="string">
+            <column name="widget_id" length="45" not-null="true" />
+        </property>
+        <property name="propertyName" type="string">
+            <column name="property_name" not-null="true" length="100"/>
+        </property>
+        <property name="requiredFlag" type="string">
+            <column name="required" not-null="true" length="1"/>
+        </property>
+        <property name="defaultValue" type="string">
+            <column name="default_value" not-null="true" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>

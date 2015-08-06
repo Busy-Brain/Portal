@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mk.portal.framework.exceptions.BusinessException;
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
 import com.mk.portal.framework.page.html.tags.DivTag;
 
-public class CustomPageLayout extends AbstractComponent {
+public class CustomPageLayout extends AbstractTagComponent {
 	private List<RowComponent> rows=new ArrayList<RowComponent>();
 	
 	public CustomPageLayout(int rowCount,int[]colsInEachRow) throws BusinessException{

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mk.portal.framework.html.objects.AbstractComponent;
+import com.mk.portal.framework.html.objects.AbstractTagComponent;
 import com.mk.portal.framework.html.objects.TagComponent;
 import com.mk.portal.framework.model.PortalLink;
 import com.mk.portal.framework.page.html.attributes.ClassAttribute;
@@ -17,7 +17,7 @@ import com.mk.portal.framework.page.html.tags.UlTag;
 import com.mk.portal.framework.service.impl.LinkServiceImpl;
 import com.mk.portal.framework.service.impl.PageDetailsServiceImpl;
 
-public class SideBarComponent extends AbstractComponent{
+public class SideBarComponent extends AbstractTagComponent{
 	@Autowired
 	private LinkServiceImpl linksServiceImpl ;
 	public LinkServiceImpl getLinksServiceImpl() {

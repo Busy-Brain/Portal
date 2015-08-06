@@ -3,12 +3,8 @@ package com.mk.portal.framework.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mk.portal.framework.dao.HibernateUtil;
 import com.mk.portal.framework.dao.PageDao;
 import com.mk.portal.framework.dao.RolesDao;
 import com.mk.portal.framework.entity.PageEntity;
@@ -21,6 +17,8 @@ public class PageDaoImpl implements PageDao {
 	private RolesDao rolesDao;
 	@Autowired
 	private SiteDetailsService siteDetailsService;
+	
+	private QueryDao<PageEntity> queryDao= new QueryDao<PageEntity>();
 	private PortalPage convertPortalPageEntityToPage(PageEntity pageEntity) {
 		PortalPage page = new PortalPage();
 		page.setEnabled(pageEntity.isEnabled());
@@ -32,19 +30,13 @@ public class PageDaoImpl implements PageDao {
 		return page;
 	}
 
-	public SessionFactory getSessionFactory() {
-		SessionFactory sf=HibernateUtil.getSessionFactory();
-		if(sf==null){
-			sf=HibernateUtil.createSessionFactory();
-		}
-		return sf;
-	}
+	
 
 	@Override
 	public PortalPage findByPageId(String pageId) {
 		List<String> listOfParams=new ArrayList<String>();
 		listOfParams.add(pageId);
-		List<PageEntity> pages = findByQuery("from PageEntity where pageId=?", listOfParams);
+		List<PageEntity> pages = queryDao.findListByQuery("from PageEntity where pageId=?", listOfParams);
 		if(pages.size()>1){
 			//throw new setup exception
 		}
@@ -62,7 +54,7 @@ public class PageDaoImpl implements PageDao {
 			pageUrl=pageUrl.substring(0, pageUrl.length()-2);
 		}
 		listOfParams.add(pageUrl);
-		List<PageEntity> pages = findByQuery("from PageEntity where pageLinkId = (select id from LinkEntity where url = ?)", listOfParams);
+		List<PageEntity> pages = queryDao.findListByQuery("from PageEntity where pageLinkId = (select id from LinkEntity where url = ?)", listOfParams);
 		PortalPage page =null;
 		if(pages.size()>1){
 			throw new PotentialBugException("INVALID_DATA", "Data setup issue");
@@ -74,24 +66,6 @@ public class PageDaoImpl implements PageDao {
 		return page;
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	private List<PageEntity> findByQuery(String query, List<String> listOfParams) {
-		List<PageEntity> pages = new ArrayList<PageEntity>();
-		Session session = getSessionFactory().openSession();
-		try {
-			
-			Query queryObject = session.createQuery(query);
-			for(int i=0;i<listOfParams.size();i++){
-				queryObject.setParameter(i, listOfParams.get(i));
-			}
-			pages = queryObject.list();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return pages;
-	}
+	
 
 }

@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mk.portal.framework.dao.LinksDao;
-import com.mk.portal.framework.dao.PageFileMappingDao;
-import com.mk.portal.framework.model.PageFileMapping;
 import com.mk.portal.framework.model.PortalLink;
-import com.mk.portal.framework.service.FileService;
 import com.mk.portal.framework.service.LinksService;
 @Service
 public class LinkServiceImpl implements LinksService {
